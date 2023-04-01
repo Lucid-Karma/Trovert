@@ -17,8 +17,8 @@ public class WalkState : CharacterStates
         {
             //fsm.currentSpeed = fsm.walkSpeed;
 
-            fsm.Rotate();
-            //fsm.Move();
+            fsm.LookAround();
+            fsm.Move();
         }
         else   ExitState(fsm);
     }

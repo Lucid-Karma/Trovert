@@ -4,5 +4,14 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: "Assets/Project/[GAME]/Scenes/TrovertIn\u0131t.unity"
+    guid: e3773485474e4bd41bed7f40d1a5499a
+  - enabled: 1
+    path: Assets/Project/[GAME]/Scenes/TrovertUI.unity
+    guid: 56f2732449cde9a4abec5946fd17a922
+  - enabled: 1
+    path: Assets/Project/[GAME]/Scenes/TrovertGame.unity
+    guid: fe0fdbadf6a1e374eb34dd5eb9240d0c
   m_configObjects: {}

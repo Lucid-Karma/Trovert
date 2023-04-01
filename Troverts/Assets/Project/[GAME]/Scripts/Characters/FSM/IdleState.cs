@@ -15,9 +15,7 @@ public class IdleState : CharacterStates
     {
         if (fsm.executingState == ExecutingState.IDLE)
         {
-            // fsm.Stand();
-
-            // fsm.Rotate();
+            fsm.LookAround();
         }
         else   ExitState(fsm);
     }
