@@ -1196,8 +1196,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1354456975}
-  - component: {fileID: 1354456978}
   - component: {fileID: 1354456979}
+  - component: {fileID: 1354456978}
   - component: {fileID: 1354456976}
   m_Layer: 0
   m_Name: Introvert
@@ -1277,6 +1277,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dbbc281e09e1c44c882bb6601eb113b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectedDifficulty: 0
+  energy: 0
 --- !u!1 &1364718158
 GameObject:
   m_ObjectHideFlags: 0
@@ -1350,8 +1352,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1535694537}
-  - component: {fileID: 1535694539}
   - component: {fileID: 1535694540}
+  - component: {fileID: 1535694539}
   - component: {fileID: 1535694538}
   m_Layer: 0
   m_Name: Extovert
@@ -1431,6 +1433,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f06a6c7d40d3914bb8950e84318c8d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectedDifficulty: 0
+  energy: 0
 --- !u!1 &1548136873
 GameObject:
   m_ObjectHideFlags: 0

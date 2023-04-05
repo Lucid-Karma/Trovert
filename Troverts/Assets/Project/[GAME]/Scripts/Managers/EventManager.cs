@@ -15,14 +15,15 @@ public static class EventManager
     public static UnityEvent OnLevelSuccess = new UnityEvent();
     public static UnityEvent OnLevelFail = new UnityEvent();
 
+    public static UnityEvent OnRestart = new UnityEvent();
+
     public static UnityEvent OnIntrovertLevelStart = new UnityEvent();
     public static UnityEvent OnExtrovertLevelStart = new UnityEvent();
-
-    public static UnityEvent OnRestart = new UnityEvent();
 
     public static UnityEvent OnCharacterChoose = new UnityEvent();
     public static UnityEvent OnExtrovertChoose = new UnityEvent();
     public static UnityEvent OnIntrovertChoose = new UnityEvent();
+    public static UnityEvent OnDifficultyChoose = new UnityEvent();
 
     public static UnityEvent OnObstacleCreated = new UnityEvent();
 

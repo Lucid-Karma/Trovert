@@ -4,55 +4,55 @@ using UnityEngine;
 
 public class StartPanels : Panel
 {
-    public Panel IntrovertPanel;
-    public Panel ExtrovertPanel;
-    public Panel ChoosePanel;
+    public Panel CharacterPanel;
+    public Panel TrovertPanel;
+    public Panel DifficultyPanel;
+    public Panel InformPanel;
 
     public Panel CountdownPanel;
 
     private void Awake() 
     {
-        IntrovertPanel.HidePanel();
-        ExtrovertPanel.HidePanel();
+        TrovertPanel.HidePanel();
+        DifficultyPanel.HidePanel();
+        InformPanel.HidePanel();
         CountdownPanel.HidePanel();
-        //ChoosePanel.HidePanel();
+        CharacterPanel.ShowPanel();
     }
 
     private void OnEnable()
     {
-        EventManager.OnExtrovertLevelStart.AddListener(InitializeExtrovertPanel);
-        EventManager.OnIntrovertLevelStart.AddListener(InitializeIntrovertPanel);
-        //EventManager.OnGameStart.AddListener(InitializeChoosePanel);
+        EventManager.OnCharacterChoose.AddListener(InitializeDifficultyPanel);
+        EventManager.OnDifficultyChoose.AddListener(InitializeInformPanel);
+        EventManager.OnLevelStart.AddListener(InitializeTrovertPanel);
     }
 
     private void OnDisable()
     {
-        EventManager.OnExtrovertLevelStart.RemoveListener(InitializeExtrovertPanel);
-        EventManager.OnIntrovertLevelStart.RemoveListener(InitializeIntrovertPanel);
-        //EventManager.OnGameStart.RemoveListener(InitializeChoosePanel);
+        EventManager.OnCharacterChoose.RemoveListener(InitializeDifficultyPanel);
+        EventManager.OnDifficultyChoose.RemoveListener(InitializeInformPanel);
+        EventManager.OnLevelStart.RemoveListener(InitializeTrovertPanel);
     }
 
-    private void InitializeExtrovertPanel()
+    private void InitializeDifficultyPanel()
     {
-        ChoosePanel.HidePanel();
-        IntrovertPanel.HidePanel();
-        InitializeCountdownPanel();
-        ExtrovertPanel.ShowPanel();
+        CharacterPanel.HidePanel();
+        DifficultyPanel.ShowPanel();
         ShowPanel();
     }
 
-    private void InitializeIntrovertPanel()
+    private void InitializeTrovertPanel()
     {
-        ChoosePanel.HidePanel();
-        ExtrovertPanel.HidePanel();
+        InformPanel.HidePanel();
         InitializeCountdownPanel();
-        IntrovertPanel.ShowPanel();
+        TrovertPanel.ShowPanel();
         ShowPanel();
     }
 
-    private void InitializeChoosePanel()
+    private void InitializeInformPanel()
     {
-        ChoosePanel.ShowPanel();
+        DifficultyPanel.HidePanel();
+        InformPanel.ShowPanel();
         ShowPanel();
     }
 

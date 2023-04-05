@@ -2,19 +2,45 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Extrovert : MonoBehaviour
+public class Extrovert : CharacterBase
 {
-    // void Awake()
-    // {
-    //     gameObject.SetActive(false);
-    // }
+    void OnEnable()
+    {
+        EventManager.OnIntrovertChoose.AddListener(() => gameObject.SetActive(false));
+        EventManager.OnDifficultyChoose.AddListener(SetEnergy);
+    }
+    void OnDisable()
+    {
+        EventManager.OnIntrovertChoose.RemoveListener(() => gameObject.SetActive(false));
+        EventManager.OnDifficultyChoose.RemoveListener(SetEnergy);
+    }
 
-    // void OnEnable()
-    // {
-    //     EventManager.OnExtrovertChoose.AddListener(() => gameObject.SetActive(true));
-    // }
-    // void OnDisable()
-    // {
-    //     EventManager.OnExtrovertChoose.RemoveListener(() => gameObject.SetActive(true));
-    // }
+    public override void SetEnergy()
+    {
+        selectedDifficulty = PlayerPrefs.GetInt("selected_difficulty");
+        
+        switch (selectedDifficulty)
+        {
+            case 0: // Easy
+                Energy = 50;
+                break;
+            case 1: // Medium
+                Energy = 75;
+                break;
+            case 2: // Hard
+                Energy = 100;
+                break;
+            default:
+                Energy = 50;
+                break;
+        }
+    }
+
+    public override void ManageEnergy(int score)
+    {
+        Score += score;
+
+        if(Score >= Energy) Debug.Log("win");
+        //base.ManageEnergy();
+    }
 }
