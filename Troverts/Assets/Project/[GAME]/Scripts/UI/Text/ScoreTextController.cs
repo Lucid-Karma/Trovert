@@ -21,17 +21,29 @@ public class ScoreTextController : MonoBehaviour
     private void OnEnable()
     {
         //EventManager.OnSthHappen.AddListener(UpdateScoreText);
+        EventManager.OnIntrovertLevelStart.AddListener(UpdateIScoreText);
+        EventManager.OnExtrovertLevelStart.AddListener(UpdateEScoreText);
     }
 
     private void OnDisable()
     {
         //EventManager.OnSthHappen.RemoveListener(UpdateScoreText); 
+        EventManager.OnIntrovertLevelStart.RemoveListener(UpdateIScoreText);
+        EventManager.OnExtrovertLevelStart.RemoveListener(UpdateEScoreText);
     }
 
-    public int point = 0;
-    private void UpdateScoreText()
+
+    private int point;
+
+    private void UpdateIScoreText()
     {
-        //point = SomeClass.point;
-        //ScoreText.text = "SCORE " + point;
+        point = Introvert.Energy;
+        ScoreText.text = point + " Energy Left !!";
+    }
+
+    private void UpdateEScoreText()
+    {
+        point = Extrovert.Score;
+        ScoreText.text = "Total Energy: " + point;
     }
 }

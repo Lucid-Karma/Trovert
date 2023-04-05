@@ -6,8 +6,10 @@ public class IntrovertButton : MonoBehaviour
 {
     public void DoIntrovert()
     {
+        //LevelData.CharacterMode = "EXTROVERT";
+        PlayerPrefs.SetString("selected_character", "introvert");
+        
+        EventManager.OnIntrovertChoose.Invoke();
         EventManager.OnCharacterChoose.Invoke();
-        //EventManager.OnIntrovertChoose.Invoke();
-        EventManager.OnCursorLock.Invoke();
     }
 }

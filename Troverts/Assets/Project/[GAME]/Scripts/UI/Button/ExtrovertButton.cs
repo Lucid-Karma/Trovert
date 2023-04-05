@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class ExtrovertButton : MonoBehaviour
 {
-    LevelData levelData;
     public void DoExtrovert()
     {
-        levelData.CharacterMode = "EXTROVERT";
+        //LevelData.CharacterMode = "EXTROVERT";
+        PlayerPrefs.SetString("selected_character", "extrovert");
 
+        EventManager.OnExtrovertChoose.Invoke();
         EventManager.OnCharacterChoose.Invoke();
-        //EventManager.OnExtrovertChoose.Invoke();
-        EventManager.OnCursorLock.Invoke();
     }
 }

@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IntrovertState : LevelStates
+public class ExtrovertState : LevelStates
 {
     public override void EnterState(LevelFsm fsm)
     {
-        //EventManager.OnIntrovertChoose.Invoke();
+        //EventManager.OnExtrovertChoose.Invoke();
     }
 }

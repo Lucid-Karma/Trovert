@@ -9,12 +9,11 @@ public enum LevelMode
 }
 public class LevelFsm : MonoBehaviour
 {
-    LevelData levelData;
     public LevelMode levelMode;
     public LevelStates currentState;
 
     public IntrovertState introvertState = new IntrovertState();
-    //public ExtrovertState extrovertState = new ExtrovertState();
+    public ExtrovertState extrovertState = new ExtrovertState();
 
     void OnEnable()
     {
@@ -27,18 +26,20 @@ public class LevelFsm : MonoBehaviour
 
     private void SetState()
     {
-        if (levelData.CharacterMode == "INTROVERT")
+        string selectedCharacter = PlayerPrefs.GetString("selected_character");
+
+        if (selectedCharacter == "introvert")
         {
             levelMode = LevelMode.INTROVERT;
             currentState = introvertState;
             currentState.EnterState(this);
         }
-        // else if(levelData.CharacterMode == "EXTROVERT")
-        // {
-        //     levelMode = LevelMode.EXTROVERT;
-        //     currentState = extrovertState;
-        //     currentState.EnterState(this);
-        // }
+        else if(selectedCharacter == "extrovert")
+        {
+            levelMode = LevelMode.EXTROVERT;
+            currentState = extrovertState;
+            currentState.EnterState(this);
+        }
     }
 
     // public void SwitchState(LevelStates nextState)
