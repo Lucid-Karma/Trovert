@@ -9,18 +9,18 @@ public class CharacterGenerator : MonoBehaviour
 
     void Awake()
     {
-        introvert.SetActive(false);
-        extrovert.SetActive(false);
+        introvert.SetActive(true);
+        extrovert.SetActive(true);
     }
 
     void OnEnable()
     {
-        EventManager.OnIntrovertLevelStart.AddListener(() => introvert.SetActive(true));
-        EventManager.OnExtrovertLevelStart.AddListener(() => extrovert.SetActive(true));
+        EventManager.OnIntrovertLevelStart.AddListener(() => extrovert.SetActive(false));
+        EventManager.OnExtrovertLevelStart.AddListener(() => introvert.SetActive(false));
     }
     void OnDisable()
     {
-        EventManager.OnIntrovertLevelStart.RemoveListener(() => introvert.SetActive(true));
-        EventManager.OnExtrovertLevelStart.RemoveListener(() => extrovert.SetActive(true));
+        EventManager.OnIntrovertLevelStart.RemoveListener(() => extrovert.SetActive(false));
+        EventManager.OnExtrovertLevelStart.RemoveListener(() => introvert.SetActive(false));
     }
 }
