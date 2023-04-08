@@ -6,12 +6,12 @@ public class Extrovert : CharacterBase
 {
     void OnEnable()
     {
-        EventManager.OnIntrovertChoose.AddListener(() => gameObject.SetActive(false));
+        //EventManager.OnIntrovertChoose.AddListener(() => gameObject.SetActive(false));
         EventManager.OnDifficultyChoose.AddListener(SetEnergy);
     }
     void OnDisable()
     {
-        EventManager.OnIntrovertChoose.RemoveListener(() => gameObject.SetActive(false));
+        //EventManager.OnIntrovertChoose.RemoveListener(() => gameObject.SetActive(false));
         EventManager.OnDifficultyChoose.RemoveListener(SetEnergy);
     }
 
