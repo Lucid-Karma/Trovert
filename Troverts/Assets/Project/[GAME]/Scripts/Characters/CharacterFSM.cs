@@ -48,6 +48,22 @@ public class CharacterFSM : MonoBehaviour
     public UnityEvent OnCharacterWalk = new UnityEvent();
     #endregion
 
+    bool isCaught = false;
+    void OnEnable()
+    {
+        EventManager.OnIntrovertCaught.AddListener(() => executingState = ExecutingState.IDLE);
+        EventManager.OnIntrovertCaught.AddListener(() => isCaught = true);
+        EventManager.OnIntrovertLeave.AddListener(() => executingState = ExecutingState.WALK);
+        EventManager.OnIntrovertLeave.AddListener(() => isCaught = false);
+    }
+    void OnDisable()
+    {
+        EventManager.OnIntrovertCaught.RemoveListener(() => executingState = ExecutingState.IDLE);
+        EventManager.OnIntrovertCaught.RemoveListener(() => isCaught = true);
+        EventManager.OnIntrovertLeave.RemoveListener(() => executingState = ExecutingState.WALK);
+        EventManager.OnIntrovertLeave.RemoveListener(() => isCaught = false);
+    }
+
     void Start()
     {
         executingState = ExecutingState.IDLE;
@@ -58,6 +74,8 @@ public class CharacterFSM : MonoBehaviour
 
     void Update()
     {
+        if(isCaught)    return;
+
         if(Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
         {
             executingState = ExecutingState.WALK;

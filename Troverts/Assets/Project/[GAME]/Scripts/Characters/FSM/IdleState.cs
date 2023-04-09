@@ -6,7 +6,7 @@ public class IdleState : CharacterStates
 {
     public override void EnterState(CharacterFSM fsm)
     {
-        Debug.Log("IDLE");
+        //Debug.Log("IDLE");
 
         fsm.OnCharacterIdle.Invoke();
     }
@@ -26,21 +26,5 @@ public class IdleState : CharacterStates
         {
             fsm.SwitchState(fsm.walkState);
         }
-        // else if(fsm.executingState == ExecutingState.SPRINT)
-        // {
-        //     fsm.SwitchState(fsm.sprintState);
-        // }
-        // else if(fsm.executingState == ExecutingState.CROUCHEDIDLE)
-        // {
-        //     fsm.SwitchState(fsm.crouchedIdleState);
-        // }
-        // else if(fsm.executingState == ExecutingState.DANCE)
-        // {
-        //     fsm.SwitchState(fsm.danceState);
-        // }
-        // else if(fsm.executingState == ExecutingState.DEATH)
-        // {
-        //     fsm.SwitchState(fsm.deathState);
-        // }
     }
 }
