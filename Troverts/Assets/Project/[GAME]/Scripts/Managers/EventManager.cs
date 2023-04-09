@@ -27,6 +27,8 @@ public static class EventManager
 
     public static UnityEvent OnObstacleCreated = new UnityEvent();
 
+    public static UnityEvent OnIntrovertCaught = new UnityEvent();
+    public static UnityEvent OnIntrovertLeave = new UnityEvent();
     public static UnityEvent OnPlayerStartedRunning = new UnityEvent();
 
     public static UnityEvent OnMusicOn = new UnityEvent();

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ExtrovertNpcFsm : NpcFSM
 {
-    public override void Interact()
-    {
-        executingNpcState = ExecutingNpcState.ESCAPE;
-    }
+    // public override void Interact()
+    // {
+    //     executingNpcState = ExecutingNpcState.ESCAPE;
+    // }
 }

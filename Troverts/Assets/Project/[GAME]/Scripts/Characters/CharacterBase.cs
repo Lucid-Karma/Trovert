@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public abstract class CharacterBase : MonoBehaviour
 {
@@ -34,5 +35,17 @@ public abstract class CharacterBase : MonoBehaviour
     // private void LearnDifficulty()
     // {
     //     selectedDifficulty = PlayerPrefs.GetInt("selected_difficulty");
+    // }
+
+    // NpcFSM npc;
+
+    // public void OnControllerColliderHit(ControllerColliderHit hit)
+    // {
+    //     npc = hit.gameObject.GetComponent<NpcFSM>();
+
+    //     if(npc != null)
+    //     {
+    //         npc.Interact();
+    //     }
     // }
 }
