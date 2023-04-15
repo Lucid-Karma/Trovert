@@ -6,8 +6,10 @@ public class PatrolState : NPCStates
 {
     public override void EnterState(NpcFSM fsm)
     {
-        Debug.Log("npc patrol");
+        //Debug.Log("npc patrol");
         fsm.OnNpcWalk.Invoke();
+        fsm.Agent.stoppingDistance = 0.0f;
+        FsmManager.Instance.IsCharacterCommunicating = false;
     }
 
     public override void UpdateState(NpcFSM fsm)

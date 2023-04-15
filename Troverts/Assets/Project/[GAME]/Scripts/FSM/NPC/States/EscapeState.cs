@@ -6,7 +6,7 @@ public class EscapeState : NPCStates
 {
     public override void EnterState(NpcFSM fsm)
     {
-        Debug.Log("npc escape");
+        //Debug.Log("npc escape");
     }
 
     public override void UpdateState(NpcFSM fsm)

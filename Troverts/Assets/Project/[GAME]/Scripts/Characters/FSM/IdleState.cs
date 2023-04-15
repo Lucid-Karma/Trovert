@@ -6,8 +6,6 @@ public class IdleState : CharacterStates
 {
     public override void EnterState(CharacterFSM fsm)
     {
-        //Debug.Log("IDLE");
-
         fsm.OnCharacterIdle.Invoke();
     }
 

@@ -6,8 +6,10 @@ public class ChatState : NPCStates
 {
     public override void EnterState(NpcFSM fsm)
     {
-        Debug.Log("npc chat");
+        //Debug.Log("npc chat");
         fsm.OnNpcIdle.Invoke();
+        fsm.hasMet = true;
+        FsmManager.Instance.IsCharacterCommunicating = true;
     }
 
     public override void UpdateState(NpcFSM fsm)

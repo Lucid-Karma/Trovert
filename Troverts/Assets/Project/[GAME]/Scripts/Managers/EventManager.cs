@@ -35,4 +35,6 @@ public static class EventManager
     public static UnityEvent OnMusicOff = new UnityEvent();
 
     public static UnityEvent OnCursorLock = new UnityEvent();
+    public static UnityEvent OnICharacterDataReceive = new UnityEvent();
+    public static UnityEvent OnECharacterDataReceive = new UnityEvent();
 }

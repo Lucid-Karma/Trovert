@@ -16,17 +16,8 @@ public class CharacterAnimationController : MonoBehaviour
 
         //EventManager.OnLevelFinish.AddListener(() => Animator.Rebind());
 
-        // characterFsm.OncharacterFsmRevive.AddListener(() => InvokeTrigger("Start"));
-        // characterFsm.OncharacterFsmJump.AddListener(() => InvokeTrigger("Jump"));
-        // characterFsm.OncharacterFsmSlide.AddListener(() =>InvokeTrigger("Slide"));
-        // characterFsm.OncharacterFsmHit.AddListener(() => InvokeTrigger("Hit"));
-
         CharacterFSM.OnCharacterIdle.AddListener(() => InvokeTrigger("Idle"));
         CharacterFSM.OnCharacterWalk.AddListener(() => InvokeTrigger("Walk"));
-
-        // EventManager.OnIntrovertCaught.AddListener(() => InvokeTrigger("Idle"));
-        // EventManager.OnIntrovertLeave.AddListener(() => InvokeTrigger("Walk"));
-        
     }
 
     private void OnDisable()
@@ -36,15 +27,8 @@ public class CharacterAnimationController : MonoBehaviour
 
         //EventManager.OnLevelFinish.RemoveListener(() => Animator.Rebind());
 
-        // characterFsm.OncharacterFsmJump.RemoveListener(() => InvokeTrigger("Jump"));
-        // characterFsm.OncharacterFsmSlide.RemoveListener(() => InvokeTrigger("Slide"));
-        // characterFsm.OncharacterFsmHit.RemoveListener(() => InvokeTrigger("Hit"));
-
         CharacterFSM.OnCharacterIdle.RemoveListener(() => InvokeTrigger("Idle"));
         CharacterFSM.OnCharacterWalk.RemoveListener(() => InvokeTrigger("Walk"));
-
-        // EventManager.OnIntrovertCaught.RemoveListener(() => InvokeTrigger("Idle"));
-        // EventManager.OnIntrovertLeave.RemoveListener(() => InvokeTrigger("Walk"));
     }
 
     // private void Update()

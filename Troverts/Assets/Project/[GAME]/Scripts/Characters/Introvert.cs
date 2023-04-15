@@ -6,11 +6,17 @@ public class Introvert : CharacterBase
 {
     void OnEnable()
     {
-        EventManager.OnDifficultyChoose.AddListener(SetEnergy);
+        if(PlayerPrefs.GetString("selected_character") == "introvert")
+            EventManager.OnDifficultyChoose.AddListener(SetEnergy);
+
+        EventManager.OnIntrovertLevelStart.AddListener(ReceiveData);
     }
     void OnDisable()
     {
-        EventManager.OnDifficultyChoose.RemoveListener(SetEnergy);
+        if(PlayerPrefs.GetString("selected_character") == "introvert")
+            EventManager.OnDifficultyChoose.RemoveListener(SetEnergy);
+            
+        EventManager.OnIntrovertLevelStart.RemoveListener(ReceiveData);
     }
 
     public override void SetEnergy()
@@ -28,10 +34,17 @@ public class Introvert : CharacterBase
             case 2: // Hard
                 Energy = 50;
                 break;
-            default:
-                Energy = 100;
-                break;
+            // default:
+            //     Energy = 100;
+            //     break;
         }
+
+        Debug.Log(Energy + " " + this.name);
+    }
+
+    public override void ReceiveData()
+    {
+        EventManager.OnICharacterDataReceive.Invoke();
     }
 
     public override void ManageEnergy(int damage)
