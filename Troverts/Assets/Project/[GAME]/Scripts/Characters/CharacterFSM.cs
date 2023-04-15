@@ -48,21 +48,17 @@ public class CharacterFSM : MonoBehaviour
     public UnityEvent OnCharacterWalk = new UnityEvent();
     #endregion
 
-    bool isCaught = false;
-    void OnEnable()
-    {
-        EventManager.OnIntrovertCaught.AddListener(() => executingState = ExecutingState.IDLE);
-        EventManager.OnIntrovertCaught.AddListener(() => isCaught = true);
-        EventManager.OnIntrovertLeave.AddListener(() => executingState = ExecutingState.WALK);
-        EventManager.OnIntrovertLeave.AddListener(() => isCaught = false);
-    }
-    void OnDisable()
-    {
-        EventManager.OnIntrovertCaught.RemoveListener(() => executingState = ExecutingState.IDLE);
-        EventManager.OnIntrovertCaught.RemoveListener(() => isCaught = true);
-        EventManager.OnIntrovertLeave.RemoveListener(() => executingState = ExecutingState.WALK);
-        EventManager.OnIntrovertLeave.RemoveListener(() => isCaught = false);
-    }
+    // bool isCaught = false;
+    // void OnEnable()
+    // {
+    //     EventManager.OnIntrovertCaught.AddListener(Id);
+    //     EventManager.OnIntrovertLeave.AddListener(wa);
+    // }
+    // void OnDisable()
+    // {
+    //     EventManager.OnIntrovertCaught.RemoveListener(Id);
+    //     EventManager.OnIntrovertLeave.RemoveListener(wa);
+    // }
 
     void Start()
     {
@@ -71,14 +67,30 @@ public class CharacterFSM : MonoBehaviour
         currentState.EnterState(this);
     }
 
+    // void Id()
+    // {
+    //     isCaught = true;
+    //     executingState = ExecutingState.IDLE;
+    // }
+    // void wa()
+    // {
+    //     isCaught = false;
+    //     executingState = ExecutingState.WALK;
+    // }
 
     void Update()
     {
-        if(isCaught)    return;
+        //if(isCaught)    return;
+        
 
         if(Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
         {
-            executingState = ExecutingState.WALK;
+            if(FsmManager.Instance.IsCharacterCommunicating)
+            {
+                executingState = ExecutingState.IDLE;
+            }
+            else
+                executingState = ExecutingState.WALK;
         }
         else
         {

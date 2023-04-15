@@ -20,14 +20,18 @@ public class ScoreTextController : MonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.OnIntrovertLevelStart.AddListener(UpdateIScoreText);
-        EventManager.OnExtrovertLevelStart.AddListener(UpdateEScoreText);
+        EventManager.OnICharacterDataReceive.AddListener(UpdateIScoreText);
+        EventManager.OnECharacterDataReceive.AddListener(UpdateEScoreText);
+        // EventManager.OnIntrovertLevelStart.AddListener(UpdateIScoreText);
+        // EventManager.OnExtrovertLevelStart.AddListener(UpdateEScoreText);
     }
 
     private void OnDisable()
     {
-        EventManager.OnIntrovertLevelStart.RemoveListener(UpdateIScoreText);
-        EventManager.OnExtrovertLevelStart.RemoveListener(UpdateEScoreText);
+        EventManager.OnICharacterDataReceive.RemoveListener(UpdateIScoreText);
+        EventManager.OnECharacterDataReceive.RemoveListener(UpdateEScoreText);
+        // EventManager.OnIntrovertLevelStart.RemoveListener(UpdateIScoreText);
+        // EventManager.OnExtrovertLevelStart.RemoveListener(UpdateEScoreText);
     }
 
 

@@ -6,8 +6,6 @@ public class WalkState : CharacterStates
 {
     public override void EnterState(CharacterFSM fsm)
     {
-        //Debug.Log("WALK");
-
         fsm.OnCharacterWalk.Invoke();
     }
 

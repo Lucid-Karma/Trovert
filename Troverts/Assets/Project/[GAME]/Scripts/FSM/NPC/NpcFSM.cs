@@ -80,10 +80,24 @@ public abstract class NpcFSM : MonoBehaviour//, IInteractable
 
         distance = Vector3.Distance(Agent.transform.position, pc.position);
 
-        if(distance <= 2f)
+        if(PlayerPrefs.GetString("selected_character") == "introvert")
         {
-            executingNpcState = ExecutingNpcState.CHASE;
+            if (!FsmManager.Instance.IsCharacterCommunicating)  // for one npc at a time.   ???
+            {
+                if(distance <= 2f)
+                {
+                    executingNpcState = ExecutingNpcState.CHASE;
+                } 
+            }
         }
+        else if(PlayerPrefs.GetString("selected_character") == "extrovert")
+        {
+            if(distance <= 3f)
+            {
+                executingNpcState = ExecutingNpcState.ESCAPE;
+            } 
+        }
+        
     }
 
     bool RandomPoint(Vector3 center, float range, out Vector3 result)
@@ -104,14 +118,20 @@ public abstract class NpcFSM : MonoBehaviour//, IInteractable
     }
     #endregion
 
+    public bool hasMet = false;
     public void Chase()
     {
         distance = Vector3.Distance(Agent.transform.position, pc.position);
 
-        if(distance >= 5.0f)
-            executingNpcState = ExecutingNpcState.PATROL;
-        else if(distance <= 1.0f)
+        if(Agent.remainingDistance <= Agent.stoppingDistance)
+        {
             executingNpcState = ExecutingNpcState.CHAT;
+        }
+
+        if(distance >= 5.0f)
+        {
+            executingNpcState = ExecutingNpcState.PATROL;
+        }
         else
             Agent.destination = pc.position;
     }

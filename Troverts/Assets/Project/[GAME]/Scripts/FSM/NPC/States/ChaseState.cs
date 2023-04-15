@@ -6,8 +6,9 @@ public class ChaseState : NPCStates
 {
     public override void EnterState(NpcFSM fsm)
     {
-        Debug.Log("npc chase");
+        //Debug.Log("npc chase");
         fsm.OnNpcWalk.Invoke();
+        fsm.Agent.stoppingDistance = 1.5f;
     }
 
     public override void UpdateState(NpcFSM fsm)
