@@ -65,7 +65,8 @@ public abstract class NpcFSM : MonoBehaviour//, IInteractable
 
     #region Patrol Methods
     
-    float distance;
+    [HideInInspector]
+    public float distance;
     public void Patrol()
     {
         if(Agent.remainingDistance <= Agent.stoppingDistance) //done with path
@@ -138,15 +139,28 @@ public abstract class NpcFSM : MonoBehaviour//, IInteractable
 
     public IEnumerator Chat()
     {
-        //yield return new WaitForSeconds(1.5f); 
-
-        EventManager.OnIntrovertCaught.Invoke();
-
         yield return new WaitForSeconds(3.0f); 
 
         executingNpcState = ExecutingNpcState.PATROL;
-        EventManager.OnIntrovertLeave.Invoke();
+    }
 
+    [HideInInspector]
+    public Vector3 pcPoint, escapePoint;
+    public void Escape(float distance)
+    {
+        pcPoint = pc.position;
+        escapePoint = new Vector3(-pcPoint.x, pcPoint.y, -pcPoint.z);
+
+        Agent.SetDestination(escapePoint);
+
+        if(distance <= 1.5f)    
+        {
+            executingNpcState = ExecutingNpcState.CHAT;
+        }
+        else if(Agent.remainingDistance <= Agent.stoppingDistance)
+        {
+            executingNpcState = ExecutingNpcState.PATROL;
+        }
     }
 
     public void SwitchState(NPCStates nextState)

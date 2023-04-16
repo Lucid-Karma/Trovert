@@ -24,5 +24,7 @@ public class PatrolState : NPCStates
     {
         if(fsm.executingNpcState == ExecutingNpcState.CHASE)
             fsm.SwitchState(fsm.chaseState);
+        else if(fsm.executingNpcState == ExecutingNpcState.ESCAPE)
+            fsm.SwitchState(fsm.escapeState);
     }
 }

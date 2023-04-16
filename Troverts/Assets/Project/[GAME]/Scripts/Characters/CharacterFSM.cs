@@ -18,7 +18,7 @@ public class CharacterFSM : MonoBehaviour
 
     #region Parameters
     [Header("Movement")]
-    public float currentSpeed;
+    public float currentSpeed;  // 5f in the inspector.
     [Space]
     [Header("Camera")]
     [SerializeField] private Transform thirdPersonCamera;
@@ -48,17 +48,6 @@ public class CharacterFSM : MonoBehaviour
     public UnityEvent OnCharacterWalk = new UnityEvent();
     #endregion
 
-    // bool isCaught = false;
-    // void OnEnable()
-    // {
-    //     EventManager.OnIntrovertCaught.AddListener(Id);
-    //     EventManager.OnIntrovertLeave.AddListener(wa);
-    // }
-    // void OnDisable()
-    // {
-    //     EventManager.OnIntrovertCaught.RemoveListener(Id);
-    //     EventManager.OnIntrovertLeave.RemoveListener(wa);
-    // }
 
     void Start()
     {
@@ -67,34 +56,23 @@ public class CharacterFSM : MonoBehaviour
         currentState.EnterState(this);
     }
 
-    // void Id()
-    // {
-    //     isCaught = true;
-    //     executingState = ExecutingState.IDLE;
-    // }
-    // void wa()
-    // {
-    //     isCaught = false;
-    //     executingState = ExecutingState.WALK;
-    // }
-
     void Update()
     {
-        //if(isCaught)    return;
-        
-
-        if(Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
+        if(FsmManager.Instance.IsCharacterCommunicating)
         {
-            if(FsmManager.Instance.IsCharacterCommunicating)
-            {
-                executingState = ExecutingState.IDLE;
-            }
-            else
-                executingState = ExecutingState.WALK;
+            executingState = ExecutingState.IDLE;
         }
         else
         {
-            executingState = ExecutingState.IDLE;
+            if(Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
+            {
+                executingState = ExecutingState.WALK;
+            }
+            else
+            {
+                executingState = ExecutingState.IDLE;
+            }
+
         }
 
         currentState.UpdateState(this);
@@ -102,6 +80,8 @@ public class CharacterFSM : MonoBehaviour
 
     public void Move()
     {
+        Sprint();
+
         verticalMove = Input.GetAxis("Vertical") * currentSpeed * Time.deltaTime;
         horizontalMove = Input.GetAxis("Horizontal") * currentSpeed * Time.deltaTime;
 
@@ -120,6 +100,18 @@ public class CharacterFSM : MonoBehaviour
         thirdPersonCamera.localRotation = Quaternion.Euler(rotationX, 0, 0);
 
         transform.Rotate(Vector3.up * mouseX);
+    }
+
+    private void Sprint()
+    {
+        if(Input.GetKey(KeyCode.LeftShift))
+        {
+            currentSpeed = 7.0f;
+        }
+        else
+        {
+            currentSpeed = 5.0f;
+        }
     }
 
     public void SwitchState(CharacterStates nextState)

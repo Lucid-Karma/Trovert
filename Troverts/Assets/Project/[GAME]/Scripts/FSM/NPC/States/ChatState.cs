@@ -10,6 +10,7 @@ public class ChatState : NPCStates
         fsm.OnNpcIdle.Invoke();
         fsm.hasMet = true;
         FsmManager.Instance.IsCharacterCommunicating = true;
+        // EventManager.OnIntrovertCaught.Invoke();
     }
 
     public override void UpdateState(NpcFSM fsm)
