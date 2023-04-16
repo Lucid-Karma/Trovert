@@ -6,7 +6,12 @@ public class IdleState : CharacterStates
 {
     public override void EnterState(CharacterFSM fsm)
     {
-        fsm.OnCharacterIdle.Invoke();
+        if(FsmManager.Instance.IsCharacterCommunicating)    // if introvert has been caught, play the shy stand animation.
+        {
+            EventManager.OnIntrovertCaught.Invoke();
+        }
+        else
+            fsm.OnCharacterIdle.Invoke();
     }
 
     public override void UpdateState(CharacterFSM fsm)
