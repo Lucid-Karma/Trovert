@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChaseState : NPCStates
+public class ChaseState : IntrovertNPCStates
 {
-    public override void EnterState(NpcFSM fsm)
+    public override void EnterState(IntrovertNpcFsm fsm)
     {
         //Debug.Log("npc chase");
         fsm.OnNpcWalk.Invoke();
         fsm.Agent.stoppingDistance = 1.5f;
     }
 
-    public override void UpdateState(NpcFSM fsm)
+    public override void UpdateState(IntrovertNpcFsm fsm)
     {
         if(fsm.executingNpcState == ExecutingNpcState.CHASE)
             fsm.Chase();
@@ -19,11 +19,11 @@ public class ChaseState : NPCStates
             ExitState(fsm);
     }
 
-    public override void ExitState(NpcFSM fsm)
+    public override void ExitState(IntrovertNpcFsm fsm)
     {
         if(fsm.executingNpcState == ExecutingNpcState.PATROL)
-            fsm.SwitchState(fsm.patrolState);
+            fsm.SwitchState(fsm.inPatrolState);
         else if(fsm.executingNpcState == ExecutingNpcState.CHAT)
-            fsm.SwitchState(fsm.chatState);
+            fsm.SwitchState(fsm.inChatState);
     }
 }
