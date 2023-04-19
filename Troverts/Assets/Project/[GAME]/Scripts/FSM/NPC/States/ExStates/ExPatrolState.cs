@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PatrolState : NPCStates
+public class ExPatrolState : ExtrovertNPCStates
 {
-    public override void EnterState(NpcFSM fsm)
+    public override void EnterState(ExtrovertNpcFsm fsm)
     {
         //Debug.Log("npc patrol");
         fsm.OnNpcWalk.Invoke();
@@ -12,7 +12,7 @@ public class PatrolState : NPCStates
         FsmManager.Instance.IsCharacterCommunicating = false;
     }
 
-    public override void UpdateState(NpcFSM fsm)
+    public override void UpdateState(ExtrovertNpcFsm fsm)
     {
         if(fsm.executingNpcState == ExecutingNpcState.PATROL)
             fsm.Patrol();
@@ -20,11 +20,9 @@ public class PatrolState : NPCStates
             ExitState(fsm);
     }
 
-    public override void ExitState(NpcFSM fsm)
+    public override void ExitState(ExtrovertNpcFsm fsm)
     {
-        if(fsm.executingNpcState == ExecutingNpcState.CHASE)
-            fsm.SwitchState(fsm.chaseState);
-        else if(fsm.executingNpcState == ExecutingNpcState.ESCAPE)
+        if(fsm.executingNpcState == ExecutingNpcState.ESCAPE)
             fsm.SwitchState(fsm.escapeState);
     }
 }

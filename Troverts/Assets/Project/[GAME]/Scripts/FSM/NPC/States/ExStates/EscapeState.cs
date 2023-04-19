@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EscapeState : NPCStates
+public class EscapeState : ExtrovertNPCStates
 {
-    public override void EnterState(NpcFSM fsm)
+    public override void EnterState(ExtrovertNpcFsm fsm)
     {
         Debug.Log("npc escape");
         fsm.distance = Vector3.Distance(fsm.Agent.transform.position, fsm.pcPoint);
     }
 
-    public override void UpdateState(NpcFSM fsm)
+    public override void UpdateState(ExtrovertNpcFsm fsm)
     {
         if(fsm.executingNpcState == ExecutingNpcState.ESCAPE)
             fsm.Escape(fsm.distance);
@@ -18,11 +18,9 @@ public class EscapeState : NPCStates
             ExitState(fsm);
     }
 
-    public override void ExitState(NpcFSM fsm)
+    public override void ExitState(ExtrovertNpcFsm fsm)
     {
         if(fsm.executingNpcState == ExecutingNpcState.CHAT)
-            fsm.SwitchState(fsm.chatState);
-        else if(fsm.executingNpcState == ExecutingNpcState.PATROL)
-            fsm.SwitchState(fsm.patrolState);
+            fsm.SwitchState(fsm.exChatState);
     }
 }

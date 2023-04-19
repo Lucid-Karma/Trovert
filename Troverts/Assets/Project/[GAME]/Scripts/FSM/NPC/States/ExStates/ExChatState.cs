@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChatState : NPCStates
+public class ExChatState : ExtrovertNPCStates
 {
-    public override void EnterState(NpcFSM fsm)
+    public override void EnterState(ExtrovertNpcFsm fsm)
     {
         //Debug.Log("npc chat");
         fsm.OnNpcIdle.Invoke();
@@ -13,7 +13,7 @@ public class ChatState : NPCStates
         // EventManager.OnIntrovertCaught.Invoke();
     }
 
-    public override void UpdateState(NpcFSM fsm)
+    public override void UpdateState(ExtrovertNpcFsm fsm)
     {
         if(fsm.executingNpcState == ExecutingNpcState.CHAT)
             fsm.StartCoroutine(fsm.Chat());
@@ -21,9 +21,9 @@ public class ChatState : NPCStates
             ExitState(fsm);
     }
 
-    public override void ExitState(NpcFSM fsm)
+    public override void ExitState(ExtrovertNpcFsm fsm)
     {
         if(fsm.executingNpcState == ExecutingNpcState.PATROL)
-            fsm.SwitchState(fsm.patrolState);
+            fsm.SwitchState(fsm.exPatrolState);
     }
 }
