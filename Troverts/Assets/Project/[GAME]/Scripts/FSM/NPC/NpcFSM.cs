@@ -73,25 +73,6 @@ public abstract class NpcFSM : MonoBehaviour
         }
 
         distance = Vector3.Distance(Agent.transform.position, pc.position);
-
-        // if(PlayerPrefs.GetString("selected_character") == "introvert")
-        // {
-        //     if (!FsmManager.Instance.IsCharacterCommunicating)  // for one npc at a time.   ???
-        //     {
-        //         if(distance <= 2f)
-        //         {
-        //             executingNpcState = ExecutingNpcState.CHASE;
-        //         } 
-        //     }
-        // }
-        // else if(PlayerPrefs.GetString("selected_character") == "extrovert")
-        // {
-        //     if(distance <= 3f)
-        //     {
-        //         executingNpcState = ExecutingNpcState.ESCAPE;
-        //     } 
-        // }
-        
     }
 
     bool RandomPoint(Vector3 center, float range, out Vector3 result)
@@ -112,7 +93,6 @@ public abstract class NpcFSM : MonoBehaviour
     }
     #endregion
 
-    public bool hasMet = false;
     // public void Chase()
     // {
     //     distance = Vector3.Distance(Agent.transform.position, pc.position);
@@ -130,9 +110,15 @@ public abstract class NpcFSM : MonoBehaviour
     //         Agent.destination = pc.position;
     // }
 
+    public void RotateToPC(Vector3 pcPos)
+    {
+        Agent.transform.rotation = Quaternion.LookRotation(pcPos, Vector3.up);
+    }
     public IEnumerator Chat()
     {
-        yield return new WaitForSeconds(3.0f); 
+        yield return new WaitForSeconds(10.0f); 
+
+        Debug.Log(Vector3.Distance(Agent.transform.position, pc.position));
 
         executingNpcState = ExecutingNpcState.PATROL;
     }

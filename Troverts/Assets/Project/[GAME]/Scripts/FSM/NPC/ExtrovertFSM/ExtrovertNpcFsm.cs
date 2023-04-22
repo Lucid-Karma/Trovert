@@ -30,16 +30,26 @@ public class ExtrovertNpcFsm : NpcFSM
     {
         base.Patrol();
 
-        if(distance <= 3f)
+        if (!FsmManager.Instance.IsCharacterCommunicating)
         {
-            executingNpcState = ExecutingNpcState.ESCAPE;
-        } 
+            if(/*distance >= 1.5f && */distance <= 4f)
+            {
+                executingNpcState = ExecutingNpcState.ESCAPE;
+            } 
+        }
+        
+        // else if(distance <= 1.5f)    
+        // {
+        //     executingNpcState = ExecutingNpcState.CHAT;
+        // }
     }
     
-    public void Escape(float distance)
+    [HideInInspector]
+    public Vector3 distanceVec;
+    public void Escape()
     {
-        pcPoint = pc.position;
-        escapePoint = new Vector3(-pcPoint.x, pcPoint.y, -pcPoint.z);
+        distance = Vector3.Distance(Agent.transform.position, pc.position);
+        escapePoint = Agent.transform.position + distanceVec;
 
         Agent.SetDestination(escapePoint);
 
@@ -47,7 +57,7 @@ public class ExtrovertNpcFsm : NpcFSM
         {
             executingNpcState = ExecutingNpcState.CHAT;
         }
-        else if(Agent.remainingDistance <= Agent.stoppingDistance)
+        else if (distance >= 15f)
         {
             executingNpcState = ExecutingNpcState.PATROL;
         }

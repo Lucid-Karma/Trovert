@@ -8,9 +8,7 @@ public class InChatState : IntrovertNPCStates
     {
         //Debug.Log("npc chat");
         fsm.OnNpcIdle.Invoke();
-        fsm.hasMet = true;
         FsmManager.Instance.IsCharacterCommunicating = true;
-        // EventManager.OnIntrovertCaught.Invoke();
     }
 
     public override void UpdateState(IntrovertNpcFsm fsm)
