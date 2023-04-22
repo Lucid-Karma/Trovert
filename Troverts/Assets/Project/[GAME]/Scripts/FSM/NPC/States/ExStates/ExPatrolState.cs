@@ -6,7 +6,7 @@ public class ExPatrolState : ExtrovertNPCStates
 {
     public override void EnterState(ExtrovertNpcFsm fsm)
     {
-        //Debug.Log("npc patrol");
+        Debug.Log("npc patrol");
         fsm.OnNpcWalk.Invoke();
         fsm.Agent.stoppingDistance = 0.0f;
         FsmManager.Instance.IsCharacterCommunicating = false;
@@ -24,5 +24,7 @@ public class ExPatrolState : ExtrovertNPCStates
     {
         if(fsm.executingNpcState == ExecutingNpcState.ESCAPE)
             fsm.SwitchState(fsm.escapeState);
+        // else if(fsm.executingNpcState == ExecutingNpcState.CHAT)    //  ???
+        //     fsm.SwitchState(fsm.exChatState);
     }
 }

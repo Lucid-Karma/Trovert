@@ -1498,7 +1498,7 @@ MonoBehaviour:
   npcPrefabs:
   - {fileID: 4327540943475855315, guid: 1723ead9f3a24904c8bdfa03fa8567b5, type: 3}
   - {fileID: 205453536501681326, guid: 06709642fa3bc5c4498b64c25a563a54, type: 3}
-  npcCount: 10
+  npcCount: 1
 --- !u!4 &1591671471
 Transform:
   m_ObjectHideFlags: 0
