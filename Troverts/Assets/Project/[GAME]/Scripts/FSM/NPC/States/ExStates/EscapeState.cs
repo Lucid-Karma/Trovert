@@ -8,7 +8,7 @@ public class EscapeState : ExtrovertNPCStates
     {
         Debug.Log("npc escape");
         fsm.pcPoint = fsm.pc.position;
-        fsm.distanceVec = fsm.Agent.transform.position - fsm.pcPoint;
+        fsm.distanceVec = (fsm.Agent.transform.position - fsm.pcPoint).normalized;
     }
 
     public override void UpdateState(ExtrovertNpcFsm fsm)

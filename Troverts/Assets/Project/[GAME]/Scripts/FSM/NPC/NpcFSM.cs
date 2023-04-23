@@ -35,6 +35,9 @@ public abstract class NpcFSM : MonoBehaviour
     [HideInInspector]
     public Transform pc;
     private float range = 10.0f;
+
+    [HideInInspector]
+    public float distance;
     #endregion
     
     #endregion
@@ -51,15 +54,7 @@ public abstract class NpcFSM : MonoBehaviour
         pc = GameObject.FindWithTag("Player").GetComponent<Transform>();
     }
 
-    public void Move()
-    {
-        // codes for npc movement.
-    }
-
     #region Patrol Methods
-    
-    [HideInInspector]
-    public float distance;
     public virtual void Patrol()
     {
         if(Agent.remainingDistance <= Agent.stoppingDistance) //done with path
@@ -118,33 +113,8 @@ public abstract class NpcFSM : MonoBehaviour
     {
         yield return new WaitForSeconds(10.0f); 
 
-        Debug.Log(Vector3.Distance(Agent.transform.position, pc.position));
+        //Debug.Log(Vector3.Distance(Agent.transform.position, pc.position));
 
         executingNpcState = ExecutingNpcState.PATROL;
     }
-
-    // [HideInInspector]
-    // public Vector3 pcPoint, escapePoint;
-    // public void Escape(float distance)
-    // {
-    //     pcPoint = pc.position;
-    //     escapePoint = new Vector3(-pcPoint.x, pcPoint.y, -pcPoint.z);
-
-    //     Agent.SetDestination(escapePoint);
-
-    //     if(distance <= 1.5f)    
-    //     {
-    //         executingNpcState = ExecutingNpcState.CHAT;
-    //     }
-    //     else if(Agent.remainingDistance <= Agent.stoppingDistance)
-    //     {
-    //         executingNpcState = ExecutingNpcState.PATROL;
-    //     }
-    // }
-
-    // public void SwitchState(NPCStates nextState)
-    // {
-    //     currentState = nextState;
-    //     currentState.EnterState(this);
-    // }
 }
