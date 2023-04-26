@@ -114,6 +114,13 @@ public class CharacterFSM : MonoBehaviour
         }
     }
 
+    // public void DetectCollisions()
+    // {
+    //     if ((CharacterController.collisionFlags & CollisionFlags.Sides) != 0)
+    //     {
+    //         print("Etrafından bir şeylere temas ediyor");
+    //     }
+    // }
     public void SwitchState(CharacterStates nextState)
     {
         currentState = nextState;

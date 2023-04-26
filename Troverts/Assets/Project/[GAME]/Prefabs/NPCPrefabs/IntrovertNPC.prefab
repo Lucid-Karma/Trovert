@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -5897781915373087496}
   m_Layer: 0
   m_Name: IntrovertNPC
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -54,7 +54,8 @@ MonoBehaviour:
   OnNpcWalk:
     m_PersistentCalls:
       m_Calls: []
-  hasMet: 0
+  pc: {fileID: 0}
+  distance: 0
 --- !u!195 &7724406484161905714
 NavMeshAgent:
   m_ObjectHideFlags: 0
