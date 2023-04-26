@@ -31,7 +31,7 @@ public abstract class NpcFSM : MonoBehaviour
     
     #region Parameters
 
-    #region NavMesh
+        #region NavMesh
     [HideInInspector]
     public Transform pc;
     private float range = 10.0f;
@@ -39,11 +39,17 @@ public abstract class NpcFSM : MonoBehaviour
     [HideInInspector]
     public float distance;
     #endregion
+
+        #region Rotation
+    Vector3 direction;
+    Quaternion lookRotation;
+    private float rotationSpeed = 20.0f;
+    #endregion
     
     #endregion
     
 
-    void Start()    // public .........?
+    void Start()    
     {
         executingNpcState = ExecutingNpcState.PATROL;
         StartState();
@@ -55,11 +61,14 @@ public abstract class NpcFSM : MonoBehaviour
     }
 
     #region Patrol Methods
+
+    private Vector3 point;
+    Vector3 randomPoint;
+    NavMeshHit hit;
     public virtual void Patrol()
     {
         if(Agent.remainingDistance <= Agent.stoppingDistance) //done with path
         {
-            Vector3 point;
             if (RandomPoint(new Vector3(0, 0, 0), range, out point)) //pass in our centre point and radius of area
             {
                 Debug.DrawRay(point, Vector3.up, Color.blue, 1.0f); //so you can see with gizmos
@@ -73,8 +82,8 @@ public abstract class NpcFSM : MonoBehaviour
     bool RandomPoint(Vector3 center, float range, out Vector3 result)
     {
 
-        Vector3 randomPoint = center + Random.insideUnitSphere * range; //random point in a sphere 
-        NavMeshHit hit;
+        randomPoint = center + Random.insideUnitSphere * range; //random point in a sphere 
+      
         if (NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas)) //documentation: https://docs.unity3d.com/ScriptReference/AI.NavMesh.SamplePosition.html
         { 
             //the 1.0f is the max distance from the random point to a point on the navmesh, might want to increase if range is big
@@ -88,32 +97,18 @@ public abstract class NpcFSM : MonoBehaviour
     }
     #endregion
 
-    // public void Chase()
-    // {
-    //     distance = Vector3.Distance(Agent.transform.position, pc.position);
-
-    //     if(Agent.remainingDistance <= Agent.stoppingDistance)
-    //     {
-    //         executingNpcState = ExecutingNpcState.CHAT;
-    //     }
-
-    //     if(distance >= 5.0f)
-    //     {
-    //         executingNpcState = ExecutingNpcState.PATROL;
-    //     }
-    //     else
-    //         Agent.destination = pc.position;
-    // }
-
     public void RotateToPC(Vector3 pcPos)
     {
-        Agent.transform.rotation = Quaternion.LookRotation(pcPos, Vector3.up);
+        direction = (pcPos - Agent.transform.position).normalized;
+        lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0f, direction.z));
+        Agent.transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
     }
+
     public IEnumerator Chat()
     {
-        yield return new WaitForSeconds(10.0f); 
+        Agent.SetDestination(transform.position);
 
-        //Debug.Log(Vector3.Distance(Agent.transform.position, pc.position));
+        yield return new WaitForSeconds(10.0f); 
 
         executingNpcState = ExecutingNpcState.PATROL;
     }

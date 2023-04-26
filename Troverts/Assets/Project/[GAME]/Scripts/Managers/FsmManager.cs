@@ -8,4 +8,10 @@ public class FsmManager : Singleton<FsmManager>
 
     [HideInInspector]
     public bool IsCharacterCommunicating { get { return isCharacterCommunicating; } set { isCharacterCommunicating = value; } }
+
+
+    // private bool isExtrovertNpcMet;
+
+    // [HideInInspector]
+    // public bool IsExtrovertNpcMet { get { return isExtrovertNpcMet; } set { isExtrovertNpcMet = value; } }
 }

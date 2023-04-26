@@ -24,7 +24,7 @@ public class ExPatrolState : ExtrovertNPCStates
     {
         if(fsm.executingNpcState == ExecutingNpcState.ESCAPE)
             fsm.SwitchState(fsm.escapeState);
-        // else if(fsm.executingNpcState == ExecutingNpcState.CHAT)    //  ???
-        //     fsm.SwitchState(fsm.exChatState);
+        else if(fsm.executingNpcState == ExecutingNpcState.CHAT)    
+            fsm.SwitchState(fsm.exChatState);
     }
 }

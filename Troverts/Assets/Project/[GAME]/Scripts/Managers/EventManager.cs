@@ -37,4 +37,7 @@ public static class EventManager
     public static UnityEvent OnCursorLock = new UnityEvent();
     public static UnityEvent OnICharacterDataReceive = new UnityEvent();
     public static UnityEvent OnECharacterDataReceive = new UnityEvent();
+
+    public static UnityEvent OnExtrvrtGreet = new UnityEvent();
+    public static UnityEvent OnExtrvrtGreetingEnd = new UnityEvent();
 }

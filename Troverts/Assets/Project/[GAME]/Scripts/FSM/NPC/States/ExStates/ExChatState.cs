@@ -10,7 +10,7 @@ public class ExChatState : ExtrovertNPCStates
         fsm.pcPoint = fsm.pc.position;
         fsm.OnNpcIdle.Invoke();
         FsmManager.Instance.IsCharacterCommunicating = true;
-        fsm.RotateToPC(fsm.pcPoint);
+        fsm.IsExtrovertNpcMet = true;
         fsm.StartCoroutine(fsm.Chat());
     }
 
@@ -18,7 +18,7 @@ public class ExChatState : ExtrovertNPCStates
     {
         if(fsm.executingNpcState == ExecutingNpcState.CHAT)
         {
-            //fsm.RotateToPC(fsm.pcPoint);
+            fsm.RotateToPC(fsm.pcPoint);
             //fsm.StartCoroutine(fsm.Chat());
         }
         else
@@ -28,6 +28,7 @@ public class ExChatState : ExtrovertNPCStates
     public override void ExitState(ExtrovertNpcFsm fsm)
     {
         fsm.ChangeColor();
+        
         if(fsm.executingNpcState == ExecutingNpcState.PATROL)
             fsm.SwitchState(fsm.exPatrolState);
     }
