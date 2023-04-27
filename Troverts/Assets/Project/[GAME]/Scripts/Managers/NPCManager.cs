@@ -32,7 +32,7 @@ public class NPCManager : MonoBehaviour
         {
             rotAmount = Random.Range(0, 360);
 
-            GameObject obj = (GameObject)Instantiate(npcPrefabs[0], GetRandomPos(new Vector3(0, 0, 0), 100.0f), Quaternion.AngleAxis(rotAmount, Vector3.up));
+            GameObject obj = (GameObject)Instantiate(npcPrefabs[0], GetRandomPos(new Vector3(0, 0, 0), 95.0f), Quaternion.AngleAxis(rotAmount, Vector3.up));
             introvertNPCs.Add(obj);
         }
     }
@@ -43,7 +43,7 @@ public class NPCManager : MonoBehaviour
         {
             rotAmount = Random.Range(0, 360);
 
-            GameObject obj = (GameObject)Instantiate(npcPrefabs[1], GetRandomPos(new Vector3(0, 0, 0), 100.0f), Quaternion.AngleAxis(rotAmount, Vector3.up));
+            GameObject obj = (GameObject)Instantiate(npcPrefabs[1], GetRandomPos(new Vector3(0, 0, 0), 95.0f), Quaternion.AngleAxis(rotAmount, Vector3.up));
             extrovertNPCs.Add(obj);
         }
     }

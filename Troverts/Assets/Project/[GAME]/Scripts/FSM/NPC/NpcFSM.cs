@@ -34,7 +34,7 @@ public abstract class NpcFSM : MonoBehaviour
         #region NavMesh
     [HideInInspector]
     public Transform pc;
-    private float range = 10.0f;
+    private float range = 95.0f;
 
     [HideInInspector]
     public float distance;
@@ -104,12 +104,17 @@ public abstract class NpcFSM : MonoBehaviour
         Agent.transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
     }
 
-    public IEnumerator Chat()
+    public void Chat(UnityEvent pointEvent)
     {
         Agent.SetDestination(transform.position);
 
-        yield return new WaitForSeconds(10.0f); 
+        EventManager.OnNpcGreet.Invoke();
 
-        executingNpcState = ExecutingNpcState.PATROL;
+        if (Input.GetMouseButtonDown(0))
+        {
+            EventManager.OnNpcGreetingEnd.Invoke();
+            pointEvent.Invoke();
+            executingNpcState = ExecutingNpcState.PATROL;
+        }
     }
 }

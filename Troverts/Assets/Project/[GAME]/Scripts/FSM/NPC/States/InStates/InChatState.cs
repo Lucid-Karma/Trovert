@@ -14,7 +14,7 @@ public class InChatState : IntrovertNPCStates
     public override void UpdateState(IntrovertNpcFsm fsm)
     {
         if(fsm.executingNpcState == ExecutingNpcState.CHAT)
-            fsm.StartCoroutine(fsm.Chat());
+            fsm.Chat(EventManager.OnPointLose);
         else
             ExitState(fsm);
     }
