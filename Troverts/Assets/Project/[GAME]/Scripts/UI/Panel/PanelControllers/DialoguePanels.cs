@@ -15,13 +15,13 @@ public class DialoguePanels : Panel
 
     void OnEnable()
     {
-        EventManager.OnExtrvrtGreet.AddListener(InitializeEGreetingPanel);
-        EventManager.OnExtrvrtGreetingEnd.AddListener(HideEGreetingPanel);
+        EventManager.OnNpcGreet.AddListener(InitializeEGreetingPanel);
+        EventManager.OnNpcGreetingEnd.AddListener(HideEGreetingPanel);
     }
     void OnDisable()
     {
-        EventManager.OnExtrvrtGreet.RemoveListener(InitializeEGreetingPanel);
-        EventManager.OnExtrvrtGreetingEnd.RemoveListener(HideEGreetingPanel);
+        EventManager.OnNpcGreet.RemoveListener(InitializeEGreetingPanel);
+        EventManager.OnNpcGreetingEnd.RemoveListener(HideEGreetingPanel);
     }
 
     private void InitializeEChatPanel()

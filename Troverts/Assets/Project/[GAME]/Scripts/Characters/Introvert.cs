@@ -38,8 +38,6 @@ public class Introvert : CharacterBase
             //     Energy = 100;
             //     break;
         }
-
-        Debug.Log(Energy + " " + this.name);
     }
 
     public override void ReceiveData()
@@ -47,11 +45,11 @@ public class Introvert : CharacterBase
         EventManager.OnICharacterDataReceive.Invoke();
     }
 
-    public override void ManageEnergy(int damage)
+    public override void ManageEnergy()
     {
-        Energy -= damage;
+        Energy -= 5;
 
         if(Energy <= 0)
-            base.ManageEnergy(damage);
+            base.ManageEnergy();
     }
 }

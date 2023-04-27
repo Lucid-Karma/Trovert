@@ -87,6 +87,7 @@ public class CharacterFSM : MonoBehaviour
 
         move = transform.right * horizontalMove + transform.forward * verticalMove;
         CharacterController.Move(move);
+        //CharacterController.SimpleMove(move);
     }
 
     public void LookAround()
@@ -118,7 +119,6 @@ public class CharacterFSM : MonoBehaviour
     // {
     //     if ((CharacterController.collisionFlags & CollisionFlags.Sides) != 0)
     //     {
-    //         print("Etrafından bir şeylere temas ediyor");
     //     }
     // }
     public void SwitchState(CharacterStates nextState)

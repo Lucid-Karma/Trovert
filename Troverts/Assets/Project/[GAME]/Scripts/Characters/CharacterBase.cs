@@ -15,7 +15,7 @@ public abstract class CharacterBase : MonoBehaviour
     public abstract void SetEnergy();
     public abstract void ReceiveData();
 
-    public virtual void ManageEnergy(int amount)
+    public virtual void ManageEnergy()
     {
         Die();
     }

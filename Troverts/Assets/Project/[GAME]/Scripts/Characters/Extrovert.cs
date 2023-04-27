@@ -11,6 +11,8 @@ public class Extrovert : CharacterBase
             EventManager.OnDifficultyChoose.AddListener(SetEnergy);
 
         EventManager.OnExtrovertLevelStart.AddListener(ReceiveData);
+
+        EventManager.OnPointEarn.AddListener(ManageEnergy);
     }
     void OnDisable()
     {
@@ -19,6 +21,8 @@ public class Extrovert : CharacterBase
             EventManager.OnDifficultyChoose.RemoveListener(SetEnergy);
             
         EventManager.OnExtrovertLevelStart.RemoveListener(ReceiveData);
+
+        EventManager.OnPointEarn.RemoveListener(ManageEnergy);
     }
 
     public override void SetEnergy()
@@ -28,20 +32,18 @@ public class Extrovert : CharacterBase
         switch (selectedDifficulty)
         {
             case 3: // Easy
-                Energy = 1;
+                Energy = 50;
                 break;
             case 4: // Medium
-                Energy = 3;
+                Energy = 70;
                 break;
             case 5: // Hard
-                Energy = 5;
+                Energy = 100;
                 break;
             // default:
             //     Energy = 50;
             //     break;
         }
-
-        Debug.Log(Energy + " " + this.name);
     }
 
     public override void ReceiveData()
@@ -49,9 +51,10 @@ public class Extrovert : CharacterBase
         EventManager.OnECharacterDataReceive.Invoke();
     }
 
-    public override void ManageEnergy(int score)
+    public override void ManageEnergy()
     {
-        Score += score;
+        Score += 5;
+        EventManager.OnEScoreTxtUpdate.Invoke();
 
         if(Score >= Energy) Debug.Log("win");
         //base.ManageEnergy();
