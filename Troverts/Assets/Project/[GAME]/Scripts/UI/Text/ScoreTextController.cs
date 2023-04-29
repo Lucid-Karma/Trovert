@@ -24,6 +24,7 @@ public class ScoreTextController : MonoBehaviour
         EventManager.OnECharacterDataReceive.AddListener(UpdateEScoreText);
         // EventManager.OnIntrovertLevelStart.AddListener(UpdateIScoreText);
         // EventManager.OnExtrovertLevelStart.AddListener(UpdateEScoreText);
+        EventManager.OnIScoreTxtUpdate.AddListener(UpdateIScoreText);
         EventManager.OnEScoreTxtUpdate.AddListener(UpdateEScoreText);
     }
 
@@ -33,11 +34,13 @@ public class ScoreTextController : MonoBehaviour
         EventManager.OnECharacterDataReceive.RemoveListener(UpdateEScoreText);
         // EventManager.OnIntrovertLevelStart.RemoveListener(UpdateIScoreText);
         // EventManager.OnExtrovertLevelStart.RemoveListener(UpdateEScoreText);
+        EventManager.OnIScoreTxtUpdate.RemoveListener(UpdateIScoreText);
         EventManager.OnEScoreTxtUpdate.RemoveListener(UpdateEScoreText);
     }
 
 
     private int point;
+    private int targetPoint;
 
     private void UpdateIScoreText()
     {
@@ -48,6 +51,7 @@ public class ScoreTextController : MonoBehaviour
     private void UpdateEScoreText()
     {
         point = Extrovert.Score;
-        ScoreText.text = "Total Energy: " + point;
+        targetPoint = Extrovert.Energy;
+        ScoreText.text = "Total Energy: " + point + "/" + targetPoint;
     }
 }

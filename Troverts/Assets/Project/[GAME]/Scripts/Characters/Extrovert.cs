@@ -6,9 +6,7 @@ public class Extrovert : CharacterBase
 {
     void OnEnable()
     {
-        //EventManager.OnIntrovertChoose.AddListener(() => gameObject.SetActive(false));
-        if(PlayerPrefs.GetString("selected_character") == "extrovert")
-            EventManager.OnDifficultyChoose.AddListener(SetEnergy);
+        EventManager.OnEDifficultyChoose.AddListener(SetEnergy);
 
         EventManager.OnExtrovertLevelStart.AddListener(ReceiveData);
 
@@ -16,9 +14,7 @@ public class Extrovert : CharacterBase
     }
     void OnDisable()
     {
-        //EventManager.OnIntrovertChoose.RemoveListener(() => gameObject.SetActive(false));
-        if(PlayerPrefs.GetString("selected_character") == "extrovert")
-            EventManager.OnDifficultyChoose.RemoveListener(SetEnergy);
+        EventManager.OnEDifficultyChoose.RemoveListener(SetEnergy);
             
         EventManager.OnExtrovertLevelStart.RemoveListener(ReceiveData);
 
@@ -44,6 +40,9 @@ public class Extrovert : CharacterBase
             //     Energy = 50;
             //     break;
         }
+
+        Debug.Log("extrovert " + selectedDifficulty + " " + Energy);
+        Debug.Log(PlayerPrefs.GetString("selected_character") + " " + PlayerPrefs.GetInt("selected_difficulty"));
     }
 
     public override void ReceiveData()
@@ -56,7 +55,7 @@ public class Extrovert : CharacterBase
         Score += 5;
         EventManager.OnEScoreTxtUpdate.Invoke();
 
-        if(Score >= Energy) Debug.Log("win");
+        if(Score >= Energy) EventManager.OnLevelSuccess.Invoke();
         //base.ManageEnergy();
     }
 }

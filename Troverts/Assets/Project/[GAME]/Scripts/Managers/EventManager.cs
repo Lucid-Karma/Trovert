@@ -23,7 +23,9 @@ public static class EventManager
     public static UnityEvent OnCharacterChoose = new UnityEvent();
     public static UnityEvent OnExtrovertChoose = new UnityEvent();
     public static UnityEvent OnIntrovertChoose = new UnityEvent();
-    public static UnityEvent OnDifficultyChoose = new UnityEvent();
+    //public static UnityEvent OnDifficultyChoose = new UnityEvent();
+    public static UnityEvent OnEDifficultyChoose = new UnityEvent();
+    public static UnityEvent OnIDifficultyChoose = new UnityEvent();
 
     public static UnityEvent OnObstacleCreated = new UnityEvent();
     public static UnityEvent OnPointEarn = new UnityEvent();
@@ -42,6 +44,7 @@ public static class EventManager
     public static UnityEvent OnICharacterDataReceive = new UnityEvent();
     public static UnityEvent OnECharacterDataReceive = new UnityEvent();
 
+    public static UnityEvent OnPreGreet = new UnityEvent();
     public static UnityEvent OnNpcGreet = new UnityEvent();
     public static UnityEvent OnNpcGreetingEnd = new UnityEvent();
 }

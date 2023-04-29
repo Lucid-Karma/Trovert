@@ -7,6 +7,18 @@ public class GameManager : Singleton<GameManager>
     private bool isGameStarted;
     public bool IsGameStarted { get { return isGameStarted; } private set { isGameStarted = value; } }
 
+    private bool isLevelSuccess;
+    public bool IsLevelSuccess { get { return isLevelSuccess; } private set { isLevelSuccess = value; } }
+
+    private bool isLevelFail;
+    public bool IsLevelFail { get { return isLevelFail; } private set { isLevelFail = value; } }
+
+
+    // void Awake()
+    // {
+    //     PlayerPrefs.DeleteAll();
+    // }
+
     public void StartGame()
     {
         if (IsGameStarted || applicationIsQuitting == false)
@@ -29,16 +41,26 @@ public class GameManager : Singleton<GameManager>
     private void OnEnable()
     {
         EventManager.OnRestart.AddListener(ContinueGame);
-        EventManager.OnLevelFail.AddListener(PauseGame);
-        EventManager.OnLevelSuccess.AddListener(PauseGame);
-        //Timer.OnTimeOut += PauseGame;
+        EventManager.OnLevelFail.AddListener(FailGame);
+        EventManager.OnLevelSuccess.AddListener(WinGame);
     }
     private void OnDisable()
     {
         EventManager.OnRestart.RemoveListener(ContinueGame);
-        EventManager.OnLevelFail.RemoveListener(PauseGame);
-        EventManager.OnLevelSuccess.RemoveListener(PauseGame);
-        //Timer.OnTimeOut -= PauseGame;
+        EventManager.OnLevelFail.RemoveListener(FailGame);
+        EventManager.OnLevelSuccess.RemoveListener(WinGame);
+    }
+
+    void WinGame()
+    {
+        IsLevelSuccess = true;
+        PauseGame();
+    }
+
+    void FailGame()
+    {
+        IsLevelFail = true;
+        PauseGame();
     }
 
     void PauseGame()

@@ -8,20 +8,20 @@ public class IDifficultyButtons : MonoBehaviour
     {
         PlayerPrefs.SetInt("selected_difficulty", 0);
 
-        EventManager.OnDifficultyChoose.Invoke();
+        EventManager.OnIDifficultyChoose.Invoke();
     }
 
     public void Medium()
     {
         PlayerPrefs.SetInt("selected_difficulty", 1);
 
-        EventManager.OnDifficultyChoose.Invoke();
+        EventManager.OnIDifficultyChoose.Invoke();
     }
 
     public void Hard()
     {
         PlayerPrefs.SetInt("selected_difficulty", 2);
 
-        EventManager.OnDifficultyChoose.Invoke();
+        EventManager.OnIDifficultyChoose.Invoke();
     }
 }

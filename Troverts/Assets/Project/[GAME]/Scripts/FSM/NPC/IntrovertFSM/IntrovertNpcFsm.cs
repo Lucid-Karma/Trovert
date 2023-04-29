@@ -12,27 +12,35 @@ public class IntrovertNpcFsm : NpcFSM
 
     void Update()
     {
+        if(GameManager.Instance.IsLevelFail || GameManager.Instance.IsLevelSuccess)     return;
+
         currentState.UpdateState(this);
     }
     
     public override void StartState()
     {
-        currentState = inPatrolState;
+        executingNpcState = ExecutingNpcState.CHASE;
+
+        currentState = chaseState;
         currentState.EnterState(this);
 
         base.StartState();
     }
 
+    public Vector3 escapePoint;
     public override void Patrol()
     {
         base.Patrol();
 
         if (!FsmManager.Instance.IsCharacterCommunicating)  // for one npc at a time.   ???
         {
-            if(distance <= 2f)
+            if (!IsNpcMet)
             {
-                executingNpcState = ExecutingNpcState.CHASE;
-            } 
+                if(distance <= 6.0f)
+                {
+                    executingNpcState = ExecutingNpcState.CHASE;
+                }  
+            }
         }
     }
 
@@ -40,17 +48,26 @@ public class IntrovertNpcFsm : NpcFSM
     {
         distance = Vector3.Distance(Agent.transform.position, pc.position);
 
-        if(Agent.remainingDistance <= Agent.stoppingDistance)
+        if (!FsmManager.Instance.IsCharacterCommunicating)
         {
-            executingNpcState = ExecutingNpcState.CHAT;
+            if (!IsNpcMet)
+            {
+                if(distance <= 1.5f)    
+                {
+                    executingNpcState = ExecutingNpcState.CHAT;
+                }
+                else    Agent.SetDestination(pc.position);
+            }
         }
+        else    executingNpcState = ExecutingNpcState.PATROL;
 
-        if(distance >= 5.0f)
-        {
-            executingNpcState = ExecutingNpcState.PATROL;
-        }
-        else
-            Agent.destination = pc.position;
+        // if(distance >= 20.0f)
+        // {
+        //     executingNpcState = ExecutingNpcState.PATROL;
+        // }
+        // else
+            //Agent.destination = pc.position;
+            
     }
 
     public void SwitchState(IntrovertNPCStates nextState)

@@ -6,13 +6,13 @@ public class GamePanels : Panel
 {
     public Panel LevelSuccesPanel;
     public Panel LevelFailPanel;
-    public Panel BlurPanel;
+    //public Panel BlurPanel;
 
     private void Awake() 
     {
         LevelSuccesPanel.HidePanel();
         LevelFailPanel.HidePanel();
-        BlurPanel.HidePanel();
+        //BlurPanel.HidePanel();
     }
 
     private void OnEnable()
@@ -32,7 +32,7 @@ public class GamePanels : Panel
     private void InitializeLevelFailPanel()
     {
         LevelSuccesPanel.HidePanel();
-        BlurPanel.ShowPanel();
+        //BlurPanel.ShowPanel();
         LevelFailPanel.ShowPanel();
         ShowPanel();
     }
@@ -40,7 +40,7 @@ public class GamePanels : Panel
     private void InitializeLevelSuccessPanel()
     {
         LevelSuccesPanel.ShowPanel();
-        BlurPanel.ShowPanel();
+        //BlurPanel.ShowPanel();
         LevelFailPanel.HidePanel();
         ShowPanel();
     }

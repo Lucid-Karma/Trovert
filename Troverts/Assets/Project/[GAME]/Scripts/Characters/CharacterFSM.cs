@@ -58,6 +58,8 @@ public class CharacterFSM : MonoBehaviour
 
     void Update()
     {
+        if(GameManager.Instance.IsLevelFail || GameManager.Instance.IsLevelSuccess)     return;
+        
         if(FsmManager.Instance.IsCharacterCommunicating)
         {
             executingState = ExecutingState.IDLE;
@@ -87,7 +89,6 @@ public class CharacterFSM : MonoBehaviour
 
         move = transform.right * horizontalMove + transform.forward * verticalMove;
         CharacterController.Move(move);
-        //CharacterController.SimpleMove(move);
     }
 
     public void LookAround()
@@ -107,7 +108,7 @@ public class CharacterFSM : MonoBehaviour
     {
         if(Input.GetKey(KeyCode.LeftShift))
         {
-            currentSpeed = 7.0f;
+            currentSpeed = 8.0f;
         }
         else
         {
@@ -115,12 +116,6 @@ public class CharacterFSM : MonoBehaviour
         }
     }
 
-    // public void DetectCollisions()
-    // {
-    //     if ((CharacterController.collisionFlags & CollisionFlags.Sides) != 0)
-    //     {
-    //     }
-    // }
     public void SwitchState(CharacterStates nextState)
     {
         currentState = nextState;
