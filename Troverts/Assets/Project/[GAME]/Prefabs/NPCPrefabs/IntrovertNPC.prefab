@@ -54,8 +54,13 @@ MonoBehaviour:
   OnNpcWalk:
     m_PersistentCalls:
       m_Calls: []
+  OnNpcRun:
+    m_PersistentCalls:
+      m_Calls: []
   pc: {fileID: 0}
+  pcPoint: {x: 0, y: 0, z: 0}
   distance: 0
+  metMat: {fileID: 2100000, guid: b0db6f9415046f6408c43ff0ba6f3fd4, type: 2}
 --- !u!195 &7724406484161905714
 NavMeshAgent:
   m_ObjectHideFlags: 0

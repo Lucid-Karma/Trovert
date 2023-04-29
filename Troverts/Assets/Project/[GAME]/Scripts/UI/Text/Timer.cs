@@ -33,22 +33,22 @@ public class Timer : MonoBehaviour
     {
         if(timeToDisplay < 0)   timeToDisplay = 0;
 
-        //if(PlanetsBase.isLevelSuccessed == false)     
-        //{
+        if(!GameManager.Instance.IsLevelFail)     
+        {
             float minutes = Mathf.FloorToInt(timeToDisplay / 60);
             float seconds = Mathf.FloorToInt(timeToDisplay % 60);
             float milliseconds = timeToDisplay % 1 * 1000;
 
             TimerText.text = string.Format("{0:00}:{1:00}:{2:000}", minutes, seconds, milliseconds);
 
-            //if(timeToDisplay == 0)  Time.timeScale=0;
+            if(timeToDisplay == 0)  EventManager.OnLevelFail.Invoke();
 
             // if(timeToDisplay == 0 )
             // {
             //     OnTimeOut?.Invoke();    //such a big sus. cos never do works like real observer pattern piece. change it when the time come.
             //     isTimeOut = true;
             // }  
-        //}
+        }
     }
 
 }

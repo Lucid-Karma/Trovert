@@ -5,12 +5,10 @@ using UnityEngine;
 public class ExtrovertNpcFsm : NpcFSM
 {
     [HideInInspector]
-    public Vector3 pcPoint, escapePoint;
+    public Vector3 escapePoint;
 
     [HideInInspector]
-    public Vector3 distanceVec;
-
-    public Material metMat;
+    // public Vector3 distanceVec;
 
     public ExtrovertNPCStates currentState;
     public EscapeState escapeState = new EscapeState();
@@ -18,19 +16,22 @@ public class ExtrovertNpcFsm : NpcFSM
     public ExPatrolState exPatrolState = new ExPatrolState();
 
 
-    private bool isExtrovertNpcMet;     // control if the agent is met before.
+    // private bool isExtrovertNpcMet;     // control if the agent is met before.
 
-    [HideInInspector]
-    public bool IsExtrovertNpcMet { get { return isExtrovertNpcMet; } set { isExtrovertNpcMet = value; } }
+    // [HideInInspector]
+    // public bool IsExtrovertNpcMet { get { return isExtrovertNpcMet; } set { isExtrovertNpcMet = value; } }
 
 
     void Update()
     {
+        if(GameManager.Instance.IsLevelFail || GameManager.Instance.IsLevelSuccess)     return;
+        
         currentState.UpdateState(this);
     }
     
     public override void StartState()
     {
+        executingNpcState = ExecutingNpcState.PATROL;
         currentState = exPatrolState;
         currentState.EnterState(this);
 
@@ -39,15 +40,17 @@ public class ExtrovertNpcFsm : NpcFSM
 
     public override void Patrol()
     {
+        Agent.speed = 3.5f;
+
         base.Patrol();
 
         // control if now, an agent is on chat state. If so do not fulfill the conditions & 
         // control if the agent is met before. If that so, do not escape or chat.
         if (!FsmManager.Instance.IsCharacterCommunicating)    
         {
-            if (!IsExtrovertNpcMet)
+            if (!IsNpcMet)
             {
-                if(distance >= 3.0f && distance <= 6.0f)
+                if(distance >= 6.0f && distance <= 10.0f)
                 {
                     executingNpcState = ExecutingNpcState.ESCAPE;
                     return;
@@ -74,6 +77,8 @@ public class ExtrovertNpcFsm : NpcFSM
             return;
         }
 
+        Agent.speed = 7.0f;
+
         if(Agent.remainingDistance <= Agent.stoppingDistance)
         {
             escapePoint = Agent.transform.position + distanceVec;
@@ -83,10 +88,10 @@ public class ExtrovertNpcFsm : NpcFSM
         distance = Vector3.Distance(Agent.transform.position, pc.position);
     }
 
-    public void ChangeColor()
-    {
-        Agent.GetComponentInChildren<SkinnedMeshRenderer>().material = metMat;
-    }
+    // public void ChangeColor()
+    // {
+    //     Agent.GetComponentInChildren<SkinnedMeshRenderer>().material = metMat;
+    // }
 
     public void SwitchState(ExtrovertNPCStates nextState)
     {

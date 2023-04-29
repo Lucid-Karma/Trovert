@@ -7,8 +7,9 @@ public class ChaseState : IntrovertNPCStates
     public override void EnterState(IntrovertNpcFsm fsm)
     {
         //Debug.Log("npc chase");
-        fsm.OnNpcWalk.Invoke();
-        fsm.Agent.stoppingDistance = 1.5f;
+        fsm.OnNpcRun.Invoke();
+        //fsm.Agent.stoppingDistance = 1.5f;
+        fsm.Agent.speed = 7.0f;
     }
 
     public override void UpdateState(IntrovertNpcFsm fsm)
@@ -23,7 +24,7 @@ public class ChaseState : IntrovertNPCStates
     {
         if(fsm.executingNpcState == ExecutingNpcState.PATROL)
             fsm.SwitchState(fsm.inPatrolState);
-        else if(fsm.executingNpcState == ExecutingNpcState.CHAT)
+        if(fsm.executingNpcState == ExecutingNpcState.CHAT)
             fsm.SwitchState(fsm.inChatState);
     }
 }

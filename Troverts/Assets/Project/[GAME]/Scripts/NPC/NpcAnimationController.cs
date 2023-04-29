@@ -14,11 +14,13 @@ public class NpcAnimationController : MonoBehaviour
     {
         NpcFSM.OnNpcWalk.AddListener(() => InvokeTrigger("Walk"));
         NpcFSM.OnNpcIdle.AddListener(() => InvokeTrigger("Idle"));
+        NpcFSM.OnNpcRun.AddListener(() => InvokeTrigger("Goofy Run"));
     }
     void OnDisable()
     {
         NpcFSM.OnNpcWalk.RemoveListener(() => InvokeTrigger("Walk"));
         NpcFSM.OnNpcIdle.RemoveListener(() => InvokeTrigger("Idle"));
+        NpcFSM.OnNpcRun.RemoveListener(() => InvokeTrigger("Goofy Run"));
     }
 
     private void InvokeTrigger(string value)

@@ -23,14 +23,16 @@ public class StartPanels : Panel
     private void OnEnable()
     {
         EventManager.OnCharacterChoose.AddListener(InitializeDifficultyPanel);
-        EventManager.OnDifficultyChoose.AddListener(InitializeInformPanel);
+        EventManager.OnIDifficultyChoose.AddListener(InitializeInformPanel);
+        EventManager.OnEDifficultyChoose.AddListener(InitializeInformPanel);
         EventManager.OnLevelStart.AddListener(InitializeTrovertPanel);
     }
 
     private void OnDisable()
     {
         EventManager.OnCharacterChoose.RemoveListener(InitializeDifficultyPanel);
-        EventManager.OnDifficultyChoose.RemoveListener(InitializeInformPanel);
+        EventManager.OnIDifficultyChoose.RemoveListener(InitializeInformPanel);
+        EventManager.OnEDifficultyChoose.RemoveListener(InitializeInformPanel);
         EventManager.OnLevelStart.RemoveListener(InitializeTrovertPanel);
     }
 

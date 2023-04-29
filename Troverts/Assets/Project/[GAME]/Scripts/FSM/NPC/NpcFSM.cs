@@ -22,6 +22,8 @@ public abstract class NpcFSM : MonoBehaviour
     public UnityEvent OnNpcIdle = new UnityEvent();
     [HideInInspector]
     public UnityEvent OnNpcWalk = new UnityEvent();
+    [HideInInspector]
+    public UnityEvent OnNpcRun = new UnityEvent();
     #endregion
     
     #region Components
@@ -32,26 +34,38 @@ public abstract class NpcFSM : MonoBehaviour
     #region Parameters
 
         #region NavMesh
-    [HideInInspector]
-    public Transform pc;
-    private float range = 95.0f;
+        [HideInInspector]
+        public Transform pc;
+        public Vector3 pcPoint, distanceVec;
+        private float range = 95.0f;
 
-    [HideInInspector]
-    public float distance;
-    #endregion
+        [HideInInspector]
+        public float distance;
+        #endregion
 
         #region Rotation
     Vector3 direction;
     Quaternion lookRotation;
     private float rotationSpeed = 20.0f;
     #endregion
-    
+
+        #region Controllers
+        private bool isNpcMet;     // control if the agent is met before.
+
+        [HideInInspector]
+        public bool IsNpcMet { get { return isNpcMet; } set { isNpcMet = value; } }
+        #endregion  
+
+        #region Others
+        public Material metMat;
+        #endregion
+
     #endregion
     
 
     void Start()    
     {
-        executingNpcState = ExecutingNpcState.PATROL;
+        //executingNpcState = ExecutingNpcState.PATROL;
         StartState();
     }
 
@@ -108,7 +122,8 @@ public abstract class NpcFSM : MonoBehaviour
     {
         Agent.SetDestination(transform.position);
 
-        EventManager.OnNpcGreet.Invoke();
+        // EventManager.OnPreGreet.Invoke();
+        // EventManager.OnNpcGreet.Invoke();
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -116,5 +131,10 @@ public abstract class NpcFSM : MonoBehaviour
             pointEvent.Invoke();
             executingNpcState = ExecutingNpcState.PATROL;
         }
+    }
+
+    public void ChangeColor()
+    {
+        Agent.GetComponentInChildren<SkinnedMeshRenderer>().material = metMat;
     }
 }

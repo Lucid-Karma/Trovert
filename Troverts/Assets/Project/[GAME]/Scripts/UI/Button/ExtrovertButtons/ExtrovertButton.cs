@@ -7,6 +7,7 @@ public class ExtrovertButton : MonoBehaviour
     public void DoExtrovert()
     {
         //LevelData.CharacterMode = "EXTROVERT";
+        //PlayerPrefs.DeleteAll();
         PlayerPrefs.SetString("selected_character", "extrovert");
 
         EventManager.OnExtrovertChoose.Invoke();
