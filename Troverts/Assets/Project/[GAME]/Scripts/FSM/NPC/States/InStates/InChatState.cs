@@ -29,6 +29,7 @@ public class InChatState : IntrovertNPCStates
     public override void ExitState(IntrovertNpcFsm fsm)
     {
         FsmManager.Instance.IsCharacterCommunicating = false;
+        EventManager.OnINpcNeeded.Invoke();
         fsm.ChangeColor();
 
         if(fsm.executingNpcState == ExecutingNpcState.PATROL)

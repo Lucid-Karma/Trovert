@@ -46,6 +46,8 @@ public class CharacterFSM : MonoBehaviour
     public UnityEvent OnCharacterIdle = new UnityEvent();
     [HideInInspector]
     public UnityEvent OnCharacterWalk = new UnityEvent();
+    [HideInInspector]
+    public UnityEvent OnCharacterRun = new UnityEvent();
     #endregion
 
 
@@ -58,6 +60,7 @@ public class CharacterFSM : MonoBehaviour
 
     void Update()
     {
+        if(!GameManager.Instance.IsLevelStarted)    return;
         if(GameManager.Instance.IsLevelFail || GameManager.Instance.IsLevelSuccess)     return;
         
         if(FsmManager.Instance.IsCharacterCommunicating)
@@ -108,10 +111,12 @@ public class CharacterFSM : MonoBehaviour
     {
         if(Input.GetKey(KeyCode.LeftShift))
         {
+            //OnCharacterRun.Invoke();
             currentSpeed = 8.0f;
         }
-        else
+        else if(Input.GetKeyUp(KeyCode.LeftShift))
         {
+            OnCharacterWalk.Invoke();
             currentSpeed = 5.0f;
         }
     }

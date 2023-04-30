@@ -7,6 +7,9 @@ public class GameManager : Singleton<GameManager>
     private bool isGameStarted;
     public bool IsGameStarted { get { return isGameStarted; } private set { isGameStarted = value; } }
 
+    private bool isLevelStarted;
+    public bool IsLevelStarted { get { return isLevelStarted; } private set { isLevelStarted = value; } }
+
     private bool isLevelSuccess;
     public bool IsLevelSuccess { get { return isLevelSuccess; } private set { isLevelSuccess = value; } }
 
@@ -40,12 +43,14 @@ public class GameManager : Singleton<GameManager>
 
     private void OnEnable()
     {
+        EventManager.OnLevelStart.AddListener(() => IsLevelStarted = true);
         EventManager.OnRestart.AddListener(ContinueGame);
         EventManager.OnLevelFail.AddListener(FailGame);
         EventManager.OnLevelSuccess.AddListener(WinGame);
     }
     private void OnDisable()
     {
+        EventManager.OnLevelStart.RemoveListener(() => IsLevelStarted = true);
         EventManager.OnRestart.RemoveListener(ContinueGame);
         EventManager.OnLevelFail.RemoveListener(FailGame);
         EventManager.OnLevelSuccess.RemoveListener(WinGame);

@@ -2848,7 +2848,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 373250945}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1274836423}
+        m_TargetAssemblyTypeName: QuitButton, Assembly-CSharp
+        m_MethodName: Finish
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &373250948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4286,6 +4298,7 @@ GameObject:
   - component: {fileID: 540637810}
   - component: {fileID: 540637811}
   - component: {fileID: 540637812}
+  - component: {fileID: 540637813}
   m_Layer: 5
   m_Name: ButtonArea
   m_TagString: Untagged
@@ -4351,6 +4364,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5535e8c1e1345b45b5b4f7e3a1d9035, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &540637813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 540637809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b96b3a27dd4d24947a5058ac1aa96976, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &553706554
@@ -6678,7 +6703,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 798966974}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 540637813}
+        m_TargetAssemblyTypeName: QuitButton, Assembly-CSharp
+        m_MethodName: Finish
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &798966977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8914,6 +8951,7 @@ GameObject:
   - component: {fileID: 1274836420}
   - component: {fileID: 1274836422}
   - component: {fileID: 1274836421}
+  - component: {fileID: 1274836423}
   m_Layer: 5
   m_Name: ButtonArea (1)
   m_TagString: Untagged
@@ -8981,6 +9019,18 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &1274836423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1274836419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b96b3a27dd4d24947a5058ac1aa96976, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1303161273
 GameObject:
   m_ObjectHideFlags: 0
