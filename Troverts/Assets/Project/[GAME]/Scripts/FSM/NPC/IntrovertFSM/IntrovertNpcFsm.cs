@@ -36,10 +36,10 @@ public class IntrovertNpcFsm : NpcFSM
         {
             if (!IsNpcMet)
             {
-                if(distance <= 6.0f)
-                {
+                // if(distance <= 6.0f)
+                // {
                     executingNpcState = ExecutingNpcState.CHASE;
-                }  
+                // }  
             }
         }
     }

@@ -122,9 +122,6 @@ public abstract class NpcFSM : MonoBehaviour
     {
         Agent.SetDestination(transform.position);
 
-        // EventManager.OnPreGreet.Invoke();
-        // EventManager.OnNpcGreet.Invoke();
-
         if (Input.GetMouseButtonDown(0))
         {
             EventManager.OnNpcGreetingEnd.Invoke();

@@ -19,11 +19,13 @@ public class NPCManager : MonoBehaviour
     {
         EventManager.OnIntrovertLevelStart.AddListener(CreateIntovertNPCs);
         EventManager.OnExtrovertLevelStart.AddListener(CreateExtrovertNPCs);
+        EventManager.OnINpcNeeded.AddListener(CreateIntovertNPCsInProcess);
     }
     void OnDisable()
     {
         EventManager.OnIntrovertLevelStart.RemoveListener(CreateIntovertNPCs);
         EventManager.OnExtrovertLevelStart.RemoveListener(CreateExtrovertNPCs);
+        EventManager.OnINpcNeeded.RemoveListener(CreateIntovertNPCsInProcess);
     }
 
     void CreateIntovertNPCs()
@@ -54,5 +56,13 @@ public class NPCManager : MonoBehaviour
         NavMesh.SamplePosition(randomPoint, out hit, range, NavMesh.AllAreas);
 
         return hit.position;
+    }
+
+    void CreateIntovertNPCsInProcess()
+    {
+        rotAmount = Random.Range(0, 360);
+
+        GameObject obj = (GameObject)Instantiate(npcPrefabs[0], GetRandomPos(new Vector3(0, 0, 0), 95.0f), Quaternion.AngleAxis(rotAmount, Vector3.up));
+        introvertNPCs.Add(obj);
     }
 }

@@ -38,7 +38,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Walk_N
+      name: Broken Walk
       takeName: Walk_N
       internalID: 1657602633327794031
       firstFrame: 0

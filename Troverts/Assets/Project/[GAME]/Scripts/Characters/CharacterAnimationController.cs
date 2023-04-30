@@ -18,6 +18,7 @@ public class CharacterAnimationController : MonoBehaviour
 
         CharacterFSM.OnCharacterIdle.AddListener(() => InvokeTrigger("Idle"));
         CharacterFSM.OnCharacterWalk.AddListener(() => InvokeTrigger("Walk"));
+        CharacterFSM.OnCharacterRun.AddListener(() => InvokeTrigger("Run"));
 
         EventManager.OnIntrovertCaught.AddListener(() => InvokeTrigger("ShyTalk"));
     }
@@ -31,6 +32,7 @@ public class CharacterAnimationController : MonoBehaviour
 
         CharacterFSM.OnCharacterIdle.RemoveListener(() => InvokeTrigger("Idle"));
         CharacterFSM.OnCharacterWalk.RemoveListener(() => InvokeTrigger("Walk"));
+        CharacterFSM.OnCharacterRun.RemoveListener(() => InvokeTrigger("Run"));
 
         EventManager.OnIntrovertCaught.AddListener(() => InvokeTrigger("ShyTalk"));
     }
