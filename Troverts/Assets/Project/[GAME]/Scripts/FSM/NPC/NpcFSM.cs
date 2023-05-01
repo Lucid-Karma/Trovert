@@ -83,16 +83,25 @@ public abstract class NpcFSM : MonoBehaviour
     {
         if(Agent.remainingDistance <= Agent.stoppingDistance) //done with path
         {
-            if (RandomPoint(new Vector3(0, 0, 0), range, out point)) //pass in our centre point and radius of area
-            {
-                Debug.DrawRay(point, Vector3.up, Color.blue, 1.0f); //so you can see with gizmos
-                Agent.SetDestination(point);
-            }
+            // if (RandomPoint(new Vector3(0, 0, 0), range, out point)) //pass in our centre point and radius of area
+            // {
+            //     Debug.DrawRay(point, Vector3.up, Color.blue, 1.0f); //so you can see with gizmos
+            //     Agent.SetDestination(point);
+            // }
+            
+            Agent.SetDestination(GetRandomPos(Vector3.zero, 95.0f));
         }
 
         distance = Vector3.Distance(Agent.transform.position, pc.position);
     }
 
+    private Vector3 GetRandomPos(Vector3 center, float range)
+    {
+        randomPoint = center + Random.insideUnitSphere * range;
+        NavMesh.SamplePosition(randomPoint, out hit, range, NavMesh.AllAreas);
+
+        return hit.position;
+    }
     bool RandomPoint(Vector3 center, float range, out Vector3 result)
     {
 

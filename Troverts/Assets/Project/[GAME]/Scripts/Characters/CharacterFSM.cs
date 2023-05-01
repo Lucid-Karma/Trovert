@@ -6,7 +6,8 @@ using UnityEngine.Events;
 public enum ExecutingState
 {
     IDLE,
-    WALK
+    WALK,
+    SPRINT
 }
 [RequireComponent(typeof(CharacterController))]
 public class CharacterFSM : MonoBehaviour
@@ -39,6 +40,7 @@ public class CharacterFSM : MonoBehaviour
 
     public IdleState idleState = new IdleState();
     public WalkState walkState = new WalkState();
+    public SprintState sprintState = new SprintState();
     #endregion
 
     #region Events
@@ -71,7 +73,12 @@ public class CharacterFSM : MonoBehaviour
         {
             if(Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
             {
-                executingState = ExecutingState.WALK;
+                if(Input.GetKey(KeyCode.LeftShift))
+                {
+                    executingState = ExecutingState.SPRINT;
+                }
+                else 
+                    executingState = ExecutingState.WALK;
             }
             else
             {
@@ -85,8 +92,6 @@ public class CharacterFSM : MonoBehaviour
 
     public void Move()
     {
-        Sprint();
-
         verticalMove = Input.GetAxis("Vertical") * currentSpeed * Time.deltaTime;
         horizontalMove = Input.GetAxis("Horizontal") * currentSpeed * Time.deltaTime;
 
@@ -105,20 +110,6 @@ public class CharacterFSM : MonoBehaviour
         thirdPersonCamera.localRotation = Quaternion.Euler(rotationX, 0, 0);
 
         transform.Rotate(Vector3.up * mouseX);
-    }
-
-    private void Sprint()
-    {
-        if(Input.GetKey(KeyCode.LeftShift))
-        {
-            //OnCharacterRun.Invoke();
-            currentSpeed = 8.0f;
-        }
-        else if(Input.GetKeyUp(KeyCode.LeftShift))
-        {
-            OnCharacterWalk.Invoke();
-            currentSpeed = 5.0f;
-        }
     }
 
     public void SwitchState(CharacterStates nextState)
