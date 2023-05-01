@@ -60,9 +60,12 @@ public class NPCManager : MonoBehaviour
 
     void CreateIntovertNPCsInProcess()
     {
-        rotAmount = Random.Range(0, 360);
+        for (int i = 0; i < 3; i++)
+        {
+            rotAmount = Random.Range(0, 360);
 
-        GameObject obj = (GameObject)Instantiate(npcPrefabs[0], GetRandomPos(new Vector3(0, 0, 0), 95.0f), Quaternion.AngleAxis(rotAmount, Vector3.up));
-        introvertNPCs.Add(obj);
+            GameObject obj = (GameObject)Instantiate(npcPrefabs[0], GetRandomPos(new Vector3(0, 0, 0), 95.0f), Quaternion.AngleAxis(rotAmount, Vector3.up));
+            introvertNPCs.Add(obj);
+        }
     }
 }
