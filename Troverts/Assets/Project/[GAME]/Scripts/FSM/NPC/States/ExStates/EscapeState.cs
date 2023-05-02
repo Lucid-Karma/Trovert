@@ -10,6 +10,7 @@ public class EscapeState : ExtrovertNPCStates
         fsm.pcPoint = fsm.pc.position;
         fsm.distanceVec = (fsm.Agent.transform.position - fsm.pcPoint).normalized;
         fsm.OnNpcRun.Invoke();
+        fsm.Agent.speed = 7.0f;
     }
 
     public override void UpdateState(ExtrovertNpcFsm fsm)

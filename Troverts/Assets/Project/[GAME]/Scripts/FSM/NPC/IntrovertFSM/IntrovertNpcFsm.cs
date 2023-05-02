@@ -32,7 +32,7 @@ public class IntrovertNpcFsm : NpcFSM
     {
         base.Patrol();
 
-        if (!FsmManager.Instance.IsCharacterCommunicating)  // for one npc at a time.   ???
+        if (!FsmManager.Instance.IsCharacterCommunicating)  // for one npc at a time. 
         {
             if (!IsNpcMet)
             {
@@ -60,14 +60,6 @@ public class IntrovertNpcFsm : NpcFSM
             }
         }
         else    executingNpcState = ExecutingNpcState.PATROL;
-
-        // if(distance >= 20.0f)
-        // {
-        //     executingNpcState = ExecutingNpcState.PATROL;
-        // }
-        // else
-            //Agent.destination = pc.position;
-            
     }
 
     public void SwitchState(IntrovertNPCStates nextState)

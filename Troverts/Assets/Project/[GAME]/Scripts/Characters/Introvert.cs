@@ -4,16 +4,20 @@ using UnityEngine;
 
 public class Introvert : CharacterBase
 {
-    void OnEnable()
+    public override void OnEnable()
     {
+        base.OnEnable();
+
         EventManager.OnIDifficultyChoose.AddListener(SetEnergy);
 
         EventManager.OnIntrovertLevelStart.AddListener(ReceiveData);
 
         EventManager.OnPointLose.AddListener(ManageEnergy);
     }
-    void OnDisable()
+    public override void OnDisable()
     {
+        base.OnDisable();
+
         EventManager.OnIDifficultyChoose.RemoveListener(SetEnergy);
             
         EventManager.OnIntrovertLevelStart.RemoveListener(ReceiveData);

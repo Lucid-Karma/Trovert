@@ -16,12 +16,6 @@ public class ExtrovertNpcFsm : NpcFSM
     public ExPatrolState exPatrolState = new ExPatrolState();
 
 
-    // private bool isExtrovertNpcMet;     // control if the agent is met before.
-
-    // [HideInInspector]
-    // public bool IsExtrovertNpcMet { get { return isExtrovertNpcMet; } set { isExtrovertNpcMet = value; } }
-
-
     void Update()
     {
         if(GameManager.Instance.IsLevelFail || GameManager.Instance.IsLevelSuccess)     return;
@@ -40,8 +34,6 @@ public class ExtrovertNpcFsm : NpcFSM
 
     public override void Patrol()
     {
-        Agent.speed = 3.5f;
-
         base.Patrol();
 
         // control if now, an agent is on chat state. If so do not fulfill the conditions & 
@@ -53,12 +45,6 @@ public class ExtrovertNpcFsm : NpcFSM
                 if(distance >= 6.0f && distance <= 10.0f)
                 {
                     executingNpcState = ExecutingNpcState.ESCAPE;
-                    return;
-                }
-                else if(distance <= 1.5f)    
-                {
-                    executingNpcState = ExecutingNpcState.CHAT;
-                    return;
                 }
             }
         }
@@ -66,18 +52,7 @@ public class ExtrovertNpcFsm : NpcFSM
     
     public void Escape()
     {
-        if(distance <= 1.5f)    
-        {
-            executingNpcState = ExecutingNpcState.CHAT;
-            return;
-        }
-        else if (distance >= 20.0f)
-        {
-            executingNpcState = ExecutingNpcState.PATROL;
-            return;
-        }
-
-        Agent.speed = 7.0f;
+        distance = Vector3.Distance(Agent.transform.position, pc.position);
 
         if(Agent.remainingDistance <= Agent.stoppingDistance)
         {
@@ -85,13 +60,15 @@ public class ExtrovertNpcFsm : NpcFSM
             Agent.SetDestination(escapePoint);
         } 
 
-        distance = Vector3.Distance(Agent.transform.position, pc.position);
+        if(distance <= 1.5f)    
+        {
+            executingNpcState = ExecutingNpcState.CHAT;
+        }
+        else if (distance >= 20.0f)
+        {
+            executingNpcState = ExecutingNpcState.PATROL;
+        }   
     }
-
-    // public void ChangeColor()
-    // {
-    //     Agent.GetComponentInChildren<SkinnedMeshRenderer>().material = metMat;
-    // }
 
     public void SwitchState(ExtrovertNPCStates nextState)
     {
