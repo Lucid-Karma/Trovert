@@ -4,16 +4,20 @@ using UnityEngine;
 
 public class Extrovert : CharacterBase
 {
-    void OnEnable()
+    public override void OnEnable()
     {
+        base.OnEnable();
+
         EventManager.OnEDifficultyChoose.AddListener(SetEnergy);
 
         EventManager.OnExtrovertLevelStart.AddListener(ReceiveData);
 
         EventManager.OnPointEarn.AddListener(ManageEnergy);
     }
-    void OnDisable()
+    public override void OnDisable()
     {
+        base.OnDisable();
+
         EventManager.OnEDifficultyChoose.RemoveListener(SetEnergy);
             
         EventManager.OnExtrovertLevelStart.RemoveListener(ReceiveData);

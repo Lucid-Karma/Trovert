@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class StartPanels : Panel
 {
-    public Panel CharacterPanel;
+    public Panel WelcomePanel;
+    public Panel CharacterChoosePanel;
     public Panel TrovertPanel;
     public Panel DifficultyPanel;
     public Panel InformPanel;
@@ -17,11 +18,13 @@ public class StartPanels : Panel
         DifficultyPanel.HidePanel();
         InformPanel.HidePanel();
         CountdownPanel.HidePanel();
-        CharacterPanel.ShowPanel();
+        CharacterChoosePanel.HidePanel();
+        WelcomePanel.ShowPanel();
     }
 
     private void OnEnable()
     {
+        EventManager.OnGameStart.AddListener(InitializeCharacterChoosePanel);
         EventManager.OnCharacterChoose.AddListener(InitializeDifficultyPanel);
         EventManager.OnIDifficultyChoose.AddListener(InitializeInformPanel);
         EventManager.OnEDifficultyChoose.AddListener(InitializeInformPanel);
@@ -30,15 +33,23 @@ public class StartPanels : Panel
 
     private void OnDisable()
     {
+        EventManager.OnGameStart.RemoveListener(InitializeCharacterChoosePanel);
         EventManager.OnCharacterChoose.RemoveListener(InitializeDifficultyPanel);
         EventManager.OnIDifficultyChoose.RemoveListener(InitializeInformPanel);
         EventManager.OnEDifficultyChoose.RemoveListener(InitializeInformPanel);
         EventManager.OnLevelStart.RemoveListener(InitializeTrovertPanel);
     }
 
+    private void InitializeCharacterChoosePanel()
+    {
+        WelcomePanel.HidePanel();
+        CharacterChoosePanel.ShowPanel();
+        ShowPanel();
+    }
+
     private void InitializeDifficultyPanel()
     {
-        CharacterPanel.HidePanel();
+        CharacterChoosePanel.HidePanel();
         DifficultyPanel.ShowPanel();
         ShowPanel();
     }
