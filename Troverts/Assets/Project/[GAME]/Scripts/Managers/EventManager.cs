@@ -5,6 +5,7 @@ using UnityEngine.Events;
 
 public static class EventManager
 {
+    public static UnityEvent OnGamePreStart = new UnityEvent();
     public static UnityEvent OnGameStart = new UnityEvent();
     public static UnityEvent OnGameEnd = new UnityEvent();
 
@@ -39,6 +40,7 @@ public static class EventManager
 
     public static UnityEvent OnMusicOn = new UnityEvent();
     public static UnityEvent OnMusicOff = new UnityEvent();
+    public static UnityEvent OnCameraMove = new UnityEvent();
 
     public static UnityEvent OnCursorLock = new UnityEvent();
     public static UnityEvent OnICharacterDataReceive = new UnityEvent();

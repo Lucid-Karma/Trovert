@@ -59,12 +59,14 @@ public class GameManager : Singleton<GameManager>
     void WinGame()
     {
         IsLevelSuccess = true;
+        IsLevelStarted = false;
         PauseGame();
     }
 
     void FailGame()
     {
         IsLevelFail = true;
+        IsLevelStarted = false;
         PauseGame();
     }
 

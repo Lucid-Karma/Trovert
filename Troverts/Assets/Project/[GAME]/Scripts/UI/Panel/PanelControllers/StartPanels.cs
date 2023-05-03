@@ -9,7 +9,6 @@ public class StartPanels : Panel
     public Panel TrovertPanel;
     public Panel DifficultyPanel;
     public Panel InformPanel;
-
     public Panel CountdownPanel;
 
     private void Awake() 
@@ -24,7 +23,10 @@ public class StartPanels : Panel
 
     private void OnEnable()
     {
-        EventManager.OnGameStart.AddListener(InitializeCharacterChoosePanel);
+        EventManager.OnGamePreStart.AddListener(InitializeCharacterChoosePanel);
+        EventManager.OnGameStart.AddListener(HideWelcomePanel);
+        EventManager.OnLevelFail.AddListener(HideOnRestart);
+        EventManager.OnLevelSuccess.AddListener(HideOnRestart);
         EventManager.OnCharacterChoose.AddListener(InitializeDifficultyPanel);
         EventManager.OnIDifficultyChoose.AddListener(InitializeInformPanel);
         EventManager.OnEDifficultyChoose.AddListener(InitializeInformPanel);
@@ -33,7 +35,10 @@ public class StartPanels : Panel
 
     private void OnDisable()
     {
-        EventManager.OnGameStart.RemoveListener(InitializeCharacterChoosePanel);
+        EventManager.OnGamePreStart.RemoveListener(InitializeCharacterChoosePanel);
+        EventManager.OnGameStart.RemoveListener(HideWelcomePanel);
+        EventManager.OnLevelFail.RemoveListener(HideOnRestart);
+        EventManager.OnLevelSuccess.RemoveListener(HideOnRestart);
         EventManager.OnCharacterChoose.RemoveListener(InitializeDifficultyPanel);
         EventManager.OnIDifficultyChoose.RemoveListener(InitializeInformPanel);
         EventManager.OnEDifficultyChoose.RemoveListener(InitializeInformPanel);
@@ -42,9 +47,14 @@ public class StartPanels : Panel
 
     private void InitializeCharacterChoosePanel()
     {
-        WelcomePanel.HidePanel();
         CharacterChoosePanel.ShowPanel();
         ShowPanel();
+    }
+
+    private void HideWelcomePanel()
+    {
+        WelcomePanel.HidePanel();
+        HidePanel();
     }
 
     private void InitializeDifficultyPanel()
@@ -73,5 +83,12 @@ public class StartPanels : Panel
     {
         CountdownPanel.ShowPanel();
         ShowPanel();
+    }
+
+    private void HideOnRestart()
+    {
+        CountdownPanel.HidePanel();
+        TrovertPanel.HidePanel();
+        HidePanel();
     }
 }
