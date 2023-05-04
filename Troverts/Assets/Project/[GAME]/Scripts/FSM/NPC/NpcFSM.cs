@@ -37,16 +37,15 @@ public abstract class NpcFSM : MonoBehaviour
         [HideInInspector]
         public Transform pc;
         public Vector3 pcPoint, distanceVec;
-        private float range = 95.0f;
 
         [HideInInspector]
         public float distance;
         #endregion
 
         #region Rotation
-    Vector3 direction;
-    Quaternion lookRotation;
-    private float rotationSpeed = 20.0f;
+        Vector3 direction;
+        Quaternion lookRotation;
+        private float rotationSpeed = 20.0f;
     #endregion
 
         #region Controllers
@@ -82,13 +81,7 @@ public abstract class NpcFSM : MonoBehaviour
     public virtual void Patrol()
     {
         if(Agent.remainingDistance <= Agent.stoppingDistance) //done with path
-        {
-            // if (RandomPoint(new Vector3(0, 0, 0), range, out point)) //pass in our centre point and radius of area
-            // {
-            //     Debug.DrawRay(point, Vector3.up, Color.blue, 1.0f); //so you can see with gizmos
-            //     Agent.SetDestination(point);
-            // }
-            
+        {   
             Agent.SetDestination(GetRandomPos(Vector3.zero, 95.0f));
         }
 
@@ -101,22 +94,6 @@ public abstract class NpcFSM : MonoBehaviour
         NavMesh.SamplePosition(randomPoint, out hit, range, NavMesh.AllAreas);
 
         return hit.position;
-    }
-    bool RandomPoint(Vector3 center, float range, out Vector3 result)
-    {
-
-        randomPoint = center + Random.insideUnitSphere * range; //random point in a sphere 
-      
-        if (NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas)) //documentation: https://docs.unity3d.com/ScriptReference/AI.NavMesh.SamplePosition.html
-        { 
-            //the 1.0f is the max distance from the random point to a point on the navmesh, might want to increase if range is big
-            //or add a for loop like in the documentation
-            result = hit.position;
-            return true;
-        }
-
-        result = Vector3.zero;
-        return false;
     }
     #endregion
 
