@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class NPCManager : MonoBehaviour
+public class NPCManager : Singleton<NPCManager>
 {
     [SerializeField]    private GameObject[] npcPrefabs;
     private List<GameObject> introvertNPCs = new List<GameObject>();
@@ -15,17 +15,16 @@ public class NPCManager : MonoBehaviour
     Vector3 randomPoint;
     NavMeshHit hit;
 
+
     void OnEnable()
     {
         EventManager.OnIntrovertLevelStart.AddListener(CreateIntovertNPCs);
         EventManager.OnExtrovertLevelStart.AddListener(CreateExtrovertNPCs);
-        EventManager.OnINpcNeeded.AddListener(CreateIntovertNPCsInProcess);
     }
     void OnDisable()
     {
         EventManager.OnIntrovertLevelStart.RemoveListener(CreateIntovertNPCs);
         EventManager.OnExtrovertLevelStart.RemoveListener(CreateExtrovertNPCs);
-        EventManager.OnINpcNeeded.RemoveListener(CreateIntovertNPCsInProcess);
     }
 
     void CreateIntovertNPCs()
@@ -49,6 +48,16 @@ public class NPCManager : MonoBehaviour
             extrovertNPCs.Add(obj);
         }
     }
+    public void CreateIntovertNPCsInProcess(Vector3 pcPos)
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            rotAmount = Random.Range(0, 360);
+
+            GameObject obj = (GameObject)Instantiate(npcPrefabs[0], GetRandomPosAroundPC(pcPos), Quaternion.AngleAxis(rotAmount, Vector3.up));
+            introvertNPCs.Add(obj);
+        }
+    }
 
     private Vector3 GetRandomPos(Vector3 center, float range)
     {
@@ -57,15 +66,11 @@ public class NPCManager : MonoBehaviour
 
         return hit.position;
     }
-
-    void CreateIntovertNPCsInProcess()
+    private Vector3 GetRandomPosAroundPC(Vector3 pcPos)
     {
-        for (int i = 0; i < 3; i++)
-        {
-            rotAmount = Random.Range(0, 360);
+        randomPoint = pcPos + Random.insideUnitSphere * 25.0f;
+        NavMesh.SamplePosition(randomPoint, out hit, 25.0f, NavMesh.AllAreas);
 
-            GameObject obj = (GameObject)Instantiate(npcPrefabs[0], GetRandomPos(new Vector3(0, 0, 0), 95.0f), Quaternion.AngleAxis(rotAmount, Vector3.up));
-            introvertNPCs.Add(obj);
-        }
+        return hit.position;
     }
 }

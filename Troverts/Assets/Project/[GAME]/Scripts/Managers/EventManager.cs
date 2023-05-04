@@ -49,5 +49,6 @@ public static class EventManager
     public static UnityEvent OnPreGreet = new UnityEvent();
     public static UnityEvent OnNpcGreet = new UnityEvent();
     public static UnityEvent OnNpcGreetingEnd = new UnityEvent();
-    public static UnityEvent OnINpcNeeded = new UnityEvent();
 }
+
+/*[System.Serializable]*/ //public class SpawnINpcEvent : UnityEvent<Vector3> { }
