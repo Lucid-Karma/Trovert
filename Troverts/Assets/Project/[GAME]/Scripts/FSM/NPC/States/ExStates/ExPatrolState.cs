@@ -6,7 +6,6 @@ public class ExPatrolState : ExtrovertNPCStates
 {
     public override void EnterState(ExtrovertNpcFsm fsm)
     {
-        //Debug.Log("npc patrol");
         fsm.OnNpcWalk.Invoke();
         fsm.Agent.stoppingDistance = 0.0f;
         fsm.Agent.speed = 3.5f;

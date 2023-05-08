@@ -48,13 +48,13 @@ public class NPCManager : Singleton<NPCManager>
             extrovertNPCs.Add(obj);
         }
     }
-    public void CreateIntovertNPCsInProcess(Vector3 pcPos)
+    public void CreateIntovertNPCsInProcess(Transform pc)
     {
         for (int i = 0; i < 3; i++)
         {
             rotAmount = Random.Range(0, 360);
 
-            GameObject obj = (GameObject)Instantiate(npcPrefabs[0], GetRandomPosAroundPC(pcPos), Quaternion.AngleAxis(rotAmount, Vector3.up));
+            GameObject obj = (GameObject)Instantiate(npcPrefabs[0], GetRandomPosAroundPC(pc), Quaternion.AngleAxis(rotAmount, Vector3.up));
             introvertNPCs.Add(obj);
         }
     }
@@ -66,11 +66,32 @@ public class NPCManager : Singleton<NPCManager>
 
         return hit.position;
     }
-    private Vector3 GetRandomPosAroundPC(Vector3 pcPos)
+    private Vector3 GetRandomPosAroundPC(Transform pc)
     {
-        randomPoint = pcPos + Random.insideUnitSphere * 25.0f;
-        NavMesh.SamplePosition(randomPoint, out hit, 25.0f, NavMesh.AllAreas);
+        randomPoint = GetPosWithinAngle(pc);
+        NavMesh.SamplePosition(randomPoint, out hit, 70.0f, NavMesh.AllAreas);
 
         return hit.position;
+    }
+
+    private float randomAngle;
+    private float randomNumber;
+    Quaternion rot;
+    Vector3 rotatedVec, finalVec;
+    private Vector3 GetPosWithinAngle(Transform pc)
+    {
+        randomNumber = Random.Range(5, 25);
+        randomAngle = Random.Range(pc.rotation.y - 45, pc.rotation.y + 45);
+
+        var fwd = pc.forward;
+        var up = pc.up;
+
+        rot = Quaternion.AngleAxis(randomAngle, up);
+
+        rotatedVec = rot * fwd;
+
+        finalVec = rotatedVec * randomNumber;
+
+        return pc.position + finalVec;
     }
 }

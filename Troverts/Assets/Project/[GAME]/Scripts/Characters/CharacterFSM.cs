@@ -7,7 +7,9 @@ public enum ExecutingState
 {
     IDLE,
     WALK,
-    SPRINT
+    SPRINT,
+
+    WAIT
 }
 [RequireComponent(typeof(CharacterController))]
 public class CharacterFSM : MonoBehaviour
@@ -41,6 +43,7 @@ public class CharacterFSM : MonoBehaviour
     public IdleState idleState = new IdleState();
     public WalkState walkState = new WalkState();
     public SprintState sprintState = new SprintState();
+    public WaitState waitState = new WaitState();
     #endregion
 
     #region Events
@@ -52,12 +55,31 @@ public class CharacterFSM : MonoBehaviour
     public UnityEvent OnCharacterRun = new UnityEvent();
     #endregion
 
+    void OnEnable()
+    {
+        EventManager.OnLevelAfterStart.AddListener(InvokeMethod);
+    }
+    void OnDisable()
+    {
+        EventManager.OnLevelAfterStart.RemoveListener(InvokeMethod);
+    }
 
     void Start()
     {
-        executingState = ExecutingState.IDLE;
-        currentState = idleState;
+        executingState = ExecutingState.WAIT;
+        currentState = waitState;
         currentState.EnterState(this);
+    }
+
+    void InvokeMethod()
+    {
+        Invoke("StartLevelAfterCamMove", 10.0f);
+    }
+    void StartLevelAfterCamMove()
+    {
+        EventManager.OnNpcGetSmart.Invoke();
+        Debug.Log("AFTER");
+        executingState = ExecutingState.IDLE;
     }
 
     void Update()
@@ -83,6 +105,7 @@ public class CharacterFSM : MonoBehaviour
             else
             {
                 executingState = ExecutingState.IDLE;
+                Debug.Log("WTF");
             }
 
         }
