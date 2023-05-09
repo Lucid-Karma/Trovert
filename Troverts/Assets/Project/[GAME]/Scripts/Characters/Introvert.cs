@@ -45,8 +45,8 @@ public class Introvert : CharacterBase
             //     break;
         }
 
-        Debug.Log("introvert " + selectedDifficulty + " " + Energy);
-        Debug.Log(PlayerPrefs.GetString("selected_character") + " " + PlayerPrefs.GetInt("selected_difficulty"));
+        // Debug.Log("introvert " + selectedDifficulty + " " + Energy);
+        // Debug.Log(PlayerPrefs.GetString("selected_character") + " " + PlayerPrefs.GetInt("selected_difficulty"));
     }
 
     public override void ReceiveData()

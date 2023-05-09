@@ -45,8 +45,8 @@ public class Extrovert : CharacterBase
             //     break;
         }
 
-        Debug.Log("extrovert " + selectedDifficulty + " " + Energy);
-        Debug.Log(PlayerPrefs.GetString("selected_character") + " " + PlayerPrefs.GetInt("selected_difficulty"));
+        // Debug.Log("extrovert " + selectedDifficulty + " " + Energy);
+        // Debug.Log(PlayerPrefs.GetString("selected_character") + " " + PlayerPrefs.GetInt("selected_difficulty"));
     }
 
     public override void ReceiveData()
@@ -60,6 +60,5 @@ public class Extrovert : CharacterBase
         EventManager.OnEScoreTxtUpdate.Invoke();
 
         if(Score >= Energy) EventManager.OnLevelSuccess.Invoke();
-        //base.ManageEnergy();
     }
 }

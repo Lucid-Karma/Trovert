@@ -17,6 +17,9 @@ public class CharacterFSM : MonoBehaviour
     #region Components
     private CharacterController characterController;
     public CharacterController CharacterController{ get { return(characterController == null)? characterController = GetComponent<CharacterController>() : characterController; }}
+    
+    private ParticleSystem particleSystem;
+    public ParticleSystem ParticleSystem{ get { return(particleSystem == null)? particleSystem = GetComponentInChildren<ParticleSystem>() : particleSystem; }}
     #endregion
 
     #region Parameters
@@ -55,6 +58,9 @@ public class CharacterFSM : MonoBehaviour
     public UnityEvent OnCharacterRun = new UnityEvent();
     #endregion
 
+    #region Controllers
+    private bool isLevelDelayedStart = false;
+    #endregion
     void OnEnable()
     {
         EventManager.OnLevelAfterStart.AddListener(InvokeMethod);
@@ -73,19 +79,20 @@ public class CharacterFSM : MonoBehaviour
 
     void InvokeMethod()
     {
-        Invoke("StartLevelAfterCamMove", 10.0f);
+        Invoke("StartLevelAfterCamMove", 2.0f);
     }
     void StartLevelAfterCamMove()
     {
         EventManager.OnNpcGetSmart.Invoke();
-        Debug.Log("AFTER");
         executingState = ExecutingState.IDLE;
+        isLevelDelayedStart = true;
     }
 
     void Update()
     {
         if(!GameManager.Instance.IsLevelStarted)    return;
         if(GameManager.Instance.IsLevelFail || GameManager.Instance.IsLevelSuccess)     return;
+        if(!isLevelDelayedStart)    return;
         
         if(FsmManager.Instance.IsCharacterCommunicating)
         {
@@ -105,7 +112,6 @@ public class CharacterFSM : MonoBehaviour
             else
             {
                 executingState = ExecutingState.IDLE;
-                Debug.Log("WTF");
             }
 
         }

@@ -16,6 +16,9 @@ public class NPCManager : Singleton<NPCManager>
     NavMeshHit hit;
 
 
+    [HideInInspector]   public bool isINpcSurprise;
+
+
     void OnEnable()
     {
         EventManager.OnIntrovertLevelStart.AddListener(CreateIntovertNPCs);
@@ -36,6 +39,8 @@ public class NPCManager : Singleton<NPCManager>
             GameObject obj = (GameObject)Instantiate(npcPrefabs[0], GetRandomPos(new Vector3(0, 0, 0), 95.0f), Quaternion.AngleAxis(rotAmount, Vector3.up));
             introvertNPCs.Add(obj);
         }
+
+        isINpcSurprise = false;
     }
 
     void CreateExtrovertNPCs()
@@ -57,6 +62,8 @@ public class NPCManager : Singleton<NPCManager>
             GameObject obj = (GameObject)Instantiate(npcPrefabs[0], GetRandomPosAroundPC(pc), Quaternion.AngleAxis(rotAmount, Vector3.up));
             introvertNPCs.Add(obj);
         }
+
+        isINpcSurprise = true;
     }
 
     private Vector3 GetRandomPos(Vector3 center, float range)
@@ -69,7 +76,7 @@ public class NPCManager : Singleton<NPCManager>
     private Vector3 GetRandomPosAroundPC(Transform pc)
     {
         randomPoint = GetPosWithinAngle(pc);
-        NavMesh.SamplePosition(randomPoint, out hit, 70.0f, NavMesh.AllAreas);
+        NavMesh.SamplePosition(randomPoint, out hit, 100.0f, NavMesh.AllAreas);
 
         return hit.position;
     }

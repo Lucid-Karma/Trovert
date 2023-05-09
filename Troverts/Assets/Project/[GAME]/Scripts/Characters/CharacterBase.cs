@@ -11,6 +11,11 @@ public abstract class CharacterBase : MonoBehaviour
     public static int Energy;
     public static int Score = 0;  
     
+    void Awake()
+    {
+        RestartData();
+    }
+
     public virtual void OnEnable()
     {
         EventManager.OnRestart.AddListener(RestartData);

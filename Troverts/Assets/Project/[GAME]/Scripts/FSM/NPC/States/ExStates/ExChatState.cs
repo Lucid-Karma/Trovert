@@ -6,7 +6,6 @@ public class ExChatState : ExtrovertNPCStates
 {
     public override void EnterState(ExtrovertNpcFsm fsm)
     {
-        //Debug.Log("npc chat");
         fsm.pcPoint = fsm.pc.position;
         fsm.OnNpcIdle.Invoke();
         FsmManager.Instance.IsCharacterCommunicating = true;

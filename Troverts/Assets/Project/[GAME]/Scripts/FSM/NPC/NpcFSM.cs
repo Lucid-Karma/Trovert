@@ -66,7 +66,6 @@ public abstract class NpcFSM : MonoBehaviour
 
     void Start()    
     {
-        //executingNpcState = ExecutingNpcState.PATROL;
         StartState();
     }
 

@@ -6,7 +6,6 @@ public class IdleState : CharacterStates
 {
     public override void EnterState(CharacterFSM fsm)
     {
-        Debug.Log("YEPPP");
         if (PlayerPrefs.GetString("selected_character") == "introvert")
         {
             if(FsmManager.Instance.IsCharacterCommunicating)
@@ -18,6 +17,8 @@ public class IdleState : CharacterStates
         {
             fsm.OnCharacterIdle.Invoke();
         } 
+
+        fsm.ParticleSystem.Stop();
     }
 
     public override void UpdateState(CharacterFSM fsm)
