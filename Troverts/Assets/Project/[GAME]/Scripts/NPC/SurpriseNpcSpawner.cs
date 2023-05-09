@@ -22,7 +22,7 @@ public class SurpriseNpcSpawner : MonoBehaviour
         if(distance <= spawnRadius)
         {
             if (!FsmManager.Instance.IsCharacterCommunicating)
-                NPCManager.Instance.CreateIntovertNPCsInProcess(playerTransform.position);
+                NPCManager.Instance.CreateIntovertNPCsInProcess(playerTransform);
         }
     }
 }

@@ -7,7 +7,9 @@ public enum ExecutingState
 {
     IDLE,
     WALK,
-    SPRINT
+    SPRINT,
+
+    WAIT
 }
 [RequireComponent(typeof(CharacterController))]
 public class CharacterFSM : MonoBehaviour
@@ -15,6 +17,9 @@ public class CharacterFSM : MonoBehaviour
     #region Components
     private CharacterController characterController;
     public CharacterController CharacterController{ get { return(characterController == null)? characterController = GetComponent<CharacterController>() : characterController; }}
+    
+    private ParticleSystem particleSystem;
+    public ParticleSystem ParticleSystem{ get { return(particleSystem == null)? particleSystem = GetComponentInChildren<ParticleSystem>() : particleSystem; }}
     #endregion
 
     #region Parameters
@@ -41,6 +46,7 @@ public class CharacterFSM : MonoBehaviour
     public IdleState idleState = new IdleState();
     public WalkState walkState = new WalkState();
     public SprintState sprintState = new SprintState();
+    public WaitState waitState = new WaitState();
     #endregion
 
     #region Events
@@ -52,18 +58,41 @@ public class CharacterFSM : MonoBehaviour
     public UnityEvent OnCharacterRun = new UnityEvent();
     #endregion
 
+    #region Controllers
+    private bool isLevelDelayedStart = false;
+    #endregion
+    void OnEnable()
+    {
+        EventManager.OnLevelAfterStart.AddListener(InvokeMethod);
+    }
+    void OnDisable()
+    {
+        EventManager.OnLevelAfterStart.RemoveListener(InvokeMethod);
+    }
 
     void Start()
     {
-        executingState = ExecutingState.IDLE;
-        currentState = idleState;
+        executingState = ExecutingState.WAIT;
+        currentState = waitState;
         currentState.EnterState(this);
+    }
+
+    void InvokeMethod()
+    {
+        Invoke("StartLevelAfterCamMove", 2.0f);
+    }
+    void StartLevelAfterCamMove()
+    {
+        EventManager.OnNpcGetSmart.Invoke();
+        executingState = ExecutingState.IDLE;
+        isLevelDelayedStart = true;
     }
 
     void Update()
     {
         if(!GameManager.Instance.IsLevelStarted)    return;
         if(GameManager.Instance.IsLevelFail || GameManager.Instance.IsLevelSuccess)     return;
+        if(!isLevelDelayedStart)    return;
         
         if(FsmManager.Instance.IsCharacterCommunicating)
         {

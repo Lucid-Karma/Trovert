@@ -8,7 +8,17 @@ public class IntrovertNpcFsm : NpcFSM
     public ChaseState chaseState = new ChaseState();
     public InPatrolState inPatrolState = new InPatrolState();
     public InChatState inChatState = new InChatState();
+    public InWaitState inWaitState = new InWaitState();
 
+
+    void OnEnable()
+    {
+        EventManager.OnNpcGetSmart.AddListener(() => executingNpcState = ExecutingNpcState.CHASE);
+    }
+    void OnDisable()
+    {
+        EventManager.OnNpcGetSmart.RemoveListener(() => executingNpcState = ExecutingNpcState.CHASE);
+    }
 
     void Update()
     {
@@ -19,11 +29,21 @@ public class IntrovertNpcFsm : NpcFSM
     
     public override void StartState()
     {
-        executingNpcState = ExecutingNpcState.CHASE;
+        if(NPCManager.Instance.isINpcSurprise)
+        {
+            executingNpcState = ExecutingNpcState.CHASE;
 
-        currentState = chaseState;
-        currentState.EnterState(this);
+            currentState = chaseState;
+            currentState.EnterState(this);
+        }
+        else
+        {
+            executingNpcState = ExecutingNpcState.WAIT;
 
+            currentState = inWaitState;
+            currentState.EnterState(this);
+        }
+        
         base.StartState();
     }
 
@@ -36,10 +56,7 @@ public class IntrovertNpcFsm : NpcFSM
         {
             if (!IsNpcMet)
             {
-                // if(distance <= 6.0f)
-                // {
-                    executingNpcState = ExecutingNpcState.CHASE;
-                // }  
+                executingNpcState = ExecutingNpcState.CHASE;
             }
         }
     }

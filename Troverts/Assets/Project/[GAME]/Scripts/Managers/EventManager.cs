@@ -10,6 +10,7 @@ public static class EventManager
     public static UnityEvent OnGameEnd = new UnityEvent();
 
     public static UnityEvent OnLevelStart = new UnityEvent();
+    public static UnityEvent OnLevelAfterStart = new UnityEvent();
     public static UnityEvent OnLevelContine = new UnityEvent();
     public static UnityEvent OnLevelFinish = new UnityEvent();
 
@@ -24,7 +25,6 @@ public static class EventManager
     public static UnityEvent OnCharacterChoose = new UnityEvent();
     public static UnityEvent OnExtrovertChoose = new UnityEvent();
     public static UnityEvent OnIntrovertChoose = new UnityEvent();
-    //public static UnityEvent OnDifficultyChoose = new UnityEvent();
     public static UnityEvent OnEDifficultyChoose = new UnityEvent();
     public static UnityEvent OnIDifficultyChoose = new UnityEvent();
 
@@ -40,6 +40,7 @@ public static class EventManager
 
     public static UnityEvent OnMusicOn = new UnityEvent();
     public static UnityEvent OnMusicOff = new UnityEvent();
+    //public static UnityEvent OnTimeFlows = new UnityEvent();
     public static UnityEvent OnCameraMove = new UnityEvent();
 
     public static UnityEvent OnCursorLock = new UnityEvent();
@@ -49,6 +50,5 @@ public static class EventManager
     public static UnityEvent OnPreGreet = new UnityEvent();
     public static UnityEvent OnNpcGreet = new UnityEvent();
     public static UnityEvent OnNpcGreetingEnd = new UnityEvent();
+    public static UnityEvent OnNpcGetSmart = new UnityEvent();
 }
-
-/*[System.Serializable]*/ //public class SpawnINpcEvent : UnityEvent<Vector3> { }

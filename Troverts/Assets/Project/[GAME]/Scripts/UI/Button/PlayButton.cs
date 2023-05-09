@@ -9,6 +9,7 @@ public class PlayButton : MonoBehaviour
         EventManager.OnLevelStart.Invoke();
         EventManager.OnIntrovertLevelStart.Invoke();
         EventManager.OnCursorLock.Invoke();
+        EventManager.OnLevelAfterStart.Invoke();
     }
 
     public void PlayExtrovert()
@@ -16,5 +17,6 @@ public class PlayButton : MonoBehaviour
         EventManager.OnLevelStart.Invoke();
         EventManager.OnExtrovertLevelStart.Invoke();
         EventManager.OnCursorLock.Invoke();
+        EventManager.OnLevelAfterStart.Invoke();
     }
 }

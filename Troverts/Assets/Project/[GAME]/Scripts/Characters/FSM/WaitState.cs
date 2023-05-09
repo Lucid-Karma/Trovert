@@ -2,21 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WalkState : CharacterStates
+public class WaitState : CharacterStates
 {
     public override void EnterState(CharacterFSM fsm)
     {
-        fsm.OnCharacterWalk.Invoke();
-        fsm.currentSpeed = 5.0f;
-        fsm.ParticleSystem.Stop();
+        fsm.OnCharacterIdle.Invoke();
     }
 
     public override void UpdateState(CharacterFSM fsm)
     {
-        if (fsm.executingState == ExecutingState.WALK)
+        if (fsm.executingState == ExecutingState.WAIT)
         {
-            fsm.LookAround();
-            fsm.Move();
+
         }
         else   ExitState(fsm);
     }
@@ -26,10 +23,6 @@ public class WalkState : CharacterStates
         if(fsm.executingState == ExecutingState.IDLE)
         {
             fsm.SwitchState(fsm.idleState);
-        }
-        else if (fsm.executingState == ExecutingState.SPRINT)
-        {
-            fsm.SwitchState(fsm.sprintState);
         }
     }
 }

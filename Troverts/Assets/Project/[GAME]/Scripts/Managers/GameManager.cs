@@ -79,4 +79,9 @@ public class GameManager : Singleton<GameManager>
     {
         Time.timeScale = 1;
     }
+
+    void DelayLevel()
+    {
+        Time.timeScale = 0.5f;
+    }
 }

@@ -6,7 +6,6 @@ public class InPatrolState : IntrovertNPCStates
 {
     public override void EnterState(IntrovertNpcFsm fsm)
     {
-        Debug.Log("npc patrol");
         fsm.OnNpcWalk.Invoke();
         fsm.Agent.stoppingDistance = 0.0f;
         fsm.distanceVec = (fsm.Agent.transform.position - fsm.pcPoint).normalized;

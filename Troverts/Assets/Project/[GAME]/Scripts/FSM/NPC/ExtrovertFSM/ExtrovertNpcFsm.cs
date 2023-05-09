@@ -7,7 +7,7 @@ public class ExtrovertNpcFsm : NpcFSM
     [HideInInspector]
     public Vector3 escapePoint;
 
-    [HideInInspector]
+    // [HideInInspector]
     // public Vector3 distanceVec;
 
     public ExtrovertNPCStates currentState;

@@ -6,9 +6,7 @@ public class ChaseState : IntrovertNPCStates
 {
     public override void EnterState(IntrovertNpcFsm fsm)
     {
-        //Debug.Log("npc chase");
         fsm.OnNpcRun.Invoke();
-        //fsm.Agent.stoppingDistance = 1.5f;
         fsm.Agent.speed = 7.0f;
     }
 

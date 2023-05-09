@@ -9,7 +9,9 @@ public enum ExecutingNpcState
     PATROL,
     CHAT,
     CHASE,
-    ESCAPE
+    ESCAPE,
+
+    WAIT
 }
 public abstract class NpcFSM : MonoBehaviour
 {
@@ -64,7 +66,6 @@ public abstract class NpcFSM : MonoBehaviour
 
     void Start()    
     {
-        //executingNpcState = ExecutingNpcState.PATROL;
         StartState();
     }
 

@@ -5727,8 +5727,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You should interact with as many people as possible before the time runs
-    out. Show them how extroverted you are.
+  m_text: The only way to win the game is to catch people by communicating with them.
+    You must reach the desired energy within a limited time. Left-click to exit the
+    conversation.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e4041c94a2181b243bd1912946bfbe63, type: 2}
   m_sharedMaterial: {fileID: 21653359819962708, guid: e4041c94a2181b243bd1912946bfbe63, type: 2}
@@ -6273,8 +6274,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Avoid people or you will lose energy. Just don't run out of energy until
-    the time runs out. You won't pass out from exhaustion when you get home.
+  m_text: Stay away from people! Make sure your energy doesn't run out before the
+    time expires. That will be enough to get through today. Don't forget to left-click
+    to end the conversation!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e4041c94a2181b243bd1912946bfbe63, type: 2}
   m_sharedMaterial: {fileID: 21653359819962708, guid: e4041c94a2181b243bd1912946bfbe63, type: 2}

@@ -17,6 +17,8 @@ public class IdleState : CharacterStates
         {
             fsm.OnCharacterIdle.Invoke();
         } 
+
+        fsm.ParticleSystem.Stop();
     }
 
     public override void UpdateState(CharacterFSM fsm)

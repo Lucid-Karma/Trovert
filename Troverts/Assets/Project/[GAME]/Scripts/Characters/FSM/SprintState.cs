@@ -8,6 +8,7 @@ public class SprintState : CharacterStates
     {
         fsm.OnCharacterRun.Invoke();
         fsm.currentSpeed = 8.0f;
+        fsm.ParticleSystem.Play();
     }
 
     public override void UpdateState(CharacterFSM fsm)
