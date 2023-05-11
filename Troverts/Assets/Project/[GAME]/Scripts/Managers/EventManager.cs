@@ -40,7 +40,8 @@ public static class EventManager
 
     public static UnityEvent OnMusicOn = new UnityEvent();
     public static UnityEvent OnMusicOff = new UnityEvent();
-    //public static UnityEvent OnTimeFlows = new UnityEvent();
+    public static UnityEvent OnTimeBlend = new UnityEvent();
+    public static UnityEvent OnTimeFlow = new UnityEvent();
     public static UnityEvent OnCameraMove = new UnityEvent();
 
     public static UnityEvent OnCursorLock = new UnityEvent();

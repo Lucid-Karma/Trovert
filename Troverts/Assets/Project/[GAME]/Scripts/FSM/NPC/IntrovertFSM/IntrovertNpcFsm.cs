@@ -79,6 +79,16 @@ public class IntrovertNpcFsm : NpcFSM
         else    executingNpcState = ExecutingNpcState.PATROL;
     }
 
+    public override void Meet()
+    {
+        Debug.Log("Press F");
+    }
+    public override void Die()
+    {
+        OnNpcDie.Invoke();
+        gameObject.SetActive(false);
+    }
+
     public void SwitchState(IntrovertNPCStates nextState)
     {
         currentState = nextState;
