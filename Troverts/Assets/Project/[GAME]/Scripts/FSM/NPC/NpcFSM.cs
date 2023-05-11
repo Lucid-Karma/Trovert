@@ -13,7 +13,7 @@ public enum ExecutingNpcState
 
     WAIT
 }
-public abstract class NpcFSM : MonoBehaviour
+public abstract class NpcFSM : MonoBehaviour, IInteractable
 {
     #region FSM
     public ExecutingNpcState executingNpcState;
@@ -26,6 +26,8 @@ public abstract class NpcFSM : MonoBehaviour
     public UnityEvent OnNpcWalk = new UnityEvent();
     [HideInInspector]
     public UnityEvent OnNpcRun = new UnityEvent();
+    [HideInInspector]
+    public UnityEvent OnNpcDie = new UnityEvent();
     #endregion
     
     #region Components
@@ -121,4 +123,7 @@ public abstract class NpcFSM : MonoBehaviour
     {
         Agent.GetComponentInChildren<SkinnedMeshRenderer>().material = metMat;
     }
+
+    public abstract void Meet();
+    public abstract void Die();
 }

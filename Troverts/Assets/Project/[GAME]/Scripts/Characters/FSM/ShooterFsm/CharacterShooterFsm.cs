@@ -1,0 +1,87 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public enum ExecutingShooterState
+{
+    AIM,
+    SHOOT,
+    EASE
+}
+public class CharacterShooterFsm : MonoBehaviour
+{
+    private Camera camera;
+
+    public ExecutingShooterState executingState;
+    public ShooterStates currentState;
+    public AimState aimState = new AimState();
+    public ShootState shootState = new ShootState();
+    public EaseState easeState = new EaseState();
+
+
+    void Start()
+    {
+        camera = Camera.main;
+
+        executingState =  ExecutingShooterState.EASE;
+        currentState = easeState;
+        currentState.EnterState(this);
+    }
+
+    void Update()
+    {
+        currentState.UpdateState(this);
+    }
+
+
+    public void Aim()
+    {
+        var target = GetTargetObject();
+
+        if(target != null)
+        {
+            // var interactable = target.GetComponent<IInteractable>();
+            var interactable = target.GetComponent<NpcFSM>();
+            if(interactable != null)
+            {
+                interactable?.Meet();
+                // crosshair.color = Color.red;
+                // pressEUI.SetActive(true);
+
+                if (Input.GetKey(KeyCode.F))
+                {
+                    interactable?.Die();
+                }
+            }   
+            // else if(interactable == null)
+            // {
+            //     crosshair.color = Color.white;
+            //     pressEUI.SetActive(false); 
+            // }
+        }
+        // else if(target == null)
+        // {
+        //     crosshair.color = Color.white;
+        //     pressEUI.SetActive(false); 
+        // }    
+    }
+    private GameObject GetTargetObject()
+    {
+        GameObject result = null;
+        Vector3 fwd = transform.TransformDirection(Vector3.forward);
+        RaycastHit hit;
+        var ray = camera.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(transform.position, fwd, out hit, 30))
+        {
+            result = hit.transform.gameObject;
+        }
+        return result;
+    }
+
+
+    public void SwitchState(ShooterStates nextState)
+    {
+        currentState = nextState;
+        currentState.EnterState(this);
+    }
+}

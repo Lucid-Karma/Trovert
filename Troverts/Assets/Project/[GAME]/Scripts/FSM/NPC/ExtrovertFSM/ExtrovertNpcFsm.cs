@@ -70,6 +70,16 @@ public class ExtrovertNpcFsm : NpcFSM
         }   
     }
 
+    public override void Meet()
+    {
+        Debug.Log("Press F");
+    }
+    public override void Die()
+    {
+        OnNpcDie.Invoke();
+        gameObject.SetActive(false);
+    }
+    
     public void SwitchState(ExtrovertNPCStates nextState)
     {
         currentState = nextState;

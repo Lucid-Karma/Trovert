@@ -47,6 +47,9 @@ public class GameManager : Singleton<GameManager>
         EventManager.OnRestart.AddListener(ContinueGame);
         EventManager.OnLevelFail.AddListener(FailGame);
         EventManager.OnLevelSuccess.AddListener(WinGame);
+
+        EventManager.OnTimeBlend.AddListener(DelayLevel);
+        EventManager.OnTimeFlow.AddListener(ContinueGame);
     }
     private void OnDisable()
     {
@@ -54,6 +57,9 @@ public class GameManager : Singleton<GameManager>
         EventManager.OnRestart.RemoveListener(ContinueGame);
         EventManager.OnLevelFail.RemoveListener(FailGame);
         EventManager.OnLevelSuccess.RemoveListener(WinGame);
+
+        EventManager.OnTimeBlend.RemoveListener(DelayLevel);
+        EventManager.OnTimeFlow.RemoveListener(ContinueGame);
     }
 
     void WinGame()
@@ -75,13 +81,13 @@ public class GameManager : Singleton<GameManager>
         Time.timeScale = 0.5f;
     }
 
-    void ContinueGame()
+    public void ContinueGame()
     {
         Time.timeScale = 1;
     }
 
-    void DelayLevel()
+    public void DelayLevel()
     {
-        Time.timeScale = 0.5f;
+        Time.timeScale = 0.1f;
     }
 }

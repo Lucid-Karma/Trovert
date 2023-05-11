@@ -4,6 +4,9 @@ using UnityEngine;
 
 public interface IInteractable 
 {
-    void Interact();
-    void Communicate();
+    //void Interact();
+
+    void Meet();
+    void Die();
+    //void PickUp();
 }

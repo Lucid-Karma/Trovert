@@ -8,10 +8,24 @@ public class IdleState : CharacterStates
     {
         if (PlayerPrefs.GetString("selected_character") == "introvert")
         {
-            if(FsmManager.Instance.IsCharacterCommunicating)
-                EventManager.OnIntrovertCaught.Invoke();
+            if(PcPowerManager.Instance.IsPowerUp)
+            {
+                if(FsmManager.Instance.IsCharacterCommunicating)
+                    EventManager.OnIntrovertCaught.Invoke();
+                else
+                {
+                    fsm.OnCharacterIdle.Invoke();
+                    EventManager.OnTimeBlend.Invoke();
+                }
+            }
             else
-                fsm.OnCharacterIdle.Invoke();
+            {
+                if(FsmManager.Instance.IsCharacterCommunicating)
+                    EventManager.OnIntrovertCaught.Invoke();
+                else
+                    fsm.OnCharacterIdle.Invoke();
+            }
+            
         }
         else if(PlayerPrefs.GetString("selected_character") == "extrovert")
         {
@@ -32,6 +46,7 @@ public class IdleState : CharacterStates
 
     public override void ExitState(CharacterFSM fsm)
     {
+        EventManager.OnTimeFlow.Invoke();
         if(fsm.executingState == ExecutingState.WALK)
         {
             fsm.SwitchState(fsm.walkState);
