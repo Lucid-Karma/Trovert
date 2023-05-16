@@ -33,6 +33,13 @@ public class CharacterShooterFsm : MonoBehaviour
         currentState.UpdateState(this);
     }
 
+    public void Ease()
+    {
+        if(Input.GetKey(KeyCode.E))
+        {
+            executingState =  ExecutingShooterState.AIM;
+        }
+    }
 
     public void Aim()
     {
@@ -45,10 +52,12 @@ public class CharacterShooterFsm : MonoBehaviour
             if(interactable != null)
             {
                 interactable?.Meet();
+                Debug.Log("NPC !!!");
                 // crosshair.color = Color.red;
                 // pressEUI.SetActive(true);
 
-                if (Input.GetKey(KeyCode.F))
+                // if (Input.GetKey(KeyCode.F))
+                if (Input.GetMouseButtonDown(0))
                 {
                     interactable?.Die();
                 }
@@ -68,10 +77,11 @@ public class CharacterShooterFsm : MonoBehaviour
     private GameObject GetTargetObject()
     {
         GameObject result = null;
-        Vector3 fwd = transform.TransformDirection(Vector3.forward);
+        // Vector3 fwd = transform.TransformDirection(Vector3.forward);
+        Vector3 fwd = camera.transform.TransformDirection(Vector3.forward);
         RaycastHit hit;
-        var ray = camera.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(transform.position, fwd, out hit, 30))
+        Ray ray = camera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));       //ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(camera.transform.position, fwd, out hit, 100))
         {
             result = hit.transform.gameObject;
         }

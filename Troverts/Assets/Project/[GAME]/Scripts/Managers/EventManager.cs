@@ -36,6 +36,8 @@ public static class EventManager
 
     public static UnityEvent OnIntrovertCaught = new UnityEvent();
     public static UnityEvent OnIntrovertLeave = new UnityEvent();
+    public static UnityEvent OnIntrovertShoot = new UnityEvent();
+    public static UnityEvent OnIntrovertEndShoot = new UnityEvent();
     public static UnityEvent OnPlayerStartedRunning = new UnityEvent();
 
     public static UnityEvent OnMusicOn = new UnityEvent();
