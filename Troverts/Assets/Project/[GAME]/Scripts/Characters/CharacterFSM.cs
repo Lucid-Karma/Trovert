@@ -36,7 +36,10 @@ public class CharacterFSM : MonoBehaviour
     private float rotationX;
 
     private float verticalMove, horizontalMove;
-    private Vector3 move;    
+    private Vector3 move;   
+
+
+    //private float _manipuletedTimeSpeed = 1f;
     #endregion
 
     #region FSM

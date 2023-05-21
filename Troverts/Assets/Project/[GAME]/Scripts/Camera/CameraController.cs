@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class CameraController : MonoBehaviour
 {
@@ -11,16 +12,16 @@ public class CameraController : MonoBehaviour
         EventManager.OnCameraMove.AddListener(ShowFarAway);
         EventManager.OnLevelStart.AddListener(ShowCloser);
 
-        EventManager.OnIntrovertShoot.AddListener(Shoot);
-        EventManager.OnIntrovertEndShoot.AddListener(EndShoot);
+        EventManager.OnIntrovertAim.AddListener(Aim);
+        EventManager.OnIntrovertEndAim.AddListener(EndAim);
     }
     void OnDisable()
     {
         EventManager.OnCameraMove.RemoveListener(ShowFarAway);
         EventManager.OnLevelStart.RemoveListener(ShowCloser);
 
-        EventManager.OnIntrovertShoot.RemoveListener(Shoot);
-        EventManager.OnIntrovertEndShoot.RemoveListener(EndShoot);
+        EventManager.OnIntrovertAim.RemoveListener(Aim);
+        EventManager.OnIntrovertEndAim.RemoveListener(EndAim);
     }
 
     private void ShowCloser()
@@ -37,14 +38,19 @@ public class CameraController : MonoBehaviour
         Cameras[1].SetActive(true);
     }
 
-    private void Shoot()
+    private void Shoot()    // same function with Aim().
     {
         Cameras[0].SetActive(false);
         Cameras[3].SetActive(true);
     }
-    private void EndShoot()
+    private void EndAim()
     {
         Cameras[3].SetActive(false);
         Cameras[0].SetActive(true);
+    }
+
+    private void Aim()
+    {
+        Cameras[3].GetComponent<Cinemachine.CinemachineVirtualCamera>().Priority = 9;
     }
 }

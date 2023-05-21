@@ -88,6 +88,8 @@ public class GameManager : Singleton<GameManager>
 
     public void DelayLevel()
     {
+        //Time.timeScale = 0.1f;
         Time.timeScale = 0.1f;
+        Time.fixedDeltaTime = Time.timeScale * 0.02f;
     }
 }

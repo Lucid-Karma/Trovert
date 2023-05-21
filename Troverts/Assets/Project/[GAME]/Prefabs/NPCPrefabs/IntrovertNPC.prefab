@@ -64,6 +64,7 @@ MonoBehaviour:
   pcPoint: {x: 0, y: 0, z: 0}
   distanceVec: {x: 0, y: 0, z: 0}
   distance: 0
+  sprintSpeed: 7
   metMat: {fileID: 2100000, guid: b0db6f9415046f6408c43ff0ba6f3fd4, type: 2}
   escapePoint: {x: 0, y: 0, z: 0}
 --- !u!195 &7724406484161905714

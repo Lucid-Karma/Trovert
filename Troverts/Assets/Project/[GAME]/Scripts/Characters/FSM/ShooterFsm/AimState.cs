@@ -6,7 +6,7 @@ public class AimState : ShooterStates
 {
     public override void EnterState(CharacterShooterFsm fsm)
     {
-        EventManager.OnIntrovertShoot.Invoke();
+        EventManager.OnIntrovertAim.Invoke();
         Debug.Log("AIM");
     }
 
@@ -21,7 +21,7 @@ public class AimState : ShooterStates
 
     public override void ExitState(CharacterShooterFsm fsm)
     {
-        EventManager.OnIntrovertEndShoot.Invoke();
+        EventManager.OnIntrovertEndAim.Invoke();
         if(fsm.executingState == ExecutingShooterState.SHOOT)
         {
             fsm.SwitchState(fsm.shootState);

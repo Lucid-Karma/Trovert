@@ -43,37 +43,17 @@ public class CharacterShooterFsm : MonoBehaviour
 
     public void Aim()
     {
-        var target = GetTargetObject();
-
-        if(target != null)
+        if (Input.GetMouseButtonDown(0))
         {
-            // var interactable = target.GetComponent<IInteractable>();
-            var interactable = target.GetComponent<NpcFSM>();
-            if(interactable != null)
-            {
-                interactable?.Meet();
-                Debug.Log("NPC !!!");
-                // crosshair.color = Color.red;
-                // pressEUI.SetActive(true);
-
-                // if (Input.GetKey(KeyCode.F))
-                if (Input.GetMouseButtonDown(0))
-                {
-                    interactable?.Die();
-                }
-            }   
-            // else if(interactable == null)
-            // {
-            //     crosshair.color = Color.white;
-            //     pressEUI.SetActive(false); 
-            // }
+            executingState = ExecutingShooterState.SHOOT;
         }
-        // else if(target == null)
-        // {
-        //     crosshair.color = Color.white;
-        //     pressEUI.SetActive(false); 
-        // }    
     }
+
+    public void Shoot()
+    {
+        BulletManager.Instance.GetBullet();
+    }
+    
     private GameObject GetTargetObject()
     {
         GameObject result = null;

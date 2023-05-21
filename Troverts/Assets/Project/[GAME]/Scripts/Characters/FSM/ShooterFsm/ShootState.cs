@@ -13,7 +13,7 @@ public class ShootState : ShooterStates
     {
         if (fsm.executingState == ExecutingShooterState.SHOOT)
         {
-            
+            fsm.Shoot();
         }
         else   ExitState(fsm);
     }
