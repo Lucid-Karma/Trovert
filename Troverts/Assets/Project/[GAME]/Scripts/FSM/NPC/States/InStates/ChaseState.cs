@@ -7,13 +7,16 @@ public class ChaseState : IntrovertNPCStates
     public override void EnterState(IntrovertNpcFsm fsm)
     {
         fsm.OnNpcRun.Invoke();
-        fsm.Agent.speed = 7.0f;
+        
     }
 
     public override void UpdateState(IntrovertNpcFsm fsm)
     {
         if(fsm.executingNpcState == ExecutingNpcState.CHASE)
+        {
+            fsm.Agent.speed = fsm.sprintSpeed;
             fsm.Chase();
+        }
         else
             ExitState(fsm);
     }

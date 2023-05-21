@@ -6,14 +6,14 @@ public class ShootState : ShooterStates
 {
     public override void EnterState(CharacterShooterFsm fsm)
     {
-        
+        Debug.Log("SHOOT");
     }
 
     public override void UpdateState(CharacterShooterFsm fsm)
     {
         if (fsm.executingState == ExecutingShooterState.SHOOT)
         {
-            
+            fsm.Shoot();
         }
         else   ExitState(fsm);
     }

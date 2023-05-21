@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class NPCManager : Singleton<NPCManager>
 {
-    [SerializeField]    private GameObject[] npcPrefabs;
+    [SerializeField] private GameObject[] npcPrefabs;
     private List<GameObject> introvertNPCs = new List<GameObject>();
     private List<GameObject> extrovertNPCs = new List<GameObject>();
 

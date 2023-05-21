@@ -10,6 +10,7 @@ public enum ExecutingNpcState
     CHAT,
     CHASE,
     ESCAPE,
+    SHOCK,
 
     WAIT
 }
@@ -44,6 +45,8 @@ public abstract class NpcFSM : MonoBehaviour, IInteractable
 
         [HideInInspector]
         public float distance;
+        [HideInInspector]
+        public float sprintSpeed = 7.0f;
         #endregion
 
         #region Rotation
@@ -124,6 +127,9 @@ public abstract class NpcFSM : MonoBehaviour, IInteractable
         Agent.GetComponentInChildren<SkinnedMeshRenderer>().material = metMat;
     }
 
-    public abstract void Meet();
+    public void Shock()
+    {
+        executingNpcState = ExecutingNpcState.SHOCK;
+    }
     public abstract void Die();
 }
