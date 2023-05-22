@@ -20,6 +20,10 @@ public class Bullet : MonoBehaviour
             interactable?.Die();
             gameObject.SetActive(false);
             interactable?.Shock();      //!!!
+
+            Debug.Log("touched a npc");
         }
+
+        Debug.Log("touched something");
     }
 }

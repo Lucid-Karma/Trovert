@@ -8,10 +8,14 @@ public class BulletManager : Singleton<BulletManager>
     [SerializeField] private GameObject objectToPool;
     GameObject _bullet;
 
-    private Vector3 _createPos;
-
-
-    public void CreateBulletObject()
+    void Start()
+    {
+        for (int i = 0; i < 20; i++)
+        {
+            SetBulletObject();
+        }
+    }
+    public void SetBulletObject()
     {
         GameObject obj = (GameObject)Instantiate(objectToPool);
         obj.SetActive(false); 
@@ -31,21 +35,15 @@ public class BulletManager : Singleton<BulletManager>
         return null;
     }
 
-    public void GetBullet()   
+    public void GetBullet(Vector3 spawnPoint, Quaternion spawnRot)   
     {
-        _createPos = GetBulletPosition();
         _bullet = GetPooledObject();
 
             if(_bullet != null)
             {
-                _bullet.transform.position = _createPos;
-                _bullet.transform.rotation = transform.parent.rotation;
+                _bullet.transform.position = spawnPoint;
+                _bullet.transform.rotation = spawnRot;
                 _bullet.SetActive(true);
             }
-    }
-
-    public Vector3 GetBulletPosition()
-    {
-        return gameObject.transform.position;
     }
 }

@@ -9,11 +9,11 @@ public class SurpriseNpcSpawner : MonoBehaviour
     private float spawnInterval = 5.0f;
     private float distance;
 
-    void Start()
-    {
-        playerTransform = GameObject.FindWithTag("Player").GetComponent<Transform>();
-        InvokeRepeating("Spawn", 10.0f, spawnInterval);
-    }
+    // void Start()
+    // {
+    //     playerTransform = GameObject.FindWithTag("Player").GetComponent<Transform>();
+    //     InvokeRepeating("Spawn", 10.0f, spawnInterval);
+    // }
 
     private void Spawn()
     {

@@ -50,6 +50,7 @@ public class GameManager : Singleton<GameManager>
 
         EventManager.OnTimeBlend.AddListener(DelayLevel);
         EventManager.OnTimeFlow.AddListener(ContinueGame);
+        EventManager.OnPreGreet.AddListener(ContinueGame);
     }
     private void OnDisable()
     {
@@ -60,6 +61,7 @@ public class GameManager : Singleton<GameManager>
 
         EventManager.OnTimeBlend.RemoveListener(DelayLevel);
         EventManager.OnTimeFlow.RemoveListener(ContinueGame);
+        EventManager.OnPreGreet.RemoveListener(ContinueGame);
     }
 
     void WinGame()

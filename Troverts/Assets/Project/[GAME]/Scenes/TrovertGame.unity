@@ -310,8 +310,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 36080187}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0019129105, y: 1.5668409, z: -0.26205432}
+  m_LocalRotation: {x: -0.32559425, y: 0.63226837, z: -0.3323119, w: -0.61951107}
+  m_LocalPosition: {x: 105.263275, y: 27.112335, z: -1.5725107}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -361,6 +361,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 62561778}
+  - component: {fileID: 62561779}
   m_Layer: 0
   m_Name: AwpHolderObj
   m_TagString: Untagged
@@ -375,14 +376,27 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 62561777}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.24999999, y: 1.135, z: 0.305}
+  m_LocalRotation: {x: -0, y: -0.07363882, z: -0, w: 0.99728495}
+  m_LocalPosition: {x: 0.197, y: 1.316, z: 0.178}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1354456975}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -8.446, z: 0}
+--- !u!114 &62561779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 62561777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19c8918680648814085acb984fbb9c66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _awpGunPrefab: {fileID: 870391579360146069, guid: 90ca0432e38f2d44298b3c0deeb51bd5, type: 3}
 --- !u!1001 &79283820
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -962,7 +976,7 @@ MonoBehaviour:
   - m_Script
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
-  m_Priority: 11
+  m_Priority: 7
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}

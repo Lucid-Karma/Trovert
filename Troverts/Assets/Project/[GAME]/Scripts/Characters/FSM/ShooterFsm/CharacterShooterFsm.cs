@@ -51,7 +51,10 @@ public class CharacterShooterFsm : MonoBehaviour
 
     public void Shoot()
     {
-        BulletManager.Instance.GetBullet();
+        if (Input.GetMouseButtonDown(0))
+        {
+            EventManager.OnBulletShoot.Invoke();
+        }
     }
     
     private GameObject GetTargetObject()

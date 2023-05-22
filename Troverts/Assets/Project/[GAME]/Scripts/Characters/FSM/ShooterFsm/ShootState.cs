@@ -7,6 +7,7 @@ public class ShootState : ShooterStates
     public override void EnterState(CharacterShooterFsm fsm)
     {
         Debug.Log("SHOOT");
+        EventManager.OnBulletShoot.Invoke();
     }
 
     public override void UpdateState(CharacterShooterFsm fsm)

@@ -13,7 +13,7 @@ public class CameraController : MonoBehaviour
         EventManager.OnLevelStart.AddListener(ShowCloser);
 
         EventManager.OnIntrovertAim.AddListener(Aim);
-        EventManager.OnIntrovertEndAim.AddListener(EndAim);
+        //EventManager.OnIntrovertEndAim.AddListener(EndAim);
     }
     void OnDisable()
     {
@@ -21,7 +21,7 @@ public class CameraController : MonoBehaviour
         EventManager.OnLevelStart.RemoveListener(ShowCloser);
 
         EventManager.OnIntrovertAim.RemoveListener(Aim);
-        EventManager.OnIntrovertEndAim.RemoveListener(EndAim);
+        //EventManager.OnIntrovertEndAim.RemoveListener(EndAim);
     }
 
     private void ShowCloser()

@@ -15,7 +15,7 @@ public class Coin : MonoBehaviour, ICollectable
 
     public void Collect()
     {
-        BulletManager.Instance.CreateBulletObject();
+        BulletManager.Instance.SetBulletObject();
         EventManager.OnCoinPickUp.Invoke();
         gameObject.SetActive(false);
     }

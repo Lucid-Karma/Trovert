@@ -30,6 +30,7 @@ public static class EventManager
 
     public static UnityEvent OnObstacleCreated = new UnityEvent();
     public static UnityEvent OnCoinPickUp = new UnityEvent();
+    public static UnityEvent OnBulletShoot = new UnityEvent();
     public static UnityEvent OnPointEarn = new UnityEvent();
     public static UnityEvent OnPointLose = new UnityEvent();
     public static UnityEvent OnEScoreTxtUpdate = new UnityEvent();
