@@ -40,11 +40,14 @@ public static class EventManager
     public static UnityEvent OnIntrovertLeave = new UnityEvent();
     public static UnityEvent OnIntrovertAim = new UnityEvent();
     public static UnityEvent OnIntrovertEndAim = new UnityEvent();
+    public static UnityEvent OnIntrovertFirstBoxCall = new UnityEvent();
+    public static UnityEvent OnIntrovertSecondBoxCall = new UnityEvent();
+    public static UnityEvent OnIntrovertFirstPowerUp = new UnityEvent();
     public static UnityEvent OnPlayerStartedRunning = new UnityEvent();
 
     public static UnityEvent OnMusicOn = new UnityEvent();
     public static UnityEvent OnMusicOff = new UnityEvent();
-    public static UnityEvent OnTimeBlend = new UnityEvent();
+    public static UnityEvent OnTimeBend = new UnityEvent();
     public static UnityEvent OnTimeFlow = new UnityEvent();
     public static UnityEvent OnCameraMove = new UnityEvent();
 

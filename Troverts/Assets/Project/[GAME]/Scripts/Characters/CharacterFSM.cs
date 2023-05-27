@@ -67,10 +67,12 @@ public class CharacterFSM : MonoBehaviour
     void OnEnable()
     {
         EventManager.OnLevelAfterStart.AddListener(InvokeMethod);
+        EventManager.OnIntrovertFirstPowerUp.AddListener(() => executingState = ExecutingState.IDLE);
     }
     void OnDisable()
     {
         EventManager.OnLevelAfterStart.RemoveListener(InvokeMethod);
+        EventManager.OnIntrovertFirstPowerUp.RemoveListener(() => executingState = ExecutingState.IDLE);
     }
 
     void Start()
@@ -97,7 +99,7 @@ public class CharacterFSM : MonoBehaviour
         if(GameManager.Instance.IsLevelFail || GameManager.Instance.IsLevelSuccess)     return;
         if(!isLevelDelayedStart)    return;
         
-        if(FsmManager.Instance.IsCharacterCommunicating)
+        if(FsmManager.Instance.IsCharacterCommunicating || PcPowerManager.Instance.IsLearning)  // ?!?!?!?!?!?!?!
         {
             executingState = ExecutingState.IDLE;
         }
@@ -142,6 +144,16 @@ public class CharacterFSM : MonoBehaviour
         thirdPersonCamera.localRotation = Quaternion.Euler(rotationX, 0, 0);
 
         transform.Rotate(Vector3.up * mouseX);
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        ICollectable collectable = other.GetComponent<ICollectable>();
+
+        if (collectable != null)
+        {
+            collectable?.Collect();
+        }
     }
 
     public void SwitchState(CharacterStates nextState)

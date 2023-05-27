@@ -11,6 +11,8 @@ public class StartPanels : Panel
     public Panel InformPanel;
     public Panel CountdownPanel;
 
+    public Panel MainPowerUpPanel;
+
     private void Awake() 
     {
         TrovertPanel.HidePanel();
@@ -18,6 +20,7 @@ public class StartPanels : Panel
         InformPanel.HidePanel();
         CountdownPanel.HidePanel();
         CharacterChoosePanel.HidePanel();
+        MainPowerUpPanel.HidePanel();
         WelcomePanel.ShowPanel();
     }
 
@@ -31,6 +34,7 @@ public class StartPanels : Panel
         EventManager.OnIDifficultyChoose.AddListener(InitializeInformPanel);
         EventManager.OnEDifficultyChoose.AddListener(InitializeInformPanel);
         EventManager.OnLevelStart.AddListener(InitializeTrovertPanel);
+        EventManager.OnIntrovertFirstPowerUp.AddListener(InitializeMainPowerUpPanel);
     }
 
     private void OnDisable()
@@ -43,6 +47,7 @@ public class StartPanels : Panel
         EventManager.OnIDifficultyChoose.RemoveListener(InitializeInformPanel);
         EventManager.OnEDifficultyChoose.RemoveListener(InitializeInformPanel);
         EventManager.OnLevelStart.RemoveListener(InitializeTrovertPanel);
+        EventManager.OnIntrovertFirstPowerUp.RemoveListener(InitializeMainPowerUpPanel);
     }
 
     private void InitializeCharacterChoosePanel()
@@ -84,6 +89,26 @@ public class StartPanels : Panel
         CountdownPanel.ShowPanel();
         ShowPanel();
     }
+
+    private void InitializeMainPowerUpPanel()
+    {
+        TrovertPanel.HidePanel();
+        MainPowerUpPanel.ShowPanel();
+        ShowPanel();
+
+        StartCoroutine(HideMainPowerUpPanel());
+    }
+    IEnumerator HideMainPowerUpPanel()
+    {
+        yield return new WaitForSeconds(3.0f);
+
+        PcPowerManager.Instance.IsLearning = false;     // ?!?!?!?!?!?!?!
+
+        MainPowerUpPanel.HidePanel();
+        TrovertPanel.ShowPanel();
+        ShowPanel();
+    }
+
 
     private void HideOnRestart()
     {

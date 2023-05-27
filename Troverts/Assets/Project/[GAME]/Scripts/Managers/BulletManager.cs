@@ -8,13 +8,23 @@ public class BulletManager : Singleton<BulletManager>
     [SerializeField] private GameObject objectToPool;
     GameObject _bullet;
 
-    void Start()
+    // void Start()
+    // {
+    //     for (int i = 0; i < 20; i++)
+    //     {
+    //         SetBulletObject();
+    //     }
+    // }
+
+    void OnEnable()
     {
-        for (int i = 0; i < 20; i++)
-        {
-            SetBulletObject();
-        }
+        EventManager.OnCoinPickUp.AddListener(SetBulletObject);
     }
+    void OnDisable()
+    {
+        EventManager.OnCoinPickUp.RemoveListener(SetBulletObject);
+    }
+
     public void SetBulletObject()
     {
         GameObject obj = (GameObject)Instantiate(objectToPool);
