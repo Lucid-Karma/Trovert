@@ -7,14 +7,18 @@ public class PcPowerManager : Singleton<PcPowerManager>
     private bool isPowerUp;
     public bool IsPowerUp { get { return isPowerUp; } set { isPowerUp = value; } }
 
+    private bool isLearning;
+    public bool IsLearning { get { return isLearning; } set { isLearning = value; } }
+
     void Start()
     {
         IsPowerUp = false;
+        IsLearning = false;
     }
 
-    void Update()
-    {
-        if(Input.GetKey(KeyCode.F))
-        IsPowerUp = true;
-    }
+    // void Update()
+    // {
+    //     if(Input.GetKey(KeyCode.F))
+    //     IsPowerUp = true;
+    // }
 }

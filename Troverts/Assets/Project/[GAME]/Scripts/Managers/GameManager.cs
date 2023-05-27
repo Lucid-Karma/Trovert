@@ -48,7 +48,7 @@ public class GameManager : Singleton<GameManager>
         EventManager.OnLevelFail.AddListener(FailGame);
         EventManager.OnLevelSuccess.AddListener(WinGame);
 
-        EventManager.OnTimeBlend.AddListener(DelayLevel);
+        EventManager.OnTimeBend.AddListener(DelayLevel);
         EventManager.OnTimeFlow.AddListener(ContinueGame);
         EventManager.OnPreGreet.AddListener(ContinueGame);
     }
@@ -59,7 +59,7 @@ public class GameManager : Singleton<GameManager>
         EventManager.OnLevelFail.RemoveListener(FailGame);
         EventManager.OnLevelSuccess.RemoveListener(WinGame);
 
-        EventManager.OnTimeBlend.RemoveListener(DelayLevel);
+        EventManager.OnTimeBend.RemoveListener(DelayLevel);
         EventManager.OnTimeFlow.RemoveListener(ContinueGame);
         EventManager.OnPreGreet.RemoveListener(ContinueGame);
     }

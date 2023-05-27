@@ -5,9 +5,9 @@ using UnityEngine.AI;
 
 public class CoinSpawner : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> _pooledObjects = new List<GameObject>();
+    private List<GameObject> _pooledObjects = new List<GameObject>();
     [SerializeField] private GameObject _objectToPool;
-    private int _amountToPool = 5;
+    private int _amountToPool = 20;
 
     private Vector3 _createPos;
 
@@ -25,9 +25,17 @@ public class CoinSpawner : MonoBehaviour
         }
     }
 
+    void OnEnable()
+    {
+        EventManager.OnCoinPickUp.AddListener(GetCoin);
+    }
+    void OnDisable()
+    {
+        EventManager.OnCoinPickUp.RemoveListener(GetCoin);
+    }
     void Start()
     {
-        Invoke("GetCoinFirst", 10.0f);
+        Invoke("GetCoinInBulk", 10.0f);
     }
 
     public GameObject GetPooledObject() 
@@ -46,13 +54,13 @@ public class CoinSpawner : MonoBehaviour
     public void GetCoin()   
     {
         _createPos = GetCoinPosition(new Vector3(0, 0, 0), 95.0f);
-        GameObject bullet = GetPooledObject();
+        GameObject coin = GetPooledObject();
 
-            if(bullet != null)
+            if(coin != null)
             {
-                bullet.transform.position = _createPos;
-                bullet.transform.rotation = transform.parent.rotation;
-                bullet.SetActive(true);
+                coin.transform.position = _createPos;
+                coin.transform.rotation = Quaternion.identity;
+                coin.SetActive(true);
             }
     }
 
@@ -64,9 +72,9 @@ public class CoinSpawner : MonoBehaviour
         return hit.position;
     }
 
-    public void GetCoinFirst()
+    public void GetCoinInBulk()
     {
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 20; i++)
         {
             GetCoin();
         }

@@ -15,7 +15,7 @@ public class IdleState : CharacterStates
                 else
                 {
                     fsm.OnCharacterIdle.Invoke();
-                    EventManager.OnTimeBlend.Invoke();
+                    EventManager.OnTimeBend.Invoke();
                 }
             }
             else

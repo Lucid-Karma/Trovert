@@ -18,7 +18,7 @@ public class Timer : MonoBehaviour
         }
     }
 
-    private float timeValue = 100;
+    private float timeValue = 1000;
 
     void FixedUpdate()
     {
