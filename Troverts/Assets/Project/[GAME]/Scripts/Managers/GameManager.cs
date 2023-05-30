@@ -51,6 +51,7 @@ public class GameManager : Singleton<GameManager>
         EventManager.OnTimeBend.AddListener(DelayLevel);
         EventManager.OnTimeFlow.AddListener(ContinueGame);
         EventManager.OnPreGreet.AddListener(ContinueGame);
+        //EventManager.OnIntrovertFirstPowerUp.AddListener(StopGame);
     }
     private void OnDisable()
     {
@@ -62,6 +63,7 @@ public class GameManager : Singleton<GameManager>
         EventManager.OnTimeBend.RemoveListener(DelayLevel);
         EventManager.OnTimeFlow.RemoveListener(ContinueGame);
         EventManager.OnPreGreet.RemoveListener(ContinueGame);
+        //EventManager.OnIntrovertFirstPowerUp.RemoveListener(StopGame);
     }
 
     void WinGame()
@@ -81,6 +83,11 @@ public class GameManager : Singleton<GameManager>
     void PauseGame()
     {
         Time.timeScale = 0.5f;
+    }
+
+    void StopGame()
+    {
+        Time.timeScale = 0.0f;
     }
 
     public void ContinueGame()

@@ -6,16 +6,19 @@ using UnityEngine.AI;
 public class BoxSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject _timeBenderBox;
+    [SerializeField] private GameObject _shooterBox;
     private Vector3 _createPos, _randomPoint;
     NavMeshHit hit;
 
     void OnEnable()
     {
         EventManager.OnIntrovertFirstBoxCall.AddListener(GetTimeBender);
+        EventManager.OnIntrovertSecondBoxCall.AddListener(GetShooter);
     }
     void OnDisable()
     {
         EventManager.OnIntrovertFirstBoxCall.RemoveListener(GetTimeBender);
+        EventManager.OnIntrovertSecondBoxCall.RemoveListener(GetShooter);
     }
 
     public void GetTimeBender()   
@@ -25,6 +28,17 @@ public class BoxSpawner : MonoBehaviour
         if(_timeBenderBox != null)
         {
             GameObject obj = (GameObject)Instantiate(_timeBenderBox, _createPos, Quaternion.identity);
+            obj.SetActive(true);
+        }
+    }
+
+    public void GetShooter()   
+    {
+        _createPos = GetBoxPosition(new Vector3(0, 0, 0), 5.0f);
+
+        if(_shooterBox != null)
+        {
+            GameObject obj = (GameObject)Instantiate(_shooterBox, _createPos, Quaternion.identity);
             obj.SetActive(true);
         }
     }

@@ -15,10 +15,4 @@ public class PcPowerManager : Singleton<PcPowerManager>
         IsPowerUp = false;
         IsLearning = false;
     }
-
-    // void Update()
-    // {
-    //     if(Input.GetKey(KeyCode.F))
-    //     IsPowerUp = true;
-    // }
 }

@@ -28,12 +28,10 @@ public class GunHolder : MonoBehaviour
         //_awpGunPrefab.transform.position = gameObject.transform.position;
         //_awpGunPrefab.transform.rotation = Quaternion.identity;
         awpGun.SetActive(true);
-        Debug.Log("gun active");
     }
 
-    private void DisposeGun()
-    {
-        awpGun.SetActive(false);
-        Debug.Log("no gun");
-    }
+    // private void DisposeGun()
+    // {
+    //     awpGun.SetActive(false);
+    // }
 }
