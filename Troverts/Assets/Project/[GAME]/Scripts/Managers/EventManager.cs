@@ -29,6 +29,7 @@ public static class EventManager
     public static UnityEvent OnIDifficultyChoose = new UnityEvent();
 
     public static UnityEvent OnObstacleCreated = new UnityEvent();
+    public static UnityEvent OnCoinVisible = new UnityEvent();
     public static UnityEvent OnCoinPickUp = new UnityEvent();
     public static UnityEvent OnBulletShoot = new UnityEvent();
     public static UnityEvent OnPointEarn = new UnityEvent();
@@ -43,6 +44,7 @@ public static class EventManager
     public static UnityEvent OnIntrovertFirstBoxCall = new UnityEvent();
     public static UnityEvent OnIntrovertSecondBoxCall = new UnityEvent();
     public static UnityEvent OnIntrovertFirstPowerUp = new UnityEvent();
+    public static UnityEvent OnIntrovertSecondPowerUp = new UnityEvent();
     public static UnityEvent OnPlayerStartedRunning = new UnityEvent();
 
     public static UnityEvent OnMusicOn = new UnityEvent();

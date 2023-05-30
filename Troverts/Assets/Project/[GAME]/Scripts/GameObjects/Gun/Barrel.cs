@@ -16,6 +16,5 @@ public class Barrel : MonoBehaviour
     private void SpawnBullet()
     {
         BulletManager.Instance.GetBullet(gameObject.transform.position, gameObject.transform.rotation);
-        Debug.Log("bullet spawned");
     }
 }

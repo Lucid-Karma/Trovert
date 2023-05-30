@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class TimeBenderBox : MonoBehaviour, ICollectable
+public class ShooterBox : MonoBehaviour, ICollectable
 {
     private float time = 4f;
 
@@ -14,9 +14,11 @@ public class TimeBenderBox : MonoBehaviour, ICollectable
 
     public void Collect()
     {
-        EventManager.OnIntrovertFirstPowerUp.Invoke();  // to initialize ui text.
-        PcPowerManager.Instance.IsPowerUp = true;
+        //EventManager.OnTimeBend.Invoke();
+        EventManager.OnIntrovertSecondPowerUp.Invoke();
+        EventManager.OnIntrovertAim.Invoke();
+        //PcPowerManager.Instance.IsPowerUp = true;
         PcPowerManager.Instance.IsLearning = true;
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
 }

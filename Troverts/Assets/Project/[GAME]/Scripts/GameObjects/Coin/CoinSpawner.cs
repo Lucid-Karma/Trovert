@@ -28,14 +28,17 @@ public class CoinSpawner : MonoBehaviour
     void OnEnable()
     {
         EventManager.OnCoinPickUp.AddListener(GetCoin);
+        EventManager.OnCoinVisible.AddListener(GetCoinInBulk);
     }
     void OnDisable()
     {
         EventManager.OnCoinPickUp.RemoveListener(GetCoin);
+        EventManager.OnCoinVisible.RemoveListener(GetCoinInBulk);
     }
     void Start()
     {
-        Invoke("GetCoinInBulk", 10.0f);
+        //Invoke("GetCoinInBulk", 10.0f);
+        GetCoinInBulk();
     }
 
     public GameObject GetPooledObject() 
