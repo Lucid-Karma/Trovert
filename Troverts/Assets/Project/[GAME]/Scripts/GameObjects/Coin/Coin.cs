@@ -12,12 +12,12 @@ public class Coin : MonoBehaviour, ICollectable
     void OnEnable()
     {
         EventManager.OnIntrovertFirstBoxCall.AddListener(DisableCoin);
-        // EventManager.OnIntrovertSecondBoxCall.AddListener(EnableCoin);
+        EventManager.OnIntrovertSecondBoxCall.AddListener(DisableCoin);
     }
     void OnDisable()
     {
         EventManager.OnIntrovertFirstBoxCall.RemoveListener(DisableCoin);
-        //EventManager.OnIntrovertSecondBoxCall.RemoveListener(EnableCoin);
+        EventManager.OnIntrovertSecondBoxCall.RemoveListener(DisableCoin);
     }
 
     private void Start()

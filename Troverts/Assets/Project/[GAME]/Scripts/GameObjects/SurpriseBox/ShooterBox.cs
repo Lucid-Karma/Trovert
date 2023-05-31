@@ -16,9 +16,8 @@ public class ShooterBox : MonoBehaviour, ICollectable
     {
         //EventManager.OnTimeBend.Invoke();
         EventManager.OnIntrovertSecondPowerUp.Invoke();
-        EventManager.OnIntrovertAim.Invoke();
         //PcPowerManager.Instance.IsPowerUp = true;
         PcPowerManager.Instance.IsLearning = true;
-        //Destroy(gameObject);
+        Destroy(gameObject);
     }
 }
