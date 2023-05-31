@@ -7,6 +7,7 @@ public class AimState : ShooterStates
     public override void EnterState(CharacterShooterFsm fsm)
     {
         EventManager.OnIntrovertAim.Invoke();
+        fsm.gameObject.GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
         Debug.Log("AIM");
     }
 

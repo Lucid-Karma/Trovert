@@ -13,7 +13,7 @@ public class EaseState : ShooterStates
     {
         if (fsm.executingState == ExecutingShooterState.EASE)
         {
-            fsm.Ease();
+            
         }
         else   ExitState(fsm);
     }

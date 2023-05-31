@@ -12,6 +12,7 @@ public class StartPanels : Panel
     public Panel CountdownPanel;
 
     public Panel MainPowerUpPanel;
+    public Panel SecondaryPowerUpPanel;
 
     private void Awake() 
     {
@@ -21,6 +22,7 @@ public class StartPanels : Panel
         CountdownPanel.HidePanel();
         CharacterChoosePanel.HidePanel();
         MainPowerUpPanel.HidePanel();
+        SecondaryPowerUpPanel.HidePanel();
         WelcomePanel.ShowPanel();
     }
 
@@ -35,6 +37,7 @@ public class StartPanels : Panel
         EventManager.OnEDifficultyChoose.AddListener(InitializeInformPanel);
         EventManager.OnLevelStart.AddListener(InitializeTrovertPanel);
         EventManager.OnIntrovertFirstPowerUp.AddListener(InitializeMainPowerUpPanel);
+        EventManager.OnIntrovertSecondPowerUp.AddListener(InitializeSecondaryPowerUpPanel);
     }
 
     private void OnDisable()
@@ -48,6 +51,7 @@ public class StartPanels : Panel
         EventManager.OnEDifficultyChoose.RemoveListener(InitializeInformPanel);
         EventManager.OnLevelStart.RemoveListener(InitializeTrovertPanel);
         EventManager.OnIntrovertFirstPowerUp.RemoveListener(InitializeMainPowerUpPanel);
+        EventManager.OnIntrovertSecondPowerUp.RemoveListener(InitializeSecondaryPowerUpPanel);
     }
 
     private void InitializeCharacterChoosePanel()
@@ -106,6 +110,26 @@ public class StartPanels : Panel
         EventManager.OnCoinVisible.Invoke();
 
         MainPowerUpPanel.HidePanel();
+        TrovertPanel.ShowPanel();
+        ShowPanel();
+    }
+
+    private void InitializeSecondaryPowerUpPanel()
+    {
+        TrovertPanel.HidePanel();
+        SecondaryPowerUpPanel.ShowPanel();
+        ShowPanel();
+
+        StartCoroutine(HideSecondaryPowerUpPanel());
+    }
+    IEnumerator HideSecondaryPowerUpPanel()
+    {
+        yield return new WaitForSeconds(0.3f);  // kinda 3 secs. because of the time delay -0.1f-
+
+        PcPowerManager.Instance.IsLearning = false;     // ?!?!?!?!?!?!?!
+        EventManager.OnCoinVisible.Invoke();
+
+        SecondaryPowerUpPanel.HidePanel();
         TrovertPanel.ShowPanel();
         ShowPanel();
     }

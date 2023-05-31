@@ -19,6 +19,15 @@ public class CharacterShooterFsm : MonoBehaviour
     public EaseState easeState = new EaseState();
 
 
+    void OnEnable()
+    {
+        EventManager.OnIntrovertSecondPowerUp.AddListener(Ease);
+    }
+    void OnDisable()
+    {
+        EventManager.OnIntrovertSecondPowerUp.RemoveListener(Ease);
+    }
+
     void Start()
     {
         camera = Camera.main;
@@ -35,10 +44,7 @@ public class CharacterShooterFsm : MonoBehaviour
 
     public void Ease()
     {
-        if(Input.GetKey(KeyCode.E))
-        {
-            executingState =  ExecutingShooterState.AIM;
-        }
+        executingState = ExecutingShooterState.AIM;
     }
 
     public void Aim()
