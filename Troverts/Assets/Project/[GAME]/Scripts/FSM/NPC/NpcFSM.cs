@@ -11,6 +11,7 @@ public enum ExecutingNpcState
     CHASE,
     ESCAPE,
     SHOCK,
+    DEAD,
 
     WAIT
 }

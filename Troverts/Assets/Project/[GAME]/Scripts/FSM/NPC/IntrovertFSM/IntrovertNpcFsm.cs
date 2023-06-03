@@ -8,6 +8,8 @@ public class IntrovertNpcFsm : NpcFSM
     public ChaseState chaseState = new ChaseState();
     public InPatrolState inPatrolState = new InPatrolState();
     public InChatState inChatState = new InChatState();
+    public ShockState shockState = new ShockState();
+    public InDeadState inDeadState = new InDeadState();
     public InWaitState inWaitState = new InWaitState();
 
 
@@ -81,8 +83,7 @@ public class IntrovertNpcFsm : NpcFSM
     
     public override void Die()
     {
-        OnNpcDie.Invoke();
-        gameObject.SetActive(false);
+        executingNpcState = ExecutingNpcState.DEAD;
     }
 
     public void SwitchState(IntrovertNPCStates nextState)

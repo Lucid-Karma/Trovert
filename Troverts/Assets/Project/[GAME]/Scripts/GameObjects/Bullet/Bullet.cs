@@ -19,7 +19,7 @@ public class Bullet : MonoBehaviour
         {
             interactable?.Die();
             gameObject.SetActive(false);
-            interactable?.Shock();      //!!!
+            //interactable?.Shock();      //!!!
         }
     }
 }

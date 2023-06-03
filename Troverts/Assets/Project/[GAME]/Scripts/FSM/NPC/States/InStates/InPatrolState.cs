@@ -26,5 +26,7 @@ public class InPatrolState : IntrovertNPCStates
     {
         if(fsm.executingNpcState == ExecutingNpcState.CHASE)
             fsm.SwitchState(fsm.chaseState);
+        else if(fsm.executingNpcState == ExecutingNpcState.DEAD)    //???????????
+            fsm.SwitchState(fsm.inDeadState);
     }
 }
