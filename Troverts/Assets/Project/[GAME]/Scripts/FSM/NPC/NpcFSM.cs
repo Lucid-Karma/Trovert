@@ -11,6 +11,7 @@ public enum ExecutingNpcState
     CHASE,
     ESCAPE,
     SHOCK,
+    DEAD,
 
     WAIT
 }
@@ -42,6 +43,9 @@ public abstract class NpcFSM : MonoBehaviour, IInteractable
         [HideInInspector]
         public Transform pc;
         public Vector3 pcPoint, distanceVec;
+
+        [HideInInspector]
+        public Vector3 escapePoint;
 
         [HideInInspector]
         public float distance;
@@ -122,6 +126,17 @@ public abstract class NpcFSM : MonoBehaviour, IInteractable
         }
     }
 
+    public virtual void Escape()
+    {
+        distance = Vector3.Distance(Agent.transform.position, pc.position);
+
+        if(Agent.remainingDistance <= Agent.stoppingDistance)
+        {
+            escapePoint = Agent.transform.position + distanceVec;
+            Agent.SetDestination(escapePoint);
+        }
+    }
+
     public void ChangeColor()
     {
         Agent.GetComponentInChildren<SkinnedMeshRenderer>().material = metMat;
@@ -132,4 +147,10 @@ public abstract class NpcFSM : MonoBehaviour, IInteractable
         executingNpcState = ExecutingNpcState.SHOCK;
     }
     public abstract void Die();
+
+    public void StopNpc()
+    {
+        Agent.ResetPath();
+        //Debug.Log("STOPPED");
+    }
 }

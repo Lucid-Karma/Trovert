@@ -15,16 +15,26 @@ public class NpcAnimationController : MonoBehaviour
         NpcFSM.OnNpcWalk.AddListener(() => InvokeTrigger("Walk"));
         NpcFSM.OnNpcIdle.AddListener(() => InvokeTrigger("Idle"));
         NpcFSM.OnNpcRun.AddListener(() => InvokeTrigger("Goofy Run"));
+        NpcFSM.OnNpcDie.AddListener(() => InvokeTrigger("Die"));
     }
     void OnDisable()
     {
         NpcFSM.OnNpcWalk.RemoveListener(() => InvokeTrigger("Walk"));
         NpcFSM.OnNpcIdle.RemoveListener(() => InvokeTrigger("Idle"));
         NpcFSM.OnNpcRun.RemoveListener(() => InvokeTrigger("Goofy Run"));
+        NpcFSM.OnNpcDie.RemoveListener(() => InvokeTrigger("Die"));
     }
 
     private void InvokeTrigger(string value)
     {
         Animator.SetTrigger(value);
     }
+
+    #region Event Based Methods
+    public void DieAnimActs()
+    {
+        //EventManager.OnNpcDie.Invoke();
+        NpcFSM.StopNpc();
+    }
+    #endregion
 }

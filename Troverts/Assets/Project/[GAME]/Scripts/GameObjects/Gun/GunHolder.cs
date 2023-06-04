@@ -10,12 +10,10 @@ public class GunHolder : MonoBehaviour
     void OnEnable()
     {
         EventManager.OnIntrovertAim.AddListener(InitializeGun);
-        //EventManager.OnIntrovertEndAim.AddListener(DisposeGun);
     }
     void OnDisable()
     {
         EventManager.OnIntrovertAim.RemoveListener(InitializeGun);
-        //EventManager.OnIntrovertEndAim.RemoveListener(DisposeGun);
     }
 
     void Start()        // ???!!!

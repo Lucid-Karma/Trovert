@@ -18,8 +18,15 @@ public class Bullet : MonoBehaviour
         if(interactable != null)
         {
             interactable?.Die();
+
+            // if(!PcPowerManager.Instance.IsShocked)  
+            // {
+            //     EventManager.OnNpcShock.Invoke();
+            //     Debug.Log("interface-1");
+            //     PcPowerManager.Instance.IsShocked = true;
+            // }
+                //interactable?.Shock();      //!!!
             gameObject.SetActive(false);
-            interactable?.Shock();      //!!!
         }
     }
 }

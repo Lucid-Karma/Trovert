@@ -61,4 +61,5 @@ public static class EventManager
     public static UnityEvent OnNpcGreet = new UnityEvent();
     public static UnityEvent OnNpcGreetingEnd = new UnityEvent();
     public static UnityEvent OnNpcGetSmart = new UnityEvent();
+    public static UnityEvent OnNpcShock = new UnityEvent();
 }
