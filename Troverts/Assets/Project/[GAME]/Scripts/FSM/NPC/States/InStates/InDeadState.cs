@@ -7,6 +7,14 @@ public class InDeadState : IntrovertNPCStates
     public override void EnterState(IntrovertNpcFsm fsm)
     {
         fsm.OnNpcDie.Invoke();
+
+        if(!PcPowerManager.Instance.IsShocked)  
+        {
+            EventManager.OnNpcShock.Invoke();
+            PcPowerManager.Instance.IsShocked = true;
+        }
+
+        Debug.Log("DEAD");
     }
 
     public override void UpdateState(IntrovertNpcFsm fsm)

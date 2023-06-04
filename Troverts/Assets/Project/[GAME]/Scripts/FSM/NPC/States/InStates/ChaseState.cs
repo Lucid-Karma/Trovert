@@ -29,5 +29,7 @@ public class ChaseState : IntrovertNPCStates
             fsm.SwitchState(fsm.inChatState);
         else if(fsm.executingNpcState == ExecutingNpcState.DEAD)
             fsm.SwitchState(fsm.inDeadState);
+        else if(fsm.executingNpcState == ExecutingNpcState.SHOCK)
+            fsm.SwitchState(fsm.shockState);
     }
 }

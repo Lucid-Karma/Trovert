@@ -2,23 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShockState : IntrovertNPCStates
+public class InEscapeState : IntrovertNPCStates
 {
     public override void EnterState(IntrovertNpcFsm fsm)
     {
         fsm.pcPoint = fsm.pc.position;
-        fsm.OnNpcIdle.Invoke();
-
-        Debug.Log("SHOCK");
+        fsm.distanceVec = (fsm.Agent.transform.position - fsm.pcPoint).normalized;
+        fsm.OnNpcRun.Invoke();
+        fsm.Agent.speed = fsm.sprintSpeed;
     }
 
     public override void UpdateState(IntrovertNpcFsm fsm)
     {
-        if(fsm.executingNpcState == ExecutingNpcState.SHOCK)
-        {
-            fsm.RotateToPC(fsm.pcPoint);
-            fsm.StartCoroutine(fsm.DelayEscape());
-        }
+        if(fsm.executingNpcState == ExecutingNpcState.ESCAPE)
+            fsm.Escape();
         else
             ExitState(fsm);
     }
@@ -27,7 +24,5 @@ public class ShockState : IntrovertNPCStates
     {
         if(fsm.executingNpcState == ExecutingNpcState.DEAD)
             fsm.SwitchState(fsm.inDeadState);
-        else if(fsm.executingNpcState == ExecutingNpcState.ESCAPE)
-            fsm.SwitchState(fsm.inEscapeState);
     }
 }

@@ -5,19 +5,19 @@ using DG.Tweening;
 
 public class Coin : MonoBehaviour, ICollectable
 {
-    // CollectableData collectableData;
-    //public float moveSpeed;
     private float time = 4f;
 
     void OnEnable()
     {
         EventManager.OnIntrovertFirstBoxCall.AddListener(DisableCoin);
         EventManager.OnIntrovertSecondBoxCall.AddListener(DisableCoin);
+        EventManager.OnLevelStart.AddListener(() => CollectableData.CoinCount = 0);
     }
     void OnDisable()
     {
         EventManager.OnIntrovertFirstBoxCall.RemoveListener(DisableCoin);
         EventManager.OnIntrovertSecondBoxCall.RemoveListener(DisableCoin);
+        EventManager.OnLevelStart.RemoveListener(() => CollectableData.CoinCount = 0);
     }
 
     private void Start()

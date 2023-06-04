@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ExtrovertNpcFsm : NpcFSM
 {
-    [HideInInspector]
-    public Vector3 escapePoint;
+    // [HideInInspector]
+    // public Vector3 escapePoint;
 
     // [HideInInspector]
     // public Vector3 distanceVec;
@@ -50,15 +50,9 @@ public class ExtrovertNpcFsm : NpcFSM
         }
     }
     
-    public void Escape()
+    public override void Escape()
     {
-        distance = Vector3.Distance(Agent.transform.position, pc.position);
-
-        if(Agent.remainingDistance <= Agent.stoppingDistance)
-        {
-            escapePoint = Agent.transform.position + distanceVec;
-            Agent.SetDestination(escapePoint);
-        } 
+        base.Escape();
 
         if(distance <= 1.5f)    
         {

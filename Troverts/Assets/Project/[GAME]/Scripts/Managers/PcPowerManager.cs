@@ -10,9 +10,14 @@ public class PcPowerManager : Singleton<PcPowerManager>
     private bool isLearning;
     public bool IsLearning { get { return isLearning; } set { isLearning = value; } }
 
+
+    private bool isShocked;
+    public bool IsShocked { get { return isShocked; } set { isShocked = value; } }
+
     void Start()
     {
         IsPowerUp = false;
         IsLearning = false;
+        IsShocked = false;
     }
 }

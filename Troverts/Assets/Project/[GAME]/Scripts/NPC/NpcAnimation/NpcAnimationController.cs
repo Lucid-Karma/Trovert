@@ -29,4 +29,12 @@ public class NpcAnimationController : MonoBehaviour
     {
         Animator.SetTrigger(value);
     }
+
+    #region Event Based Methods
+    public void DieAnimActs()
+    {
+        //EventManager.OnNpcDie.Invoke();
+        NpcFSM.StopNpc();
+    }
+    #endregion
 }

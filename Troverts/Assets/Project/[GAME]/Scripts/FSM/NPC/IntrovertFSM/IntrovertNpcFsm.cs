@@ -11,15 +11,18 @@ public class IntrovertNpcFsm : NpcFSM
     public ShockState shockState = new ShockState();
     public InDeadState inDeadState = new InDeadState();
     public InWaitState inWaitState = new InWaitState();
+    public InEscapeState inEscapeState = new InEscapeState();
 
 
     void OnEnable()
     {
         EventManager.OnNpcGetSmart.AddListener(() => executingNpcState = ExecutingNpcState.CHASE);
+        EventManager.OnNpcShock.AddListener(Shock);
     }
     void OnDisable()
     {
         EventManager.OnNpcGetSmart.RemoveListener(() => executingNpcState = ExecutingNpcState.CHASE);
+        EventManager.OnNpcShock.RemoveListener(Shock);
     }
 
     void Update()
@@ -85,6 +88,18 @@ public class IntrovertNpcFsm : NpcFSM
     {
         executingNpcState = ExecutingNpcState.DEAD;
     }
+    public override void Escape()
+    {
+        base.Escape();
+    }
+    
+    public IEnumerator DelayEscape()
+    {
+        yield return new WaitForSeconds(1.5f);
+
+        executingNpcState = ExecutingNpcState.ESCAPE;
+    }
+    
 
     public void SwitchState(IntrovertNPCStates nextState)
     {
