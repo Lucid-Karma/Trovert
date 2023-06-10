@@ -52,7 +52,7 @@ public class IntrovertNpcFsm : NpcFSM
         base.StartState();
     }
 
-    public Vector3 escapePoint;
+    //public Vector3 escapePoint;
     public override void Patrol()
     {
         base.Patrol();
@@ -91,13 +91,6 @@ public class IntrovertNpcFsm : NpcFSM
     public override void Escape()
     {
         base.Escape();
-    }
-    
-    public IEnumerator DelayEscape()
-    {
-        yield return new WaitForSeconds(1.5f);
-
-        executingNpcState = ExecutingNpcState.ESCAPE;
     }
     
 
