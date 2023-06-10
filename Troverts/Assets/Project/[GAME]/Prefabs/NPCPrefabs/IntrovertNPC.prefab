@@ -60,13 +60,16 @@ MonoBehaviour:
   OnNpcDie:
     m_PersistentCalls:
       m_Calls: []
+  OnNpcPanic:
+    m_PersistentCalls:
+      m_Calls: []
   pc: {fileID: 0}
   pcPoint: {x: 0, y: 0, z: 0}
   distanceVec: {x: 0, y: 0, z: 0}
+  escapePoint: {x: 0, y: 0, z: 0}
   distance: 0
   sprintSpeed: 7
   metMat: {fileID: 2100000, guid: b0db6f9415046f6408c43ff0ba6f3fd4, type: 2}
-  escapePoint: {x: 0, y: 0, z: 0}
 --- !u!195 &7724406484161905714
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -313,6 +316,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb107b421e8a1a34b84163174b3f149c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shockAnimations:
+  - React
+  - StandL
+  - StandS
 --- !u!4 &4288617556897126660 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2fd5c79190f5f73418830203eb1aa5f1, type: 3}

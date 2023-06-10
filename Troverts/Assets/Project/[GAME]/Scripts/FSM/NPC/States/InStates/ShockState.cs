@@ -6,10 +6,11 @@ public class ShockState : IntrovertNPCStates
 {
     public override void EnterState(IntrovertNpcFsm fsm)
     {
+        fsm.StopNpc();
         fsm.pcPoint = fsm.pc.position;
-        fsm.OnNpcIdle.Invoke();
+        fsm.OnNpcPanic.Invoke();
 
-        Debug.Log("SHOCK");
+        //Debug.Log("SHOCK");
     }
 
     public override void UpdateState(IntrovertNpcFsm fsm)
@@ -17,7 +18,6 @@ public class ShockState : IntrovertNPCStates
         if(fsm.executingNpcState == ExecutingNpcState.SHOCK)
         {
             fsm.RotateToPC(fsm.pcPoint);
-            fsm.StartCoroutine(fsm.DelayEscape());
         }
         else
             ExitState(fsm);

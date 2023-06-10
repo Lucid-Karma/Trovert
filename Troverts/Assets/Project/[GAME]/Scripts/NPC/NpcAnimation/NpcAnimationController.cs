@@ -10,12 +10,16 @@ public class NpcAnimationController : MonoBehaviour
     NpcFSM npcFSM;
     NpcFSM NpcFSM { get { return (npcFSM == null) ? npcFSM = GetComponentInParent<NpcFSM>() : npcFSM; } }
 
+    public string[] shockAnimations;  // Array of animation clips to be played on the actors 
+    private int animNum;
+
     void OnEnable()
     {
         NpcFSM.OnNpcWalk.AddListener(() => InvokeTrigger("Walk"));
         NpcFSM.OnNpcIdle.AddListener(() => InvokeTrigger("Idle"));
         NpcFSM.OnNpcRun.AddListener(() => InvokeTrigger("Goofy Run"));
         NpcFSM.OnNpcDie.AddListener(() => InvokeTrigger("Die"));
+        NpcFSM.OnNpcPanic.AddListener(() => InvokeTrigger(PlayCutscene()));
     }
     void OnDisable()
     {
@@ -23,6 +27,7 @@ public class NpcAnimationController : MonoBehaviour
         NpcFSM.OnNpcIdle.RemoveListener(() => InvokeTrigger("Idle"));
         NpcFSM.OnNpcRun.RemoveListener(() => InvokeTrigger("Goofy Run"));
         NpcFSM.OnNpcDie.RemoveListener(() => InvokeTrigger("Die"));
+        NpcFSM.OnNpcPanic.RemoveListener(() => InvokeTrigger(PlayCutscene()));
     }
 
     private void InvokeTrigger(string value)
@@ -33,8 +38,20 @@ public class NpcAnimationController : MonoBehaviour
     #region Event Based Methods
     public void DieAnimActs()
     {
-        //EventManager.OnNpcDie.Invoke();
         NpcFSM.StopNpc();
     }
+
+    public void Panic()
+    {
+        NpcFSM.Panic();
+    }
     #endregion
+
+
+    public string PlayCutscene() 
+    {
+        animNum = Random.Range(0, shockAnimations.Length - 1);
+        Debug.Log("animNum is " + animNum);
+        return shockAnimations[animNum];
+    } 
 }

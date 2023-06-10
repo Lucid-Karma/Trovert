@@ -31,11 +31,11 @@ public class Coin : MonoBehaviour, ICollectable
         CollectableData.CoinCount ++;
         EventManager.OnCoinPickUp.Invoke();
 
-        if(CollectableData.CoinCount == 5)
+        if(CollectableData.CoinCount == 1)
         {
             EventManager.OnIntrovertFirstBoxCall.Invoke();
         }
-        if(CollectableData.CoinCount == 10)
+        if(CollectableData.CoinCount == 2)
         {
             EventManager.OnIntrovertSecondBoxCall.Invoke();
         }

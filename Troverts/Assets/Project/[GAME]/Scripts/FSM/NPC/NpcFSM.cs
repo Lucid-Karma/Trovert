@@ -30,6 +30,8 @@ public abstract class NpcFSM : MonoBehaviour, IInteractable
     public UnityEvent OnNpcRun = new UnityEvent();
     [HideInInspector]
     public UnityEvent OnNpcDie = new UnityEvent();
+    [HideInInspector]
+    public UnityEvent OnNpcPanic = new UnityEvent();
     #endregion
     
     #region Components
@@ -145,6 +147,10 @@ public abstract class NpcFSM : MonoBehaviour, IInteractable
     public void Shock()
     {
         executingNpcState = ExecutingNpcState.SHOCK;
+    }
+    public void Panic()
+    {
+        executingNpcState = ExecutingNpcState.ESCAPE;
     }
     public abstract void Die();
 
