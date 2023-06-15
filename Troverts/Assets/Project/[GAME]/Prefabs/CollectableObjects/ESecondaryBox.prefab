@@ -11,9 +11,8 @@ GameObject:
   - component: {fileID: 3025552700923675417}
   - component: {fileID: 9042625925623399032}
   - component: {fileID: 6135284774224349335}
-  - component: {fileID: 6893268555898784954}
   m_Layer: 0
-  m_Name: SecondaryBox
+  m_Name: ESecondaryBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64,18 +63,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.3378623, y: 6.2635856, z: 3.308446}
   m_Center: {x: -0.09610498, y: -1.2380521, z: 0.022577763}
---- !u!114 &6893268555898784954
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2501534682931780003}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f6fe7bdef05b5642901257a74f245fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &8365945785774558883
 GameObject:
   m_ObjectHideFlags: 0

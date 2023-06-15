@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 3025552700923675417}
   - component: {fileID: 9042625925623399032}
   - component: {fileID: 6135284774224349335}
-  - component: {fileID: 317951412160164025}
+  - component: {fileID: 6893268555898784954}
   m_Layer: 0
-  m_Name: MysteryBox
+  m_Name: ISecondaryBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64,7 +64,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.3378623, y: 6.2635856, z: 3.308446}
   m_Center: {x: -0.09610498, y: -1.2380521, z: 0.022577763}
---- !u!114 &317951412160164025
+--- !u!114 &6893268555898784954
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -73,7 +73,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2501534682931780003}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27deb2c16f6f8e2449faffad13985fd4, type: 3}
+  m_Script: {fileID: 11500000, guid: 4f6fe7bdef05b5642901257a74f245fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8365945785774558883
@@ -137,9 +137,9 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 4418572348006011840, guid: a8cd8d44ad3761346a547e68720a171c, type: 3}
-  - {fileID: -7151953745340231607, guid: a8cd8d44ad3761346a547e68720a171c, type: 3}
-  - {fileID: 4874126678125670354, guid: a8cd8d44ad3761346a547e68720a171c, type: 3}
+  - {fileID: 2100000, guid: 9957f0a845730314bbee132feae86723, type: 2}
+  - {fileID: 2100000, guid: 9957f0a845730314bbee132feae86723, type: 2}
+  - {fileID: 2100000, guid: 9957f0a845730314bbee132feae86723, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

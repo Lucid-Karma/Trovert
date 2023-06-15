@@ -17,7 +17,7 @@ public class ShockState : IntrovertNPCStates
     {
         if(fsm.executingNpcState == ExecutingNpcState.SHOCK)
         {
-            fsm.RotateToPC(fsm.pcPoint);
+            //fsm.RotateToPC(fsm.pcPoint);
         }
         else
             ExitState(fsm);
