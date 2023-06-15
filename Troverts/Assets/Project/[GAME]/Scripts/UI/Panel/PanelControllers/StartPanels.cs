@@ -133,7 +133,7 @@ public class StartPanels : Panel
         TrovertPanel.ShowPanel();
         ShowPanel();
     }
-
+    
 
     private void HideOnRestart()
     {

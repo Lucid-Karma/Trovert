@@ -50,8 +50,7 @@ public class NpcAnimationController : MonoBehaviour
 
     public string PlayCutscene() 
     {
-        animNum = Random.Range(0, shockAnimations.Length - 1);
-        Debug.Log("animNum is " + animNum);
+        animNum = Random.Range(0, shockAnimations.Length);
         return shockAnimations[animNum];
     } 
 }
