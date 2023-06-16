@@ -42,7 +42,8 @@ public class ExtrovertNpcFsm : NpcFSM
         {
             if (!IsNpcMet)
             {
-                if(distance >= 6.0f && distance <= 10.0f)
+                // if(distance >= 6.0f && distance <= 10.0f)
+                if(distance <= 10.0f)
                 {
                     executingNpcState = ExecutingNpcState.ESCAPE;
                 }

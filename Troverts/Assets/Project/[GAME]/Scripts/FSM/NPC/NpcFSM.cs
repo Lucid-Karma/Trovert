@@ -134,6 +134,7 @@ public abstract class NpcFSM : MonoBehaviour, IInteractable
 
         if(Agent.remainingDistance <= Agent.stoppingDistance)
         {
+            distanceVec = (Agent.transform.position - pcPoint).normalized;  //???
             escapePoint = Agent.transform.position + distanceVec;
             Agent.SetDestination(escapePoint);
         }
