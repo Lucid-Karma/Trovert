@@ -6,17 +6,8 @@ public class EscapeState : ExtrovertNPCStates
 {
     public override void EnterState(ExtrovertNpcFsm fsm)
     {
-        //fsm.Agent.ResetPath();
-        //fsm.Agent.SetDestination(fsm.Agent.destination);
-        //fsm.Agent.remainingDistance = fsm.Agent.stoppingDistance;
-
-        fsm.pcPoint = fsm.pc.position;
-        //fsm.distanceVec = (fsm.Agent.transform.position - fsm.pcPoint).normalized;  //???
-
-        // fsm.escapePoint = fsm.Agent.transform.position + fsm.distanceVec;
-        // fsm.Agent.SetDestination(fsm.escapePoint);
         fsm.OnNpcRun.Invoke();
-        fsm.Agent.speed = fsm.sprintSpeed;
+        fsm.Agent.speed = fsm.sprintSpeed + 2.0f;   // 9.0f in total.
     }
 
     public override void UpdateState(ExtrovertNpcFsm fsm)

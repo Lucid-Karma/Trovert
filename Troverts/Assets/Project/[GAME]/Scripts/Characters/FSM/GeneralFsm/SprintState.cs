@@ -7,7 +7,7 @@ public class SprintState : CharacterStates
     public override void EnterState(CharacterFSM fsm)
     {
         fsm.OnCharacterRun.Invoke();
-        fsm.currentSpeed = 8.0f;
+        fsm.currentSpeed = 10.0f;
         fsm.ParticleSystem.Play();
     }
 
