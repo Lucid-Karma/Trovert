@@ -42,6 +42,8 @@ public abstract class NpcFSM : MonoBehaviour, IInteractable
     #region Parameters
 
         #region NavMesh
+        NavMeshHit navMeshHit;
+
         [HideInInspector]
         public Transform pc;
         public Vector3 pcPoint, distanceVec;
@@ -130,12 +132,20 @@ public abstract class NpcFSM : MonoBehaviour, IInteractable
 
     public virtual void Escape()
     {
+        pcPoint = pc.position;
         distance = Vector3.Distance(Agent.transform.position, pc.position);
 
-        if(Agent.remainingDistance <= Agent.stoppingDistance)
+        //if(Agent.remainingDistance <= Agent.stoppingDistance)
+        if(distance <= 10.0f)   
         {
             distanceVec = (Agent.transform.position - pcPoint).normalized;  //???
-            escapePoint = Agent.transform.position + distanceVec;
+            escapePoint = Agent.transform.position + distanceVec * 10f;
+
+            if (NavMesh.SamplePosition(escapePoint, out navMeshHit, 10f, NavMesh.AllAreas))
+            {
+                escapePoint = navMeshHit.position;
+            }
+
             Agent.SetDestination(escapePoint);
         }
     }

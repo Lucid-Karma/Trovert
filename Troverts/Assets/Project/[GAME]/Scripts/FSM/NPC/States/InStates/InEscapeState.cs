@@ -6,10 +6,8 @@ public class InEscapeState : IntrovertNPCStates
 {
     public override void EnterState(IntrovertNpcFsm fsm)
     {
-        fsm.pcPoint = fsm.pc.position;
-        fsm.distanceVec = (fsm.Agent.transform.position - fsm.pcPoint).normalized;
         fsm.OnNpcRun.Invoke();
-        fsm.Agent.speed = fsm.sprintSpeed;
+        fsm.Agent.speed = fsm.sprintSpeed + 2.0f;   // 9.0f in total.
 
         //Debug.Log("ESCAPE");
     }
