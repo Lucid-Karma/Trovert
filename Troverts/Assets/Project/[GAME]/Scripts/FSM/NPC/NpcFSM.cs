@@ -136,7 +136,7 @@ public abstract class NpcFSM : MonoBehaviour, IInteractable
         distance = Vector3.Distance(Agent.transform.position, pc.position);
 
         //if(Agent.remainingDistance <= Agent.stoppingDistance)
-        if(distance <= 10.0f)   
+        if(distance <= 10.0f || Agent.remainingDistance <= Agent.stoppingDistance)   
         {
             distanceVec = (Agent.transform.position - pcPoint).normalized;  //???
             escapePoint = Agent.transform.position + distanceVec * 10f;
@@ -168,6 +168,5 @@ public abstract class NpcFSM : MonoBehaviour, IInteractable
     public void StopNpc()
     {
         Agent.ResetPath();
-        //Debug.Log("STOPPED");
     }
 }

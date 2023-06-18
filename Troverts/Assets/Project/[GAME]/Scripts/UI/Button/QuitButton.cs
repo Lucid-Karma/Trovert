@@ -6,6 +6,16 @@ public class QuitButton : MonoBehaviour
 { 
     public void Finish()
     {
-        Application.Quit();
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+        #endif
+
+        #if UNITY_STANDALONE
+            Application.Quit();
+        #endif
+
+        #if UNITY_WEBGL
+            Application.OpenURL("https://m1rr0r.itch.io/troverts");
+        #endif
     }
 }

@@ -104,10 +104,13 @@ public class StartPanels : Panel
     }
     IEnumerator HideMainPowerUpPanel()
     {
+        EventManager.OnNpcStop.Invoke();
+
         yield return new WaitForSeconds(0.3f);  // kinda 3 secs. because of the time delay -0.1f-
 
         PcPowerManager.Instance.IsLearning = false;     // ?!?!?!?!?!?!?!
         EventManager.OnCoinVisible.Invoke();
+        EventManager.OnNpcMove.Invoke();
 
         MainPowerUpPanel.HidePanel();
         TrovertPanel.ShowPanel();
@@ -124,10 +127,13 @@ public class StartPanels : Panel
     }
     IEnumerator HideSecondaryPowerUpPanel()
     {
+        EventManager.OnNpcStop.Invoke();
+
         yield return new WaitForSeconds(0.3f);  // kinda 3 secs. because of the time delay -0.1f-
 
         PcPowerManager.Instance.IsLearning = false;     // ?!?!?!?!?!?!?!
         EventManager.OnCoinVisible.Invoke();
+        EventManager.OnNpcMove.Invoke();
 
         SecondaryPowerUpPanel.HidePanel();
         TrovertPanel.ShowPanel();

@@ -68,11 +68,13 @@ public class CharacterFSM : MonoBehaviour
     {
         EventManager.OnLevelAfterStart.AddListener(InvokeMethod);
         EventManager.OnIntrovertFirstPowerUp.AddListener(() => executingState = ExecutingState.IDLE);
+        EventManager.OnIntrovertSecondPowerUp.AddListener(() => ParticleSystem.gameObject.SetActive(false));
     }
     void OnDisable()
     {
         EventManager.OnLevelAfterStart.RemoveListener(InvokeMethod);
         EventManager.OnIntrovertFirstPowerUp.RemoveListener(() => executingState = ExecutingState.IDLE);
+        EventManager.OnIntrovertSecondPowerUp.RemoveListener(() => ParticleSystem.gameObject.SetActive(false));
     }
 
     void Start()
@@ -110,6 +112,9 @@ public class CharacterFSM : MonoBehaviour
                 if(Input.GetKey(KeyCode.LeftShift))
                 {
                     executingState = ExecutingState.SPRINT;
+
+                    if(Input.GetKeyUp(KeyCode.LeftShift))   //???
+                        executingState = ExecutingState.WALK;
                 }
                 else 
                     executingState = ExecutingState.WALK;

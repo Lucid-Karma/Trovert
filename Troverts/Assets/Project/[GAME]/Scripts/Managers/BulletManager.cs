@@ -5,6 +5,7 @@ using UnityEngine;
 public class BulletManager : Singleton<BulletManager>
 {
     private List<GameObject> pooledObjects = new List<GameObject>();
+    private List<GameObject> usableBulletObjects = new List<GameObject>();
     [SerializeField] private GameObject objectToPool;
     GameObject _bullet;
 
@@ -12,24 +13,29 @@ public class BulletManager : Singleton<BulletManager>
     // {
     //     for (int i = 0; i < 20; i++)
     //     {
-    //         SetBulletObject();
+    //         SetObject();
     //     }
     // }
 
     void OnEnable()
     {
-        EventManager.OnCoinPickUp.AddListener(SetBulletObject);
+        EventManager.OnCoinPickUp.AddListener(FillBulletPool);
+        EventManager.OnIntrovertLevelStart.AddListener(SetObject);
     }
     void OnDisable()
     {
-        EventManager.OnCoinPickUp.RemoveListener(SetBulletObject);
+        EventManager.OnCoinPickUp.RemoveListener(FillBulletPool);
+        EventManager.OnIntrovertLevelStart.RemoveListener(SetObject);
     }
 
-    public void SetBulletObject()
+    public void SetObject()
     {
-        GameObject obj = (GameObject)Instantiate(objectToPool);
-        obj.SetActive(false); 
-        pooledObjects.Add(obj);
+        for (int i = 0; i < 20; i++)
+        {
+            GameObject obj = (GameObject)Instantiate(objectToPool);
+            obj.SetActive(false); 
+            pooledObjects.Add(obj);
+        }
     }
 
     public GameObject GetPooledObject() 
@@ -45,9 +51,27 @@ public class BulletManager : Singleton<BulletManager>
         return null;
     }
 
+    private void FillBulletPool()
+    {
+        usableBulletObjects.Add(GetPooledObject());
+    }
+    private void DrainBulletPool(GameObject bullet)
+    {
+        usableBulletObjects.Remove(bullet);
+    }
+    private GameObject GetPooledBullet()
+    {
+        for (int i = 0; i < usableBulletObjects.Count; i++) 
+        {
+            return usableBulletObjects[i];
+        }
+        
+        return null;
+    }
+
     public void GetBullet(Vector3 spawnPoint, Quaternion spawnRot)   
     {
-        _bullet = GetPooledObject();
+        _bullet = GetPooledBullet();
 
             if(_bullet != null)
             {
@@ -55,5 +79,7 @@ public class BulletManager : Singleton<BulletManager>
                 _bullet.transform.rotation = spawnRot;
                 _bullet.SetActive(true);
             }
+        
+        DrainBulletPool(_bullet);
     }
 }

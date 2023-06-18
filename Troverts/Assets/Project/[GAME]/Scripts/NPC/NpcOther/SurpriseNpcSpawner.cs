@@ -9,20 +9,49 @@ public class SurpriseNpcSpawner : MonoBehaviour
     private float spawnInterval = 5.0f;
     private float distance;
 
-    // void Start()
+    void OnEnable()
+    {
+        EventManager.OnIntrovertSecondPowerUp.AddListener(() => gameObject.SetActive(false));
+    }
+    void OnDisable()
+    {
+        EventManager.OnIntrovertSecondPowerUp.RemoveListener(() => gameObject.SetActive(false));
+    }
+
+    void Start()
+    {
+        playerTransform = GameObject.FindWithTag("Player").GetComponent<Transform>();
+        //InvokeRepeating("Spawn", 10.0f, spawnInterval);
+    }
+
+    // private void Spawn()
     // {
-    //     playerTransform = GameObject.FindWithTag("Player").GetComponent<Transform>();
-    //     InvokeRepeating("Spawn", 10.0f, spawnInterval);
+    //     distance = Vector3.Distance(transform.position, playerTransform.position);
+
+    //     if(distance <= spawnRadius)
+    //     {
+    //         if (!FsmManager.Instance.IsCharacterCommunicating)
+    //             NPCManager.Instance.CreateIntovertNPCsInProcess(playerTransform);
+    //     }
+
+    //     Debug.Log("spawned");
     // }
 
-    private void Spawn()
+    void OnTriggerEnter(Collider other)
     {
-        distance = Vector3.Distance(transform.position, playerTransform.position);
+        if (!enabled) return;
 
-        if(distance <= spawnRadius)
+        if(other.gameObject.CompareTag("Player"))
         {
-            if (!FsmManager.Instance.IsCharacterCommunicating)
-                NPCManager.Instance.CreateIntovertNPCsInProcess(playerTransform);
+            // distance = Vector3.Distance(transform.position, playerTransform.position);
+
+            // if(distance <= spawnRadius)
+            // {
+                if (!FsmManager.Instance.IsCharacterCommunicating)
+                    NPCManager.Instance.CreateIntovertNPCsInProcess(playerTransform);
+            // }
+
+            Debug.Log("spawned");
         }
     }
 }
