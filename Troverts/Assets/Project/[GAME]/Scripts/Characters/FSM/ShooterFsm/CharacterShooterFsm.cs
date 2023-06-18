@@ -51,7 +51,10 @@ public class CharacterShooterFsm : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            executingState = ExecutingShooterState.SHOOT;
+            if (!FsmManager.Instance.IsCharacterCommunicating)
+            {
+                executingState = ExecutingShooterState.SHOOT;
+            }
         }
     }
 
@@ -59,7 +62,11 @@ public class CharacterShooterFsm : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            EventManager.OnBulletShoot.Invoke();
+            if (!FsmManager.Instance.IsCharacterCommunicating)
+            {
+                CollectableData.CoinCount --;
+                EventManager.OnBulletShoot.Invoke();
+            }
         }
     }
     

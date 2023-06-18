@@ -7,7 +7,6 @@ public class ChaseState : IntrovertNPCStates
     public override void EnterState(IntrovertNpcFsm fsm)
     {
         fsm.OnNpcRun.Invoke();
-        
     }
 
     public override void UpdateState(IntrovertNpcFsm fsm)
@@ -31,5 +30,7 @@ public class ChaseState : IntrovertNPCStates
             fsm.SwitchState(fsm.inDeadState);
         else if(fsm.executingNpcState == ExecutingNpcState.SHOCK)
             fsm.SwitchState(fsm.shockState);
+        else if(fsm.executingNpcState == ExecutingNpcState.WAIT)
+            fsm.SwitchState(fsm.inWaitState);
     }
 }

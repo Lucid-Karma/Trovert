@@ -6,7 +6,7 @@ public class ShootState : ShooterStates
 {
     public override void EnterState(CharacterShooterFsm fsm)
     {
-        Debug.Log("SHOOT");
+        CollectableData.CoinCount --;
         EventManager.OnBulletShoot.Invoke();
     }
 
