@@ -225,6 +225,7 @@ GameObject:
   - component: {fileID: 815536300}
   - component: {fileID: 815536301}
   - component: {fileID: 815536302}
+  - component: {fileID: 815536303}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -313,3 +314,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectToPool: {fileID: 6538074459891814872, guid: 371780cc659d8df4cae802a19c9d8242, type: 3}
+--- !u!114 &815536303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 815536295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54e68b20ba1d11348bbaf7c77a23a268, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bird: {fileID: 1879581886640764, guid: 8a98dc7c3255b1f43b1885fecabf80f2, type: 3}
+  _flySpeed: 50
