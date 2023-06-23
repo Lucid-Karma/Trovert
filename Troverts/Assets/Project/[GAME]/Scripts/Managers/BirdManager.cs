@@ -15,7 +15,7 @@ public class BirdManager : Singleton<BirdManager>
 
     void Start()
     {
-        for (int i = 0; i < 20; i++)
+        for (int i = 0; i < 1; i++)
         {
             _rotAmount = Random.Range(0, 360);
 
@@ -24,30 +24,34 @@ public class BirdManager : Singleton<BirdManager>
         }
     }
 
-    void FixedUpdate()
-    {
-        MoveBird();
-    }
+    // void FixedUpdate()
+    // {
+    //     MoveBird(GetRandomBirdPos());
+    // }
 
-    private Vector3 GetRandomBirdPos()
+    public Vector3 GetRandomBirdPos()
     {
-        _randomBirdPos = Vector3.zero + Random.insideUnitSphere * _range;
+        //_randomBirdPos = Vector3.zero + Random.insideUnitSphere * _range;
+        _randomBirdPos = new Vector3(Random.Range(-100, 100), 50, Random.Range(-100, 100));
         return _randomBirdPos;
     }
 
-    public void MoveBird()
-    {
-        for (int i = 0; i < _birdList.Count; i++)
-        {
-            if (_birdList[i].transform.position == _randomBirdPos)
-            {
-                _randomBirdPos = GetRandomBirdPos();
-                _stickDirection = new Vector3(_randomBirdPos.x, 0, _randomBirdPos.z);
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(_stickDirection, Vector3.up), _rotationDegreePerSecond * Time.fixedDeltaTime);
-            }
+    // public void MoveBird(Vector3 nextPos)
+    // {
+    //     for (int i = 0; i < _birdList.Count; i++)
+    //     {
+    //         _stickDirection = new Vector3(nextPos.x, 0, nextPos.z);
+    //         _birdList[i].transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(_stickDirection, Vector3.up), _rotationDegreePerSecond * Time.fixedDeltaTime);
 
-            _birdList[i].transform.position += transform.forward * _flySpeed * Time.fixedDeltaTime;
-        }
+    //         if (_birdList[i].transform.position == nextPos)
+    //         {
+    //             nextPos = GetRandomBirdPos();
+    //             // _stickDirection = new Vector3(nextPos.x, 0, nextPos.z);
+    //             // _birdList[i].transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(_stickDirection, Vector3.up), _rotationDegreePerSecond * Time.fixedDeltaTime);
+    //         }
+
+    //         _birdList[i].transform.position += transform.forward * _flySpeed * Time.fixedDeltaTime;
+    //     }
         
-    }
+    // }
 }
