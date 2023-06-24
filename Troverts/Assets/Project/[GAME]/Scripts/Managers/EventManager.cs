@@ -54,6 +54,8 @@ public static class EventManager
     public static UnityEvent OnCameraMove = new UnityEvent();
 
     public static UnityEvent OnCursorLock = new UnityEvent();
+    public static UnityEvent OnUIHide = new UnityEvent();
+    public static UnityEvent OnUIShow = new UnityEvent();
     public static UnityEvent OnICharacterDataReceive = new UnityEvent();
     public static UnityEvent OnECharacterDataReceive = new UnityEvent();
 
