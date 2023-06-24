@@ -45,7 +45,7 @@ public class ScoreTextController : MonoBehaviour
     private void UpdateIScoreText()
     {
         point = Introvert.Energy;
-        ScoreText.text = point + " Energy Left !!";
+        ScoreText.text = point + " Energy Left !";
     }
 
     private void UpdateEScoreText()
