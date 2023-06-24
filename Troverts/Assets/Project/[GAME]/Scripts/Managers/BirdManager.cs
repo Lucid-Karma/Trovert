@@ -15,7 +15,7 @@ public class BirdManager : Singleton<BirdManager>
 
     void Start()
     {
-        for (int i = 0; i < 1; i++)
+        for (int i = 0; i < 50; i++)
         {
             _rotAmount = Random.Range(0, 360);
 
@@ -32,16 +32,15 @@ public class BirdManager : Singleton<BirdManager>
     public Vector3 GetRandomBirdPos()
     {
         //_randomBirdPos = Vector3.zero + Random.insideUnitSphere * _range;
-        _randomBirdPos = new Vector3(Random.Range(-100, 100), 50, Random.Range(-100, 100));
+        _randomBirdPos = new Vector3(Random.Range(-200, 200), 50, Random.Range(-200, 200));
         return _randomBirdPos;
+        
     }
 
     // public void MoveBird(Vector3 nextPos)
     // {
     //     for (int i = 0; i < _birdList.Count; i++)
     //     {
-    //         _stickDirection = new Vector3(nextPos.x, 0, nextPos.z);
-    //         _birdList[i].transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(_stickDirection, Vector3.up), _rotationDegreePerSecond * Time.fixedDeltaTime);
 
     //         if (_birdList[i].transform.position == nextPos)
     //         {
