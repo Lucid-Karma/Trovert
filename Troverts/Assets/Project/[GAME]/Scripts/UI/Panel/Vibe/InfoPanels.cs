@@ -25,35 +25,61 @@ public class InfoPanels : MonoBehaviour
         EventManager.OnNpcGetSmart.AddListener(InitializeEntryInfo);
         EventManager.OnIntrovertFirstBoxCall.AddListener(InitializeMainPwrInfo);
         EventManager.OnIntrovertSecondBoxCall.AddListener(InitializeSecondPwrInfo);
+        EventManager.OnNpcGreet.AddListener(InitializeLeftClickInfo);
+        EventManager.OnNpcGreetingEnd.AddListener(HideLeftClickInfo);
+        EventManager.OnLevelAfterStart.AddListener(() => StartCoroutine(DisplayLeftShiftInfo()));
     }
     void OnDisable()
     {
         EventManager.OnNpcGetSmart.RemoveListener(InitializeEntryInfo); 
         EventManager.OnIntrovertFirstBoxCall.RemoveListener(InitializeMainPwrInfo);
         EventManager.OnIntrovertSecondBoxCall.RemoveListener(InitializeSecondPwrInfo);  
+        EventManager.OnNpcGreet.RemoveListener(InitializeLeftClickInfo);
+        EventManager.OnNpcGreetingEnd.RemoveListener(HideLeftClickInfo);
+        EventManager.OnLevelAfterStart.RemoveListener(() => StartCoroutine(DisplayLeftShiftInfo()));
     }
 
     private void InitializeEntryInfo() 
     {
-        StartCoroutine(DisplayEntryInfo(EntryInfo));
+        StartCoroutine(DisplayInfo(EntryInfo));
     }
     private void InitializeMainPwrInfo() 
     {
-        StartCoroutine(DisplayEntryInfo(MainPwrInfo));
+        StartCoroutine(DisplayInfo(MainPwrInfo));
     }
     private void InitializeSecondPwrInfo() 
     {
-        StartCoroutine(DisplayEntryInfo(SecondPwrInfo));
+        StartCoroutine(DisplayInfo(SecondPwrInfo));
     }
 
-    IEnumerator DisplayEntryInfo(GameObject infoObject)
+    private void InitializeLeftClickInfo() 
+    {
+        LeftShiftInfo.SetActive(false);
+        LeftClickInfo.SetActive(true);
+    }
+    private void HideLeftClickInfo() 
+    {
+        LeftClickInfo.SetActive(false);
+    }
+
+    IEnumerator DisplayInfo(GameObject infoObject)
     {
         EventManager.OnUIHide.Invoke();
         infoObject.SetActive(true);
 
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(3.0f);
 
         infoObject.SetActive(false);
         EventManager.OnUIShow.Invoke();
+    }
+    IEnumerator DisplayLeftShiftInfo()
+    {
+        yield return new WaitForSeconds(5.0f);
+
+        LeftShiftInfo.SetActive(true);
+
+        yield return new WaitForSeconds(5.0f);
+
+        LeftShiftInfo.SetActive(false);
     }
 }
