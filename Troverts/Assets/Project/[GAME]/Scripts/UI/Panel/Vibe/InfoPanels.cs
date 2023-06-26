@@ -11,6 +11,8 @@ public class InfoPanels : MonoBehaviour
     public GameObject LeftClickInfo;
     public GameObject LeftShiftInfo;
 
+    private bool isLeftClick = false;
+
     void Awake()
     {
         EntryInfo.SetActive(false);
@@ -28,6 +30,8 @@ public class InfoPanels : MonoBehaviour
         EventManager.OnNpcGreet.AddListener(InitializeLeftClickInfo);
         EventManager.OnNpcGreetingEnd.AddListener(HideLeftClickInfo);
         EventManager.OnLevelAfterStart.AddListener(() => StartCoroutine(DisplayLeftShiftInfo()));
+        EventManager.OnIntrovertFirstPowerUp.AddListener(() => MainPwrInfo.SetActive(false));
+        EventManager.OnIntrovertSecondPowerUp.AddListener(() => SecondPwrInfo.SetActive(false));
     }
     void OnDisable()
     {
@@ -37,6 +41,8 @@ public class InfoPanels : MonoBehaviour
         EventManager.OnNpcGreet.RemoveListener(InitializeLeftClickInfo);
         EventManager.OnNpcGreetingEnd.RemoveListener(HideLeftClickInfo);
         EventManager.OnLevelAfterStart.RemoveListener(() => StartCoroutine(DisplayLeftShiftInfo()));
+        EventManager.OnIntrovertFirstPowerUp.RemoveListener(() => MainPwrInfo.SetActive(false));
+        EventManager.OnIntrovertSecondPowerUp.RemoveListener(() => SecondPwrInfo.SetActive(false));
     }
 
     private void InitializeEntryInfo() 
@@ -55,10 +61,12 @@ public class InfoPanels : MonoBehaviour
     private void InitializeLeftClickInfo() 
     {
         LeftShiftInfo.SetActive(false);
+        isLeftClick = true;
         LeftClickInfo.SetActive(true);
     }
     private void HideLeftClickInfo() 
     {
+        isLeftClick = false;
         LeftClickInfo.SetActive(false);
     }
 
@@ -67,19 +75,23 @@ public class InfoPanels : MonoBehaviour
         EventManager.OnUIHide.Invoke();
         infoObject.SetActive(true);
 
-        yield return new WaitForSeconds(3.0f);
+        yield return new WaitForSeconds(4.0f);
 
         infoObject.SetActive(false);
         EventManager.OnUIShow.Invoke();
     }
     IEnumerator DisplayLeftShiftInfo()
     {
-        yield return new WaitForSeconds(5.0f);
+        if(!isLeftClick)
+        {
+            yield return new WaitForSeconds(5.0f);
 
-        LeftShiftInfo.SetActive(true);
+            LeftShiftInfo.SetActive(true);
 
-        yield return new WaitForSeconds(5.0f);
+            yield return new WaitForSeconds(5.0f);
 
-        LeftShiftInfo.SetActive(false);
+            LeftShiftInfo.SetActive(false);
+        }
+        
     }
 }
