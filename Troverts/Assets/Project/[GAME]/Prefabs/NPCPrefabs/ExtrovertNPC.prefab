@@ -56,12 +56,19 @@ MonoBehaviour:
   OnNpcRun:
     m_PersistentCalls:
       m_Calls: []
+  OnNpcDie:
+    m_PersistentCalls:
+      m_Calls: []
+  OnNpcPanic:
+    m_PersistentCalls:
+      m_Calls: []
   pc: {fileID: 0}
   pcPoint: {x: 0, y: 0, z: 0}
   distanceVec: {x: 0, y: 0, z: 0}
-  distance: 0
-  metMat: {fileID: 2100000, guid: 2bde4e2d5d7920941b2b4e5316332fd3, type: 2}
   escapePoint: {x: 0, y: 0, z: 0}
+  distance: 0
+  sprintSpeed: 7
+  metMat: {fileID: 2100000, guid: 2bde4e2d5d7920941b2b4e5316332fd3, type: 2}
 --- !u!195 &962633403161374690
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -71,7 +78,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 205453536501681326}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.1
+  m_Radius: 0.52
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -299,3 +306,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb107b421e8a1a34b84163174b3f149c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shockAnimations: []
