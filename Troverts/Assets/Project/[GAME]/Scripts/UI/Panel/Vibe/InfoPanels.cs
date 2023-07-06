@@ -11,7 +11,7 @@ public class InfoPanels : MonoBehaviour
     public GameObject LeftClickInfo;
     public GameObject LeftShiftInfo;
 
-    private bool isLeftClick = false;
+    //private bool isLeftClick = false;
 
     void Awake()
     {
@@ -61,12 +61,12 @@ public class InfoPanels : MonoBehaviour
     private void InitializeLeftClickInfo() 
     {
         LeftShiftInfo.SetActive(false);
-        isLeftClick = true;
+        //isLeftClick = true;
         LeftClickInfo.SetActive(true);
     }
     private void HideLeftClickInfo() 
     {
-        isLeftClick = false;
+        //isLeftClick = false;
         LeftClickInfo.SetActive(false);
     }
 
@@ -82,8 +82,8 @@ public class InfoPanels : MonoBehaviour
     }
     IEnumerator DisplayLeftShiftInfo()
     {
-        if(!isLeftClick)
-        {
+        // if(!isLeftClick)
+        // {
             yield return new WaitForSeconds(5.0f);
 
             LeftShiftInfo.SetActive(true);
@@ -91,7 +91,7 @@ public class InfoPanels : MonoBehaviour
             yield return new WaitForSeconds(5.0f);
 
             LeftShiftInfo.SetActive(false);
-        }
+        // }
         
     }
 }
