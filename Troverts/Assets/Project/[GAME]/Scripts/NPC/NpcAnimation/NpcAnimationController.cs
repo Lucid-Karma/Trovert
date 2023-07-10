@@ -44,9 +44,22 @@ public class NpcAnimationController : MonoBehaviour
     public void Panic()
     {
         NpcFSM.Panic();
+
+        OrganiseNpcColliderWithAnimation();
     }
+
+    #region Helper Methods
+
+    private void OrganiseNpcColliderWithAnimation()
+    {
+        Animator.rootPosition = NpcFSM.Agent.nextPosition;
+    }
+
     #endregion
 
+    #endregion
+
+    
 
     public string PlayCutscene() 
     {
