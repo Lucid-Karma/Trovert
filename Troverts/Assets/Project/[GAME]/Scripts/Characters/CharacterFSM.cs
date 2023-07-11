@@ -113,8 +113,16 @@ public class CharacterFSM : MonoBehaviour
                 {
                     executingState = ExecutingState.SPRINT;
 
-                    if(Input.GetKeyUp(KeyCode.LeftShift))   //???
-                        executingState = ExecutingState.WALK;
+                    // if(Input.GetKeyUp(KeyCode.LeftShift))   //???
+                    //     executingState = ExecutingState.WALK;
+
+                    if(Input.GetKeyUp(KeyCode.LeftShift)) 
+                    {
+                        if(Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
+                            executingState = ExecutingState.WALK;
+                        else
+                            executingState = ExecutingState.IDLE;
+                    }
                 }
                 else 
                     executingState = ExecutingState.WALK;

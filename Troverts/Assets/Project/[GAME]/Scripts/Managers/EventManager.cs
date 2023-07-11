@@ -45,7 +45,7 @@ public static class EventManager
     public static UnityEvent OnIntrovertSecondBoxCall = new UnityEvent();
     public static UnityEvent OnIntrovertFirstPowerUp = new UnityEvent();
     public static UnityEvent OnIntrovertSecondPowerUp = new UnityEvent();
-    public static UnityEvent OnPlayerStartedRunning = new UnityEvent();
+    public static UnityEvent OnPlayerMove = new UnityEvent();
 
     public static UnityEvent OnMusicOn = new UnityEvent();
     public static UnityEvent OnMusicOff = new UnityEvent();
