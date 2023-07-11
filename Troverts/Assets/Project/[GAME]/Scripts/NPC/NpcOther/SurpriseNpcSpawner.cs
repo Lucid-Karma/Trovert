@@ -41,7 +41,7 @@ public class SurpriseNpcSpawner : MonoBehaviour
     {
         if (!enabled) return;
 
-        if(other.gameObject.CompareTag("Player"))
+        if(other.gameObject.CompareTag("Player") && PlayerPrefs.GetString("selected_character") == "introvert")
         {
             // distance = Vector3.Distance(transform.position, playerTransform.position);
 
@@ -50,8 +50,6 @@ public class SurpriseNpcSpawner : MonoBehaviour
                 if (!FsmManager.Instance.IsCharacterCommunicating)
                     NPCManager.Instance.CreateIntovertNPCsInProcess(playerTransform);
             // }
-
-            Debug.Log("spawned");
         }
     }
 }

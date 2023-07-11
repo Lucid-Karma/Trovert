@@ -22,7 +22,7 @@ public class BirdManager : Singleton<BirdManager>
 
     public Vector3 GetRandomBirdPos()
     {
-        _randomBirdPos = new Vector3(Random.Range(-200, 200), 50, Random.Range(-200, 200));
+        _randomBirdPos = new Vector3(Random.Range(-200, 200), 30, Random.Range(-200, 200));
         return _randomBirdPos;
         
     }

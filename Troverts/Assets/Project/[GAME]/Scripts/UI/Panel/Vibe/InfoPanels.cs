@@ -86,6 +86,7 @@ public class InfoPanels : MonoBehaviour
         // {
             yield return new WaitForSeconds(5.0f);
 
+            LeftClickInfo.SetActive(false);
             LeftShiftInfo.SetActive(true);
 
             yield return new WaitForSeconds(5.0f);
