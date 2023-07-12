@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.individualkex.wavetools": {
+      "version": "https://github.com/IndividualKex/wavetoolkit.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "51c7bd4ceb0df506d90bbc22a227c82dd4e4fc28"
+    },
     "com.unity.cinemachine": {
       "version": "2.8.9",
       "depth": 0,

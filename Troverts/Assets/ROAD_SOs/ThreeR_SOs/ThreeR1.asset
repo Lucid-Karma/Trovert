@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba27562a2dcf27346b47d769e240fd08, type: 3}
+  m_Name: ThreeR1
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 3578403813682489259, guid: fe1217e844ec5624793211bcd5604acc, type: 3}
+  down:
+    name: 
+  left:
+    name: 1
+  up:
+    name: 
+  right:
+    name: 1
+  above:
+    name: 1
+  below:
+    name: 
