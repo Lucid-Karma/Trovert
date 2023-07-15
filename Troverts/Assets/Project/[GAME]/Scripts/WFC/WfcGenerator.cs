@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class WfcGenerator : MonoBehaviour
 {
-    public List<CellSO> cells = new List<CellSO> ();
+    private List<CellSO> cells = new List<CellSO> ();
     [SerializeField] private int _width;
     [SerializeField] private int _length;
     [SerializeField] private int _moduleSize;
@@ -16,10 +17,10 @@ public class WfcGenerator : MonoBehaviour
         Generate();
         firstCollapse = cells.Count / 2;
 
-        CollapseCell(cells[firstCollapse]);
-        FindNeighbors(cells[firstCollapse]);
-        FindLowestEntropy(cells[firstCollapse]);
-        GetDefiniteState(cells[firstCollapse]);
+        cells[firstCollapse].isCollapsed = true;
+        GameObject obj = (GameObject)Instantiate(GetDefiniteState(cells[firstCollapse]), cells[firstCollapse].cellPos, Quaternion.identity);
+
+        CollapseGrid();
 
     }
 
@@ -29,7 +30,7 @@ public class WfcGenerator : MonoBehaviour
         {
             for (int col = 0; col < _length; col++)
             {
-                CellSO cell = new CellSO();
+                CellSO cell = ScriptableObject.CreateInstance<CellSO>(); // Use "CreateInstance" method for scriptableObjects not "new CellSO();"
                 cell.cellPos = new Vector3(row, 0, col);
                 cell.Row = row;
                 cell.Column = col;
@@ -98,34 +99,76 @@ public class WfcGenerator : MonoBehaviour
 
     private void UpdateCell(int i, CellSO neighborCell, CellSO cell)
     {
-        //for (int i = 0; i < 4; i++) // 0=north, 1=south, 2=east, 3=west
-        //{
-            if (i % 2 == 0)
+        // 0=north, 1=south, 2=east, 3=west
+
+        if (i % 2 == 0)
+        {
+            for (int j = 0; j < neighborCell.modules.Count; j++)
             {
-                for (int j = 0; j < neighborCell.modules.Count; j++)
+                if(neighborCell.modules[j].moduleType[i + 1] != cell.modules[0].moduleType[i])  // cell.modules[definiteState].moduleType[i]
                 {
-                    if(neighborCell.modules[j].moduleType[i + 1] != cell.modules[0].moduleType[i])  // cell.modules[definiteState].moduleType[i]
-                    {
-                        neighborCell.modules.RemoveAt(j);
-                    }
+                    neighborCell.modules.RemoveAt(j);
                 }
             }
-        //}
+        }
     }
 
     int randomModule;
     private GameObject GetDefiniteState(CellSO currentCell)
     {
-        //CellSO cell = FindLowestEntropy(currentCell);
+        if (currentCell.modules.Count > 0)
+        {
+            randomModule = Random.Range(0, currentCell.modules.Count);
+            currentCell.definiteState = randomModule;
+            ModuleSO selectedModule = currentCell.modules[randomModule];
+            
+            if (selectedModule != null)
+            {
+                GameObject modulePrefab = selectedModule.modulePrefab;
 
-        randomModule = Random.Range(0, currentCell.modules.Count);
-        currentCell.definiteState = randomModule;
-        return currentCell.modules[randomModule].modulePrefab;
+                if (modulePrefab != null)
+                {
+                    //return Instantiate(modulePrefab, currentCell.cellPos, Quaternion.identity);
+                    return modulePrefab;
+                }
+                else
+                {
+                    Debug.LogWarning("modulePrefab is not assigned in the selected ModuleSO.");
+                    return null; // or return a default GameObject if you have one.
+                }
+            }
+            else
+            {
+                Debug.LogWarning("Selected ModuleSO is null.");
+                return null; // or return a default GameObject if you have one.
+            }
+        }
+        else
+        {
+            Debug.LogWarning("No modules attached to the current cell.");
+            return null; // or return a default GameObject if you have one.
+        }
     }
 
-    private void CollapseCell(CellSO currentCell)
+
+
+    private void CollapseCell(CellSO nextCell)
     {
-        currentCell.isCollapsed = true;
-        GameObject obj = (GameObject)Instantiate(GetDefiniteState(currentCell), currentCell.cellPos, Quaternion.identity);
+        nextCell.isCollapsed = true;
+        GameObject obj = (GameObject)Instantiate(GetDefiniteState(FindLowestEntropy(nextCell)), nextCell.cellPos, Quaternion.identity);
+    }
+
+    private void CollapseGrid()
+    {
+        while(cells.Any(y => !y.isCollapsed))
+        {
+            if(cells.Where(x => x.isCollapsed).Any())
+            {
+                var cell = cells.Find(x => x.isCollapsed);
+
+                FindNeighbors(cell);
+                CollapseCell(cell);
+            } 
+        }
     }
 }

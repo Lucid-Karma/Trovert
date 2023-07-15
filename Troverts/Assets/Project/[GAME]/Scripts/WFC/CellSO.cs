@@ -13,10 +13,4 @@ public class CellSO : ScriptableObject
 
     public int Row { get; set; }
     public int Column { get; set; }
-    
-
-    // public CellSO(Vector3 cellPos)
-    // {
-    //     this.cellPos = cellPos;
-    // }
 }
