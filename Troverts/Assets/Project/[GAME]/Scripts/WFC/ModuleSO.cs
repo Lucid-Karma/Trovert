@@ -12,23 +12,14 @@ public class ModuleSO : ScriptableObject
     public int east;
     public int west;
 
-    [HideInInspector] public int[] moduleType = new int[4];
-
-    // public ModuleSO()
-    // {
-    //     moduleType[0] = north;
-    //     moduleType[1] = south;
-    //     moduleType[2] = east;
-    //     moduleType[3] = west;
-    // }
+    [HideInInspector] public List<int> moduleType = new List<int>();
 
     private void OnEnable()
     {
-        moduleType[0] = north;
-        moduleType[1] = south;
-        moduleType[2] = east;
-        moduleType[3] = west;
+        moduleType.Add(north);
+        moduleType.Add(south);
+        moduleType.Add(east);
+        moduleType.Add(west);
     }
-
 }
 

@@ -731,6 +731,7 @@ MonoBehaviour:
   _width: 7
   _length: 7
   _moduleSize: 30
+  Cell: {fileID: 11400000, guid: 9e6a1a3dd4218f24a89e564b16a7153b, type: 2}
 --- !u!4 &902499948
 Transform:
   m_ObjectHideFlags: 0
