@@ -6,7 +6,7 @@ using UnityEngine;
 public class CellSO : ScriptableObject 
 {
     public List<ModuleSO> modules = new List<ModuleSO>();
-    [HideInInspector] public List<CellSO> neighbors = new List<CellSO>();
+    [HideInInspector] public HashSet<CellSO> neighbors = new HashSet<CellSO>();
     [HideInInspector] public Vector3 cellPos;
     [HideInInspector] public bool isCollapsed = false;
     [HideInInspector] public int definiteState;
