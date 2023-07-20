@@ -6,11 +6,13 @@ using System.Linq;
 public class WfcGenerator : MonoBehaviour
 {
     private List<CellSO> cells = new List<CellSO> ();
+    private List<CellSO> candidateCells = new List<CellSO>();
     public CellSO Cell;
     [SerializeField] private int _width;
     [SerializeField] private int _length;
     [SerializeField] private int _moduleSize;
     private int firstCollapse;
+    Quaternion prefabRotation;
 
 
     void Start()
@@ -77,6 +79,7 @@ public class WfcGenerator : MonoBehaviour
             CellSO northNeighbor = cells.Find(c => c.Column == _col - 1 && c.Row == _row && !c.isCollapsed);
             cell.neighbors.Add(northNeighbor);
             //Debug.Log("nothNeighbor num is: " + cells.IndexOf(northNeighbor));
+            candidateCells.Add(northNeighbor);
             UpdateCell(0, northNeighbor, cell);
         }
 
@@ -85,6 +88,7 @@ public class WfcGenerator : MonoBehaviour
         {
             CellSO southNeighbor = cells.Find(c => c.Column == _col + 1 && c.Row == _row && !c.isCollapsed);
             cell.neighbors.Add(southNeighbor);
+            candidateCells.Add(southNeighbor);
             UpdateCell(1, southNeighbor, cell);
         }
 
@@ -93,6 +97,7 @@ public class WfcGenerator : MonoBehaviour
         {
             CellSO eastNeighbor = cells.Find(c => c.Column == _col && c.Row == _row + 1 && !c.isCollapsed);
             cell.neighbors.Add(eastNeighbor);
+            candidateCells.Add(eastNeighbor);
             UpdateCell(2, eastNeighbor, cell);
         }
 
@@ -101,20 +106,32 @@ public class WfcGenerator : MonoBehaviour
         {
             CellSO westNeighbor = cells.Find(c => c.Column == _col && c.Row == _row - 1 && !c.isCollapsed);
             cell.neighbors.Add(westNeighbor);
+            candidateCells.Add(westNeighbor);
             UpdateCell(3, westNeighbor, cell);
         }
     }
 
+    int lowestEntropyValue;
     private CellSO FindLowestEntropy(CellSO currentCell)
     {
         CellSO lowestEntropy = ScriptableObject.CreateInstance<CellSO>();
-        
         lowestEntropy = currentCell.neighbors.OrderBy(list => list.modules.Count).FirstOrDefault();
 
         var lowestEntropies = currentCell.neighbors.Where(num => num == lowestEntropy).ToList();
-        int lowestEntropyIndex = Random.Range(0, lowestEntropies.Count);
+
+        if(lowestEntropies.Count > 1)
+        {
+            lowestEntropyValue = lowestEntropies.Min(x => x.entropy);
+            var lowestEntropyValues = lowestEntropies.Where(entropyValue => entropyValue.entropy == lowestEntropyValue).ToList();
+
+            if(lowestEntropyValues.Count > 1)    return lowestEntropyValues[Random.Range(0, lowestEntropyValues.Count)];
+            else    return lowestEntropies.Find(y => y.entropy == lowestEntropyValue);  // or lowestEntropyValues[0] ...first and only element.
+        }
+        else
+        {
+            return lowestEntropies[0];
+        }
         //Debug.Log("lowestEntropy's neighbor index is: " + currentCell.neighbors.IndexOf(lowestEntropy));
-        return lowestEntropies[lowestEntropyIndex];
     }
 
     private void UpdateCell(int direction, CellSO neighborCell, CellSO cell)
@@ -131,7 +148,9 @@ public class WfcGenerator : MonoBehaviour
             }
         }
 
-        Debug.Log("Neighbor's module count is: " + neighborCell.modules.Count);
+        neighborCell.entropy = neighborCell.modules.Sum(x => x.moduleUsageCount);
+
+        //Propagate(neighborCell);
     }
 
 private bool IsMatching(int direction, ModuleSO neighborModule, ModuleSO cellModule)
@@ -163,9 +182,14 @@ private bool IsMatching(int direction, ModuleSO neighborModule, ModuleSO cellMod
         }
 
         if (currentCell.modules.Count > 0)
-        {
+        {   
+            // ModuleSO selectedModule = ScriptableObject.CreateInstance<ModuleSO>();
+            // if (currentCell.modules.Where(x => x.moduleUsageCount == lowestEntropyValue).Any())
+            // {
+            //     selectedModule = currentCell.modules.Find(x => x.moduleUsageCount == lowestEntropyValue);
+            // }
+
             randomModule = Random.Range(0, currentCell.modules.Count);
-            currentCell.definiteState = randomModule;
             ModuleSO selectedModule = currentCell.modules[randomModule];
             
             if (selectedModule != null)
@@ -174,7 +198,9 @@ private bool IsMatching(int direction, ModuleSO neighborModule, ModuleSO cellMod
 
                 if (modulePrefab != null)
                 {
+                    selectedModule.moduleUsageCount ++;
                     prefabRotation = modulePrefab.transform.rotation;
+                    candidateCells.Remove(currentCell);   //.........................
                     return modulePrefab;
                 }
                 else
@@ -196,8 +222,6 @@ private bool IsMatching(int direction, ModuleSO neighborModule, ModuleSO cellMod
         }
     }
 
-    Quaternion prefabRotation;
-
     private void CollapseCell(CellSO nextCell)
     {
         nextCell = FindLowestEntropy(nextCell);
@@ -209,8 +233,8 @@ private bool IsMatching(int direction, ModuleSO neighborModule, ModuleSO cellMod
     {
         // while(cells.Any(y => !y.isCollapsed))
         // {
-            for (int i = 0; i < 4; i++)
-            {
+            // for (int i = 0; i < 4; i++)
+            // {
                 if(cells.Where(x => x.isCollapsed).Any())
                 {
                     var cell = cells.Find(x => x.isCollapsed);
@@ -222,9 +246,28 @@ private bool IsMatching(int direction, ModuleSO neighborModule, ModuleSO cellMod
     
                     Debug.Log("collapsed cell is found");
                 } 
-            }
+            // }
         // }
     }
+
+    // private void Propagate(CellSO cell)
+    // {
+    //     MapCell cell = null;
+        
+    //     do
+    //     {
+    //         if (cell.neighbors.Where(c => c.modules.Count == 0).Any())  return;
+    //         else if(cell.neighbors.Where(c => c.modules.Count > 1).Any())
+    //         {
+    //             var minStatesCount = cell.neighbors.Min(c => c.modules.Count);
+    //         }
+
+            
+
+    //         cell = cellsWithUnselectedState.First(c => c.States.Count == minStatesCount);
+    //     }
+    //     while (cell.TrySelectState(states => states[Random.Range(0, states.Count)]));
+    // }
     
     // private void CollapseGrid()
     // {
