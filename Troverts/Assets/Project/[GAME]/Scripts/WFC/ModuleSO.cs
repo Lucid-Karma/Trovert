@@ -12,6 +12,8 @@ public class ModuleSO : ScriptableObject
     public int east;
     public int west;
 
+    [HideInInspector] public int moduleUsageCount = 0;
+
     [HideInInspector] public List<int> moduleType = new List<int>();
 
     private void OnEnable()
